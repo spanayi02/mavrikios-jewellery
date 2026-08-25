@@ -1,0 +1,92 @@
+@AGENTS.md
+
+# Mavrikios Jewellery Boutique — Project Rules
+
+Premium e-commerce rebuild for a real jewellery boutique (Latsia, Nicosia, Cyprus, since
+1967). Full brand/creative brief lives in the original build request; this file captures the
+durable engineering rules for anyone (human or agent) working in this codebase afterwards.
+
+## Design system
+
+- Palette lives in `app/globals.css` as Tailwind v4 `@theme` tokens: `marble-*` (warm white),
+  `stone-*` (cool grey), `ink-*` (near-black/navy), `silver-*`, `champagne-*` (sparing accent
+  only — never the dominant color). Use these tokens, not raw hex values, in new components.
+- Typography: `font-serif` (Fraunces, editorial/italic for headlines and campaign copy) +
+  `font-sans` (Inter, for nav/UI/prices/buttons). Don't introduce a third family.
+- Buttons are rectangular with small radius and uppercase tracked labels (see
+  `components/ui/button.tsx` variants) — not SaaS pill buttons.
+- `.marble-surface` / `.marble-surface-dark` (globals.css) are the only "marble" treatments —
+  used sparingly as a brand signature, not behind every section.
+- Motion is restrained: short entrance reveals, opacity/scale in the 0.9–1.06 range, no bounce,
+  no motion for motion's sake. Respect `prefers-reduced-motion` (already handled globally).
+
+## Placeholder imagery
+
+- No real product photography is available yet. `components/site/placeholder-art.tsx` renders
+  fine-line procedural jewellery motifs on a marble surface as a deliberate, on-brand
+  placeholder — not a generic grey box.
+- `types/product.ts` → `ProductImage` has an optional `src`. `components/site/product-media.tsx`
+  automatically renders a real photo via `next/image` when `src` is set, falling back to
+  `PlaceholderArt` otherwise. **To add real photography: just set `src` on the product's images
+  — no other code changes needed.**
+
+## Commerce architecture
+
+- Product data: `types/product.ts` (types) + `data/products.ts` (demo catalogue — clearly
+  marked as sample data, not verified Mavrikios inventory). Keep this shape when replacing with
+  the real catalogue.
+- Cart/wishlist/UI state: Zustand stores in `lib/store/` (`cart-store.ts`, `wishlist-store.ts`,
+  `ui-store.ts`), persisted to `localStorage`. No backend/auth — guest checkout only, by design.
+- Checkout (`app/checkout/`) is a UI-complete mock: it validates the form and shows a
+  confirmation with a generated reference number, but does not call a payment gateway or send
+  email. Cash on Delivery and QuickPay are the represented payment methods. Wire up a real
+  payment provider before taking this live — never fabricate a "payment succeeded" state beyond
+  what's actually implemented.
+
+## Real business info vs. demo data
+
+- `lib/site-config.ts` holds verified business info (address, phone, Instagram, hours). Hours
+  are a best-effort placeholder from the one data point we had — confirm with the business
+  before relying on them.
+- Do not invent awards, press mentions, certifications, review counts/quotes, stone carats,
+  warranties, or company/family history. `data/reviews.ts` is intentionally empty with a themed
+  fallback until real reviews are supplied — see the comment in that file before adding fake
+  ones.
+- Sample products in `data/products.ts` use plausible names/pricing but are demo data — don't
+  present them as real inventory in copy or marketing.
+
+## Motion & component reuse
+
+- shadcn-style primitives live in `components/ui/` (hand-written, not the shadcn CLI — the CLI
+  can't reach ui.shadcn.com from this environment). Copy this pattern (Radix primitive +
+  `cva` + `cn`) for any new primitive rather than installing a new UI kit.
+- Don't install overlapping UI/animation libraries. Framer Motion, Radix, `@number-flow/react`,
+  Zustand, `sonner`, and lucide-react are the established set.
+
+## Responsive & accessibility
+
+- `body`/`html` must never scroll horizontally — `html { overflow-x: hidden }` in globals.css is
+  load-bearing (Chromium computes `scrollWidth` inconsistently for `overflow-x: clip` on
+  `body`; don't switch it back without re-testing at 375px on every route). If you add
+  something that visually bleeds past its container, test at 375px width, not just desktop.
+- Buttons with variable-length labels inside a flex row need `min-w-0` on the flexible child, or
+  they'll overflow instead of shrinking (see `components/commerce/purchase-panel.tsx`).
+- Any full-screen overlay/sheet/dialog must sit above `AnnouncementBar` (`z-30`) and `Navbar`
+  (`z-50`, sticky). Keep new fixed/sticky elements inside that ordering.
+- Keep `prefers-reduced-motion`, focus-visible rings, and semantic landmarks intact when editing
+  interactive components.
+
+## SEO
+
+- Add `alternates: { canonical: "/path" }` to every new top-level page's `metadata`.
+- `app/sitemap.ts` and `app/robots.ts` are generated from route lists / `data/products.ts` —
+  add new top-level static routes to `staticRoutes` in `app/sitemap.ts`.
+- `app/opengraph-image.tsx` / `app/icon.tsx` generate branded OG/favicon images at build time
+  (no static asset files needed) — edit those instead of adding files under `public/`.
+- Structured data helpers live in `lib/structured-data.ts` (Organization, Product, Breadcrumb).
+
+## Validation before finishing a change
+
+Run, in order: `npx tsc --noEmit`, `npx eslint .`, `npx next build`. All three must be clean
+(no disabling rules/types to force a pass). If you touch layout/spacing, take a screenshot at
+375px and 1440px widths before calling it done.
