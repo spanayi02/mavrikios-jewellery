@@ -16,7 +16,7 @@ export function PageHero({ eyebrow, title, description, motif }: PageHeroProps) 
         <div className="absolute inset-0 bg-gradient-to-t from-marble-50 via-marble-50/45 to-marble-50/15" />
       </div>
       <div className="container-mavrikios relative z-10 pb-16 pt-40 sm:pb-20">
-        <p className="mb-5 flex items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-champagne-500">
+        <p className="mb-5 flex items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-champagne-600">
           <span className="h-px w-8 bg-champagne-400" aria-hidden />
           {eyebrow}
         </p>

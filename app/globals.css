@@ -38,6 +38,8 @@
   --champagne-300: #cdb37f;
   --champagne-400: #b39460;
   --champagne-500: #a3844f;
+  /* WCAG AA-safe (4.5:1+) deep gold for small text on light backgrounds */
+  --champagne-600: #7d6530;
 
   /* semantic surface tokens (light) */
   --background: var(--marble-50);
@@ -94,6 +96,7 @@
   --color-champagne-300: var(--champagne-300);
   --color-champagne-400: var(--champagne-400);
   --color-champagne-500: var(--champagne-500);
+  --color-champagne-600: var(--champagne-600);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

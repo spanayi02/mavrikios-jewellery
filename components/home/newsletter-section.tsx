@@ -5,7 +5,7 @@ export function NewsletterSection() {
   return (
     <section className="marble-surface py-20 text-center sm:py-28">
       <Reveal className="container-mavrikios flex flex-col items-center">
-        <p className="mb-4 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-champagne-500">
+        <p className="mb-4 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-champagne-600">
           <span className="h-px w-8 bg-champagne-400" aria-hidden />
           Notes from Mavrikios
           <span className="h-px w-8 bg-champagne-400" aria-hidden />

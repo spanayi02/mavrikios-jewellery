@@ -108,7 +108,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease }}
-            className="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-champagne-500"
+            className="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-champagne-600"
           >
             <span className="h-px w-8 bg-champagne-400" aria-hidden />
             Mavrikios &middot; Nicosia &middot; Since 1967
@@ -176,9 +176,9 @@ export function Hero() {
         <Marquee
           duration={30}
           items={tickerItems.map((item) => (
-            <span key={item} className="flex items-center gap-8 px-4 py-3.5 text-[11px] uppercase tracking-[0.28em] text-stone-500">
+            <span key={item} className="flex items-center gap-8 px-4 py-3.5 text-[11px] uppercase tracking-[0.28em] text-stone-600">
               {item}
-              <span aria-hidden className="text-champagne-500">
+              <span aria-hidden className="text-champagne-600">
                 &#10022;
               </span>
             </span>
