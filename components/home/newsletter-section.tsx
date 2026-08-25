@@ -1,9 +1,10 @@
 import { NewsletterForm } from "@/components/site/newsletter-form";
+import { Reveal } from "@/components/site/reveal";
 
 export function NewsletterSection() {
   return (
     <section className="marble-surface-dark py-20 text-center sm:py-28">
-      <div className="container-mavrikios flex flex-col items-center">
+      <Reveal className="container-mavrikios flex flex-col items-center">
         <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-marble-50/50">
           Notes from Mavrikios
         </p>
@@ -13,7 +14,7 @@ export function NewsletterSection() {
         <div className="mt-8">
           <NewsletterForm dark />
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

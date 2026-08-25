@@ -2,6 +2,7 @@ import { MapPin, Navigation, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { StoreStatusBadge } from "@/components/site/store-status";
+import { Reveal } from "@/components/site/reveal";
 import { siteConfig } from "@/lib/site-config";
 
 const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
@@ -12,10 +13,10 @@ export function BoutiqueLocation() {
   return (
     <section className="container-mavrikios py-20 sm:py-28">
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
-        <div className="relative order-2 aspect-[4/3] overflow-hidden lg:order-1 lg:col-span-7">
+        <Reveal className="relative order-2 aspect-[4/3] overflow-hidden lg:order-1 lg:col-span-7">
           <PlaceholderArt motif="gift" label="Ayiou Georgiou 17C, Latsia" />
-        </div>
-        <div className="order-1 lg:order-2 lg:col-span-5">
+        </Reveal>
+        <Reveal delay={0.1} className="order-1 lg:order-2 lg:col-span-5">
           <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">Visit the Boutique</p>
           <h2 className="max-w-md font-serif text-3xl italic text-ink-950 sm:text-4xl">
             Come and see the pieces in person.
@@ -48,7 +49,7 @@ export function BoutiqueLocation() {
               </a>
             </Button>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

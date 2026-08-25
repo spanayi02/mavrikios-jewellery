@@ -1,11 +1,13 @@
 import { Star } from "lucide-react";
 import { reviews, reviewThemes } from "@/data/reviews";
+import { Reveal } from "@/components/site/reveal";
+import { Marquee } from "@/components/site/marquee";
 
 export function ReviewsSection() {
   return (
-    <section className="border-y border-stone-200 bg-marble-100 py-20 sm:py-28">
+    <section className="overflow-hidden border-y border-stone-200 bg-marble-100 py-20 sm:py-28">
       <div className="container-mavrikios">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">
             Customer Experience
           </p>
@@ -17,7 +19,7 @@ export function ReviewsSection() {
             craftsmanship, considered designs and a team that takes the time to help you find the
             right piece.
           </p>
-        </div>
+        </Reveal>
 
         {reviews.length > 0 ? (
           <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-3">
@@ -38,16 +40,19 @@ export function ReviewsSection() {
             ))}
           </div>
         ) : (
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
-            {reviewThemes.map((theme) => (
-              <span
-                key={theme}
-                className="rounded-full border border-stone-300 px-4 py-2 text-xs uppercase tracking-[0.08em] text-stone-600"
-              >
-                {theme}
-              </span>
-            ))}
-          </div>
+          <Reveal delay={0.15} className="mt-14">
+            <Marquee
+              duration={26}
+              items={reviewThemes.map((theme) => (
+                <span
+                  key={theme}
+                  className="mx-2 rounded-full border border-stone-300 bg-marble-50 px-4 py-2 text-xs uppercase tracking-[0.08em] text-stone-600"
+                >
+                  {theme}
+                </span>
+              ))}
+            />
+          </Reveal>
         )}
 
         <p className="mt-10 text-center text-xs text-stone-500">

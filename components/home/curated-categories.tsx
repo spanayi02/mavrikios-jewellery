@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
+import { Reveal, RevealItem } from "@/components/site/reveal";
 import { shopCategories } from "@/data/categories";
 
 export function CuratedCategories() {
@@ -8,7 +9,7 @@ export function CuratedCategories() {
 
   return (
     <section className="container-mavrikios py-20 sm:py-28">
-      <div className="mb-10 flex flex-col gap-3 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
+      <Reveal className="mb-10 flex flex-col gap-3 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">Shop by Category</p>
           <h2 className="max-w-lg font-serif text-3xl italic text-ink-950 sm:text-4xl">
@@ -18,31 +19,35 @@ export function CuratedCategories() {
         <Link href="/shop" className="veil-underline text-[13px] font-medium uppercase tracking-[0.12em] text-ink-950">
           View All Jewellery
         </Link>
-      </div>
+      </Reveal>
 
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-6 lg:grid-rows-2 lg:gap-5">
-        <CategoryTile item={rings} className="lg:col-span-2 lg:row-span-2 aspect-[3/4] lg:aspect-auto" />
-        <CategoryTile item={engagement} className="lg:col-span-4 aspect-[3/4] lg:aspect-auto" large />
-        <CategoryTile item={earrings} className="aspect-[3/4]" />
-        <CategoryTile item={necklaces} className="aspect-[3/4]" />
-        <CategoryTile item={bracelets} className="aspect-[3/4]" />
-        <CategoryTile item={gifts} className="aspect-[3/4]" />
-      </div>
+      <Reveal stagger={0.08} className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-6 lg:grid-rows-2 lg:gap-5">
+        <RevealItem className="aspect-[3/4] lg:col-span-2 lg:row-span-2 lg:aspect-auto">
+          <CategoryTile item={rings} />
+        </RevealItem>
+        <RevealItem className="aspect-[3/4] lg:col-span-4 lg:aspect-auto">
+          <CategoryTile item={engagement} large />
+        </RevealItem>
+        <RevealItem className="aspect-[3/4]">
+          <CategoryTile item={earrings} />
+        </RevealItem>
+        <RevealItem className="aspect-[3/4]">
+          <CategoryTile item={necklaces} />
+        </RevealItem>
+        <RevealItem className="aspect-[3/4]">
+          <CategoryTile item={bracelets} />
+        </RevealItem>
+        <RevealItem className="aspect-[3/4]">
+          <CategoryTile item={gifts} />
+        </RevealItem>
+      </Reveal>
     </section>
   );
 }
 
-function CategoryTile({
-  item,
-  className,
-  large,
-}: {
-  item: (typeof shopCategories)[number];
-  className?: string;
-  large?: boolean;
-}) {
+function CategoryTile({ item, large }: { item: (typeof shopCategories)[number]; large?: boolean }) {
   return (
-    <Link href={item.href} className={`group relative block overflow-hidden bg-stone-100 ${className}`}>
+    <Link href={item.href} className="group relative block h-full w-full overflow-hidden bg-stone-100">
       <PlaceholderArt motif={item.motif} className="transition-transform duration-700 ease-out group-hover:scale-105" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink-950/55 via-ink-950/0 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 sm:p-6">

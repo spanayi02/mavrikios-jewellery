@@ -6,6 +6,8 @@ import { ProductGallery } from "@/components/commerce/product-gallery";
 import { PurchasePanel } from "@/components/commerce/purchase-panel";
 import { ProductInfoAccordion } from "@/components/commerce/product-info-accordion";
 import { RelatedProducts } from "@/components/commerce/related-products";
+import { RecentlyViewedRail } from "@/components/commerce/recently-viewed-rail";
+import { TrackRecentlyViewed } from "@/components/commerce/track-recently-viewed";
 import { StickyAddToBag } from "@/components/commerce/sticky-add-to-bag";
 import { JsonLd } from "@/components/site/json-ld";
 import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/data/products";
@@ -52,6 +54,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     <div>
       <JsonLd data={productJsonLd(product)} />
       <JsonLd data={breadcrumb} />
+      <TrackRecentlyViewed productId={product.id} />
 
       <nav aria-label="Breadcrumb" className="container-mavrikios flex items-center gap-1.5 py-5 text-xs text-stone-500">
         <Link href="/shop" className="hover:text-ink-950">
@@ -75,6 +78,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <StickyAddToBag product={product} />
       <RelatedProducts products={related} />
+      <RecentlyViewedRail excludeId={product.id} />
     </div>
   );
 }

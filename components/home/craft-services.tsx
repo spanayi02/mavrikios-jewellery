@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { services } from "@/data/services";
+import { Reveal, RevealItem } from "@/components/site/reveal";
 
 export function CraftServices() {
   const featured = services.slice(0, 6);
   return (
     <section className="bg-ink-950 py-20 text-marble-50 sm:py-28">
       <div className="container-mavrikios">
-        <div className="mb-12 flex flex-col gap-3 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
+        <Reveal className="mb-12 flex flex-col gap-3 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-marble-50/50">
               Craft &amp; Care
@@ -22,23 +23,24 @@ export function CraftServices() {
           >
             All Services
           </Link>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal stagger={0.06} className="grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((service) => (
-            <Link
-              key={service.key}
-              href="/services"
-              className="group flex items-start justify-between gap-4 border-t border-marble-50/15 py-6"
-            >
-              <div>
-                <p className="font-serif text-lg italic">{service.title}</p>
-                <p className="mt-1.5 max-w-xs text-sm text-marble-50/60">{service.description}</p>
-              </div>
-              <ArrowUpRight className="mt-1 size-4 shrink-0 text-marble-50/50 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-marble-50" />
-            </Link>
+            <RevealItem key={service.key}>
+              <Link
+                href="/services"
+                className="group flex items-start justify-between gap-4 border-t border-marble-50/15 py-6"
+              >
+                <div>
+                  <p className="font-serif text-lg italic">{service.title}</p>
+                  <p className="mt-1.5 max-w-xs text-sm text-marble-50/60">{service.description}</p>
+                </div>
+                <ArrowUpRight className="mt-1 size-4 shrink-0 text-marble-50/50 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-marble-50" />
+              </Link>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

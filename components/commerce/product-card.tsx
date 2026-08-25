@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ProductMedia } from "@/components/site/product-media";
 import { WishlistButton } from "@/components/commerce/wishlist-button";
@@ -6,6 +9,7 @@ import { QuickAddButton } from "@/components/commerce/quick-add-button";
 import { categoryLabels } from "@/lib/product-labels";
 import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { useQuickViewStore } from "@/lib/store/quick-view-store";
 import type { Product } from "@/types/product";
 
 interface ProductCardProps {
@@ -16,6 +20,13 @@ interface ProductCardProps {
 
 export function ProductCard({ product, priority, className }: ProductCardProps) {
   const [primary, secondary] = product.images;
+  const openQuickView = useQuickViewStore((s) => s.open);
+
+  function handleQuickView(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    openQuickView(product);
+  }
 
   return (
     <div className={cn("group relative flex flex-col", className)}>
@@ -40,7 +51,15 @@ export function ProductCard({ product, priority, className }: ProductCardProps) 
           </span>
         </div>
 
-        <div className="absolute bottom-3 right-3 opacity-100 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100">
+        <div className="absolute bottom-3 right-3 flex flex-col items-end gap-2 opacity-100 transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100">
+          <button
+            type="button"
+            onClick={handleQuickView}
+            aria-label={`Quick view ${product.name}`}
+            className="flex size-9 items-center justify-center rounded-full bg-marble-50/90 text-ink-950 shadow-sm backdrop-blur-sm transition-transform hover:scale-105 active:scale-95"
+          >
+            <Eye className="size-4" />
+          </button>
           <QuickAddButton product={product} />
         </div>
       </Link>

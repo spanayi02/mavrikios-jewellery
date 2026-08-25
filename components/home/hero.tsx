@@ -1,28 +1,109 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, type MotionValue } from "framer-motion";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
+import { Marquee } from "@/components/site/marquee";
+import type { PlaceholderMotif } from "@/types/product";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+const tickerItems = [
+  "Since 1967",
+  "Engagement Rings",
+  "Bespoke Design",
+  "Free Delivery in Cyprus",
+  "Handcrafted in Latsia",
+  "Jewellery Repairs",
+];
+
+interface FloatCard {
+  motif: PlaceholderMotif;
+  tone: "marble" | "ink";
+  className: string;
+  rotate: number;
+  depth: number;
+  floatDelay: number;
+}
+
+const floatCards: FloatCard[] = [
+  {
+    motif: "ring",
+    tone: "marble",
+    className: "right-[6%] top-[12%] h-40 w-32 sm:h-52 sm:w-40 lg:right-[10%] lg:top-[9%] lg:h-64 lg:w-52",
+    rotate: 4,
+    depth: 0.18,
+    floatDelay: 0,
+  },
+  {
+    motif: "necklace",
+    tone: "ink",
+    className: "right-[30%] top-[46%] hidden h-32 w-28 sm:right-[34%] sm:block sm:h-40 sm:w-32 lg:right-[32%] lg:top-[44%] lg:h-48 lg:w-40",
+    rotate: -3,
+    depth: 0.1,
+    floatDelay: 0.6,
+  },
+  {
+    motif: "earring",
+    tone: "marble",
+    className: "right-[8%] top-[54%] hidden h-28 w-24 sm:right-[10%] sm:block sm:h-32 sm:w-28 lg:right-[13%] lg:top-[52%] lg:h-40 lg:w-36",
+    rotate: -6,
+    depth: 0.26,
+    floatDelay: 1.2,
+  },
+];
+
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  }
+
   return (
-    <section className="relative -mt-20 flex min-h-[92vh] w-full items-end overflow-hidden bg-ink-950 sm:min-h-screen">
-      <motion.div
-        initial={{ scale: 1.06, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 2.2, ease }}
-        className="absolute inset-0"
-      >
-        <PlaceholderArt motif="ring" tone="ink" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/20 to-ink-950/40" />
+    <section
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      className="relative -mt-20 flex min-h-[100vh] w-full flex-col overflow-hidden bg-ink-950 sm:min-h-[104vh]"
+    >
+      <motion.div style={{ y: bgY }} className="absolute inset-0">
+        <PlaceholderArt motif="monopetra" tone="ink" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/35 to-ink-950/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/70 via-transparent to-ink-950/40" />
       </motion.div>
 
-      <div className="container-mavrikios relative z-10 grid w-full grid-cols-1 gap-10 pb-16 pt-40 sm:pb-24 lg:grid-cols-12 lg:pb-28">
-        <div className="lg:col-span-8 lg:col-start-1">
+      {/* Ghost wordmark watermark */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-[8%] select-none text-center font-serif text-[22vw] leading-none tracking-tight text-marble-50/[0.05] sm:top-[10%]"
+      >
+        MAVRIKIOS
+      </div>
+
+      {/* Floating jewellery cards */}
+      {floatCards.map((card, i) => (
+        <FloatingCard key={i} card={card} index={i} mouseX={springX} mouseY={springY} />
+      ))}
+
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="container-mavrikios relative z-10 flex flex-1 flex-col justify-end pb-20 pt-40 sm:pb-16"
+      >
+        <div className="max-w-3xl">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -71,9 +152,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 1.25, ease }}
             className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4"
           >
-            <Button asChild variant="inverse" size="lg">
+            <MagneticButton>
               <Link href="/shop">Shop the Collection</Link>
-            </Button>
+            </MagneticButton>
             <Link
               href="/our-story"
               className="group flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.12em] text-marble-50"
@@ -83,17 +164,100 @@ export function Hero() {
             </Link>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.6 }}
-        className="absolute bottom-8 right-6 hidden flex-col items-end gap-1 text-right text-[11px] uppercase tracking-[0.2em] text-marble-50/60 sm:flex lg:right-12"
+        transition={{ duration: 1, delay: 1.5 }}
+        className="relative z-10 border-t border-marble-50/10"
       >
-        <span>Ayiou Georgiou 17C, Latsia</span>
-        <span>Handled with care since 1967</span>
+        <Marquee
+          duration={30}
+          items={tickerItems.map((item) => (
+            <span key={item} className="flex items-center gap-8 px-4 py-3.5 text-[11px] uppercase tracking-[0.28em] text-marble-50/55">
+              {item}
+              <span aria-hidden className="text-champagne-300/60">
+                &#10022;
+              </span>
+            </span>
+          ))}
+        />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.8 }}
+        className="pointer-events-none absolute bottom-24 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-marble-50/50 sm:flex"
+      >
+        <motion.span animate={{ y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}>
+          <ArrowDown className="size-4" />
+        </motion.span>
       </motion.div>
     </section>
+  );
+}
+
+function FloatingCard({
+  card,
+  index,
+  mouseX,
+  mouseY,
+}: {
+  card: FloatCard;
+  index: number;
+  mouseX: MotionValue<number>;
+  mouseY: MotionValue<number>;
+}) {
+  const x = useTransform(mouseX, (v) => v * card.depth * 60);
+  const y = useTransform(mouseY, (v) => v * card.depth * 60);
+
+  return (
+    <motion.div
+      style={{ x, y }}
+      initial={{ opacity: 0, scale: 0.92, rotate: card.rotate - 4 }}
+      animate={{ opacity: 1, scale: 1, rotate: card.rotate }}
+      transition={{ duration: 1.1, delay: 0.5 + index * 0.15, ease }}
+      className={`absolute z-[1] ${card.className}`}
+    >
+      <motion.div
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 5.5, delay: card.floatDelay, repeat: Infinity, ease: "easeInOut" }}
+        className="h-full w-full overflow-hidden border border-marble-50/15 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)]"
+      >
+        <PlaceholderArt motif={card.motif} tone={card.tone} />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function MagneticButton({ children }: { children: React.ReactNode }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 150, damping: 15, mass: 0.3 });
+  const springY = useSpring(y, { stiffness: 150, damping: 15, mass: 0.3 });
+
+  function handleMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left - rect.width / 2) * 0.25);
+    y.set((e.clientY - rect.top - rect.height / 2) * 0.25);
+  }
+  function handleLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.div
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{ x: springX, y: springY }}
+      className="inline-block"
+    >
+      <Button asChild variant="inverse" size="lg">
+        {children}
+      </Button>
+    </motion.div>
   );
 }
