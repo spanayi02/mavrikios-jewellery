@@ -78,18 +78,18 @@ export function Hero() {
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative -mt-20 flex min-h-[100vh] w-full flex-col overflow-hidden bg-ink-950 sm:min-h-[104vh]"
+      className="relative -mt-20 flex min-h-[100vh] w-full flex-col overflow-hidden bg-marble-50 sm:min-h-[104vh]"
     >
       <motion.div style={{ y: bgY }} className="absolute inset-0">
-        <PlaceholderArt motif="monopetra" tone="ink" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/35 to-ink-950/55" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-950/70 via-transparent to-ink-950/40" />
+        <PlaceholderArt motif="monopetra" />
+        <div className="absolute inset-0 bg-gradient-to-t from-marble-50 via-marble-50/40 to-marble-50/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-marble-50/85 via-marble-50/10 to-transparent" />
       </motion.div>
 
       {/* Ghost wordmark watermark */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-[8%] select-none text-center font-serif text-[22vw] leading-none tracking-tight text-marble-50/[0.05] sm:top-[10%]"
+        className="pointer-events-none absolute inset-x-0 top-[8%] select-none text-center font-serif text-[22vw] leading-none tracking-tight text-champagne-400/[0.14] sm:top-[10%]"
       >
         MAVRIKIOS
       </div>
@@ -108,12 +108,13 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease }}
-            className="mb-6 text-[11px] uppercase tracking-[0.35em] text-marble-50/70"
+            className="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-champagne-500"
           >
+            <span className="h-px w-8 bg-champagne-400" aria-hidden />
             Mavrikios &middot; Nicosia &middot; Since 1967
           </motion.p>
 
-          <h1 className="max-w-3xl font-serif text-[2.6rem] leading-[1.05] text-marble-50 sm:text-6xl lg:text-[4.6rem]">
+          <h1 className="max-w-3xl font-serif text-[2.6rem] leading-[1.05] text-ink-950 sm:text-6xl lg:text-[4.6rem]">
             <span className="block overflow-hidden">
               <motion.span
                 initial={{ y: "110%" }}
@@ -129,7 +130,7 @@ export function Hero() {
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.9, delay: 0.75, ease }}
-                className="block italic text-balance"
+                className="block italic text-balance text-champagne-500"
               >
                 become part of your story.
               </motion.span>
@@ -140,7 +141,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.05, ease }}
-            className="mt-6 max-w-md text-[15px] leading-relaxed text-marble-50/75"
+            className="mt-6 max-w-md text-[15px] leading-relaxed text-stone-600"
           >
             Fine jewellery, engagement rings and bespoke pieces, chosen and made with personal
             attention at our boutique in Latsia.
@@ -157,7 +158,7 @@ export function Hero() {
             </MagneticButton>
             <Link
               href="/our-story"
-              className="group flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.12em] text-marble-50"
+              className="group flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.12em] text-ink-950"
             >
               Discover Our Story
               <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -170,14 +171,14 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}
-        className="relative z-10 border-t border-marble-50/10"
+        className="relative z-10 border-t border-champagne-300/40 bg-marble-50/60 backdrop-blur-sm"
       >
         <Marquee
           duration={30}
           items={tickerItems.map((item) => (
-            <span key={item} className="flex items-center gap-8 px-4 py-3.5 text-[11px] uppercase tracking-[0.28em] text-marble-50/55">
+            <span key={item} className="flex items-center gap-8 px-4 py-3.5 text-[11px] uppercase tracking-[0.28em] text-stone-500">
               {item}
-              <span aria-hidden className="text-champagne-300/60">
+              <span aria-hidden className="text-champagne-500">
                 &#10022;
               </span>
             </span>
@@ -189,7 +190,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.8 }}
-        className="pointer-events-none absolute bottom-24 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-marble-50/50 sm:flex"
+        className="pointer-events-none absolute bottom-24 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-ink-950/35 sm:flex"
       >
         <motion.span animate={{ y: [0, 6, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}>
           <ArrowDown className="size-4" />
@@ -224,7 +225,7 @@ function FloatingCard({
       <motion.div
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 5.5, delay: card.floatDelay, repeat: Infinity, ease: "easeInOut" }}
-        className="h-full w-full overflow-hidden border border-marble-50/15 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)]"
+        className="h-full w-full overflow-hidden border border-champagne-300/70 shadow-[0_24px_50px_-18px_rgba(163,132,79,0.35)]"
       >
         <PlaceholderArt motif={card.motif} tone={card.tone} />
       </motion.div>
@@ -255,7 +256,7 @@ function MagneticButton({ children }: { children: React.ReactNode }) {
       style={{ x: springX, y: springY }}
       className="inline-block"
     >
-      <Button asChild variant="inverse" size="lg">
+      <Button asChild variant="default" size="lg">
         {children}
       </Button>
     </motion.div>

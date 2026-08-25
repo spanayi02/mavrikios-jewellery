@@ -31,7 +31,8 @@ export function CampaignFeature() {
 
       <Reveal className="container-mavrikios relative z-10 py-20">
         <div className="max-w-md">
-          <p className="mb-5 text-[11px] uppercase tracking-[0.3em] text-marble-50/60">
+          <p className="mb-5 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-champagne-400">
+            <span className="h-px w-8 bg-champagne-400/70" aria-hidden />
             The Mavrikios Edit
           </p>
           <h2 className="font-serif text-4xl italic leading-[1.1] text-marble-50 sm:text-5xl">

@@ -10,7 +10,8 @@ export function CraftServices() {
       <div className="container-mavrikios">
         <Reveal className="mb-12 flex flex-col gap-3 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-marble-50/50">
+            <p className="mb-3 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-champagne-400">
+              <span className="h-px w-8 bg-champagne-400/70" aria-hidden />
               Craft &amp; Care
             </p>
             <h2 className="max-w-lg font-serif text-3xl italic sm:text-4xl">

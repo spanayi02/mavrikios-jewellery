@@ -33,8 +33,8 @@ export function HeritageStory() {
             it always has.
           </p>
 
-          <div className="mt-8 flex items-baseline gap-2 border-t border-ink-950/10 pt-6">
-            <span className="font-serif text-4xl italic text-ink-950">
+          <div className="mt-8 flex items-baseline gap-2 border-t border-champagne-300/50 pt-6">
+            <span className="font-serif text-4xl italic text-champagne-500">
               <CountUp to={years} />
             </span>
             <span className="text-sm text-stone-600">years of craftsmanship, in the same neighbourhood.</span>

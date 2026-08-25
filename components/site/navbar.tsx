@@ -49,7 +49,7 @@ export function Navbar() {
     >
       <div className="container-mavrikios flex h-20 items-center justify-between">
         <Link href="/" aria-label="Mavrikios home" className="shrink-0">
-          <Logo tone={isTransparent ? "marble" : "ink"} />
+          <Logo tone="ink" />
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex">
@@ -57,10 +57,7 @@ export function Navbar() {
             <div key={item.label} onMouseEnter={() => item.label === "Shop" && handleEnter(item.label)}>
               <Link
                 href={item.href}
-                className={cn(
-                  "veil-underline text-[13px] font-medium uppercase tracking-[0.12em] transition-colors",
-                  isTransparent ? "text-marble-50" : "text-ink-950"
-                )}
+                className="veil-underline text-[13px] font-medium uppercase tracking-[0.12em] text-ink-950 transition-colors"
               >
                 {item.label}
               </Link>
@@ -74,7 +71,7 @@ export function Navbar() {
             size="icon"
             aria-label="Search"
             onClick={openSearch}
-            className={cn("hidden sm:inline-flex", isTransparent && "text-marble-50 hover:bg-white/10 hover:text-marble-50")}
+            className="hidden sm:inline-flex"
           >
             <Search className="size-[18px]" />
           </Button>
@@ -83,7 +80,7 @@ export function Navbar() {
             size="icon"
             aria-label={`Wishlist, ${wishlistCount} items`}
             asChild
-            className={cn("relative hidden sm:inline-flex", isTransparent && "text-marble-50 hover:bg-white/10 hover:text-marble-50")}
+            className="relative hidden sm:inline-flex"
           >
             <Link href="/wishlist">
               <Heart className="size-[18px]" />
@@ -94,13 +91,7 @@ export function Navbar() {
               )}
             </Link>
           </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={`Bag, ${totalItems} items`}
-            onClick={cartOpen}
-            className={cn("relative", isTransparent && "text-marble-50 hover:bg-white/10 hover:text-marble-50")}
-          >
+          <Button variant="ghost" size="icon" aria-label={`Bag, ${totalItems} items`} onClick={cartOpen} className="relative">
             <ShoppingBag className="size-[18px]" />
             {totalItems > 0 && (
               <span className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-champagne-500 text-[9px] font-medium text-ink-950">
@@ -113,7 +104,7 @@ export function Navbar() {
             size="icon"
             aria-label="Open menu"
             onClick={() => setMobileOpen(true)}
-            className={cn("lg:hidden", isTransparent && "text-marble-50 hover:bg-white/10 hover:text-marble-50")}
+            className="lg:hidden"
           >
             <Menu className="size-[20px]" />
           </Button>
