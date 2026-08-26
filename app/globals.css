@@ -207,6 +207,31 @@
   .reveal {
     animation: var(--animate-reveal-up);
   }
+
+  /* One-shot light-catching glint across gold text — fires once after entrance, never loops */
+  .gold-shimmer {
+    background-image: linear-gradient(
+      100deg,
+      var(--champagne-500) 44%,
+      #fff6e4 50%,
+      var(--champagne-500) 56%
+    );
+    background-size: 220% 100%;
+    background-position: 100% 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gold-shimmer 1.5s linear 1.7s 1 both;
+  }
+}
+
+@keyframes gold-shimmer {
+  from {
+    background-position: 130% 0;
+  }
+  to {
+    background-position: -30% 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

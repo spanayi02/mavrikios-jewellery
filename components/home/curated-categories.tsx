@@ -50,6 +50,7 @@ function CategoryTile({ item, large }: { item: (typeof shopCategories)[number]; 
     <Link href={item.href} className="group relative block h-full w-full overflow-hidden bg-stone-100">
       <PlaceholderArt motif={item.motif} className="transition-transform duration-700 ease-out group-hover:scale-105" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink-950/55 via-ink-950/0 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 border border-champagne-300/0 transition-colors duration-500 group-hover:border-champagne-300/50" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 sm:p-6">
         <div>
           <p className={`font-serif text-marble-50 ${large ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"}`}>
@@ -59,7 +60,7 @@ function CategoryTile({ item, large }: { item: (typeof shopCategories)[number]; 
             <p className="mt-1 hidden max-w-xs text-sm text-marble-50/80 sm:block">{item.description}</p>
           )}
         </div>
-        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-marble-50/15 text-marble-50 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-marble-50/15 text-marble-50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-champagne-400 group-hover:text-ink-950">
           <ArrowUpRight className="size-4" />
         </span>
       </div>

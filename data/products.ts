@@ -81,7 +81,6 @@ export const products: Product[] = [
       { alt: "Selene Pearl Drop Earrings, close detail", placeholder: "earring", tone: "ink" },
     ],
     availability: "in-stock",
-    isNew: true,
     createdAt: "2026-06-14",
     seo: {
       title: "Selene Pearl Drop Earrings — Gold & Freshwater Pearl",
@@ -231,6 +230,7 @@ export const products: Product[] = [
     ],
     availability: "in-stock",
     featured: true,
+    isNew: true,
     createdAt: "2025-10-11",
     seo: {
       title: "Calliope Pendant Necklace — 18k White Gold & Diamond",
@@ -268,7 +268,6 @@ export const products: Product[] = [
     ],
     variantLabel: "Ring Size",
     availability: "made-to-order",
-    bestSeller: true,
     createdAt: "2025-08-04",
     seo: {
       title: "Monopetra Classic Ring — Made to Order Engagement Ring",
@@ -310,6 +309,7 @@ export const products: Product[] = [
     ],
     variantLabel: "Ring Size",
     availability: "in-stock",
+    isNew: true,
     createdAt: "2025-07-22",
     seo: {
       title: "Daphne Signet Ring — 9k Gold",
@@ -379,7 +379,6 @@ export const products: Product[] = [
       { alt: "Thalia Sapphire Studs, close-up", placeholder: "earring", tone: "ink" },
     ],
     availability: "in-stock",
-    isNew: true,
     createdAt: "2026-05-30",
     seo: {
       title: "Thalia Sapphire Studs — 18k Gold & Sapphire",
@@ -413,6 +412,7 @@ export const products: Product[] = [
       { alt: "Irini Layered Necklace, clasp detail", placeholder: "necklace", tone: "ink" },
     ],
     availability: "in-stock",
+    bestSeller: true,
     createdAt: "2025-06-15",
     seo: {
       title: "Irini Layered Necklace — 9k Gold",
@@ -482,6 +482,7 @@ export const products: Product[] = [
       { alt: "Melina Baguette Bracelet, stone line detail", placeholder: "bracelet", tone: "ink" },
     ],
     availability: "in-stock",
+    isNew: true,
     createdAt: "2025-12-20",
     seo: {
       title: "Melina Baguette Bracelet — Silver & Baguette Stones",
@@ -550,6 +551,7 @@ export const products: Product[] = [
       { alt: "Athina Ruby Drop Earrings, detachable drop detail", placeholder: "earring", tone: "ink" },
     ],
     availability: "in-stock",
+    bestSeller: true,
     createdAt: "2025-11-30",
     seo: {
       title: "Athina Ruby Drop Earrings — 18k Gold, Diamond & Ruby",
