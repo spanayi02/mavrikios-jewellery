@@ -130,7 +130,7 @@ export function Hero() {
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.9, delay: 0.75, ease }}
-                className="block italic text-balance text-champagne-500"
+                className="gold-shimmer block italic text-balance"
               >
                 become part of your story.
               </motion.span>
