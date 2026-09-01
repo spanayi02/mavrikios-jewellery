@@ -1,7 +1,7 @@
 "use server";
 
 import { getProductById } from "@/data/products";
-import { getSupabaseServerClient } from "@/lib/supabase-server";
+import { createClient } from "@/lib/supabase/server";
 
 interface PlaceOrderItem {
   productId: string;
@@ -98,7 +98,10 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
   }
 
   const subtotal = lines.reduce((sum, line) => sum + line.lineTotal, 0);
-  const supabase = getSupabaseServerClient();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // Generating the id here (rather than an INSERT ... RETURNING) is deliberate — see the
   // note on RLS/RETURNING in CLAUDE.md's Commerce architecture section.
@@ -111,6 +114,7 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
     const { error } = await supabase.from("orders").insert({
       id: orderId,
       reference,
+      user_id: user?.id ?? null,
       customer_name: fullName,
       customer_email: email,
       customer_phone: phone,
