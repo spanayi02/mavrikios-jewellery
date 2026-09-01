@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import NumberFlow from "@number-flow/react";
 import { Banknote, CheckCircle2, CreditCard, Truck } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,10 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ProductMedia } from "@/components/site/product-media";
 import { useCartStore, useCartTotals } from "@/lib/store/cart-store";
 import { formatPrice } from "@/lib/format";
-
-function generateOrderReference() {
-  return `MVK-${Math.floor(100000 + Math.random() * 900000)}`;
-}
+import { placeOrder } from "./actions";
 
 export function CheckoutClient() {
   const lines = useCartStore((s) => s.lines);
@@ -22,12 +20,39 @@ export function CheckoutClient() {
   const { subtotal } = useCartTotals();
   const [paymentMethod, setPaymentMethod] = useState<"cod" | "quickpay">("cod");
   const [orderRef, setOrderRef] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!e.currentTarget.reportValidity()) return;
-    const ref = generateOrderReference();
-    setOrderRef(ref);
+    const form = e.currentTarget;
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    setIsSubmitting(true);
+    const result = await placeOrder({
+      email: String(data.get("email")),
+      phone: String(data.get("phone")),
+      fullName: String(data.get("fullName")),
+      address: String(data.get("address")),
+      city: String(data.get("city")),
+      postalCode: String(data.get("postalCode")),
+      paymentMethod,
+      items: lines.map((line) => ({
+        productId: line.productId,
+        name: line.name,
+        variantLabel: line.variantLabel,
+        price: line.price,
+        quantity: line.quantity,
+      })),
+      subtotal,
+    });
+    setIsSubmitting(false);
+
+    if (!result.ok) {
+      toast.error(result.error);
+      return;
+    }
+    setOrderRef(result.reference);
     clear();
   }
 
@@ -140,8 +165,8 @@ export function CheckoutClient() {
             </p>
           </section>
 
-          <Button type="submit" size="lg" className="w-full sm:w-auto">
-            Place Order
+          <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={isSubmitting}>
+            {isSubmitting ? "Placing Order…" : "Place Order"}
           </Button>
         </div>
 
