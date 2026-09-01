@@ -39,12 +39,9 @@ export function CheckoutClient() {
       paymentMethod,
       items: lines.map((line) => ({
         productId: line.productId,
-        name: line.name,
-        variantLabel: line.variantLabel,
-        price: line.price,
+        variantId: line.variantId,
         quantity: line.quantity,
       })),
-      subtotal,
     });
     setIsSubmitting(false);
 

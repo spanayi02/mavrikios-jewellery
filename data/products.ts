@@ -601,6 +601,10 @@ export function getProductBySlug(slug: string): Product | undefined {
   return products.find((product) => product.slug === slug);
 }
 
+export function getProductById(id: string): Product | undefined {
+  return products.find((product) => product.id === id);
+}
+
 export function getRelatedProducts(product: Product, limit = 4): Product[] {
   return products
     .filter((p) => p.id !== product.id && p.category === product.category)
