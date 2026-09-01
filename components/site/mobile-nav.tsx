@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Heart, Phone, Search, ShoppingBag } from "lucide-react";
+import { Heart, Phone, Search, ShoppingBag, User } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -14,6 +14,7 @@ import { primaryNav, megaMenu } from "@/data/navigation";
 import { useCartTotals, useCartStore } from "@/lib/store/cart-store";
 import { useWishlistStore } from "@/lib/store/wishlist-store";
 import { useUIStore } from "@/lib/store/ui-store";
+import { useUser } from "@/hooks/use-user";
 import { siteConfig } from "@/lib/site-config";
 
 interface MobileNavProps {
@@ -26,6 +27,7 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
   const wishlistCount = useWishlistStore((s) => s.ids.length);
   const cartOpen = useCartStore((s) => s.open);
   const openSearch = useUIStore((s) => s.openSearch);
+  const user = useUser();
 
   function close() {
     onOpenChange(false);
@@ -61,6 +63,14 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
               <Heart className="size-4" /> Wishlist {wishlistCount > 0 && `(${wishlistCount})`}
             </Link>
           </div>
+
+          <Link
+            href={user ? "/account" : "/account/sign-in"}
+            onClick={close}
+            className="mb-6 flex items-center justify-center gap-2 border border-stone-300 py-3 text-[12px] uppercase tracking-[0.1em]"
+          >
+            <User className="size-4" /> {user ? "My Account" : "Sign In"}
+          </Link>
 
           <nav className="flex flex-col">
             {primaryNav.map((item) => (

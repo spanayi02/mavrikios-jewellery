@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
-import { Heart, Menu, Search, ShoppingBag } from "lucide-react";
+import { Heart, Menu, Search, ShoppingBag, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/logo";
 import { MegaMenu } from "@/components/site/mega-menu";
@@ -14,6 +14,7 @@ import { useCartTotals, useCartStore } from "@/lib/store/cart-store";
 import { useWishlistStore } from "@/lib/store/wishlist-store";
 import { useUIStore } from "@/lib/store/ui-store";
 import { useScrolledPast } from "@/hooks/use-scrolled";
+import { useUser } from "@/hooks/use-user";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -28,6 +29,7 @@ export function Navbar() {
   const wishlistCount = useWishlistStore((s) => s.ids.length);
   const cartOpen = useCartStore((s) => s.open);
   const openSearch = useUIStore((s) => s.openSearch);
+  const user = useUser();
 
   const isTransparent = transparentOnTop && !scrolledPast && openMenu === null;
 
@@ -74,6 +76,17 @@ export function Navbar() {
             className="hidden sm:inline-flex"
           >
             <Search className="size-[18px]" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            aria-label={user ? "My Account" : "Sign In"}
+            asChild
+            className="hidden sm:inline-flex"
+          >
+            <Link href={user ? "/account" : "/account/sign-in"}>
+              <User className="size-[18px]" />
+            </Link>
           </Button>
           <Button
             variant="ghost"

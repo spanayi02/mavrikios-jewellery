@@ -36,24 +36,53 @@ durable engineering rules for anyone (human or agent) working in this codebase a
   marked as sample data, not verified Mavrikios inventory). Keep this shape when replacing with
   the real catalogue.
 - Cart/wishlist/UI state: Zustand stores in `lib/store/` (`cart-store.ts`, `wishlist-store.ts`,
-  `ui-store.ts`), persisted to `localStorage`. No backend/auth — guest checkout only, by design.
+  `ui-store.ts`), persisted to `localStorage`. Checkout doesn't require an account — guest
+  checkout still works exactly as before — but accounts now exist (see Accounts/Auth below) and,
+  when signed in, an order is linked to the user.
 - Checkout (`app/checkout/`, Server Action in `app/checkout/actions.ts`) validates the form,
-  writes the order + line items to Supabase (`orders`/`order_items` tables — see
-  `lib/supabase-server.ts`), and shows a confirmation with the generated reference number. It
-  does **not** call a payment gateway or send email — Cash on Delivery and QuickPay are still
-  just the represented payment methods, not live charges. Wire up a real payment provider before
-  taking this live — never fabricate a "payment succeeded" state beyond what's actually
-  implemented.
-- Order writes use `SUPABASE_URL` / `SUPABASE_ANON_KEY` (server-only env vars, not
-  `NEXT_PUBLIC_*`). RLS on `orders`/`order_items` grants `INSERT` only, `to public` (not `to
-  anon` — in this Supabase project, `to anon`-scoped policies mysteriously fail even though the
-  role and grants check out; `to public` is the confirmed-working equivalent here since there's
-  no `authenticated` role in play). There is deliberately no `SELECT` policy, so customers can't
-  read other customers' orders — order review happens via the Supabase dashboard. Because of
-  this, **never chain `.select()`/`.single()` after `.insert()` on these tables** — Postgres
-  requires `INSERT ... RETURNING` to also satisfy a `SELECT` policy, which would fail here (or
-  force opening one, leaking all orders). Generate the order's `id` client-side
-  (`crypto.randomUUID()`) instead and insert it explicitly, exactly as `placeOrder` does.
+  re-derives every line's price/name/variant from the real catalogue (`getProductById` in
+  `data/products.ts` — never trust client-supplied price/name, cart state is tamperable in
+  devtools), writes the order + line items to Supabase (`orders`/`order_items` tables), and shows
+  a confirmation with the generated reference number. It does **not** call a payment gateway or
+  send email — Cash on Delivery and QuickPay are still just the represented payment methods, not
+  live charges. Wire up a real payment provider before taking this live — never fabricate a
+  "payment succeeded" state beyond what's actually implemented.
+- RLS on `orders`/`order_items` grants `INSERT` `to public` with `with_check (true)` (anyone can
+  place an order, signed in or not). There's also a `SELECT` policy `to authenticated` scoped to
+  `user_id = auth.uid()` (added once accounts existed) — verified directly against RLS (positive
+  + negative test with a real `auth.users` row) that an owner sees only their own orders. Order
+  review for guest orders (no `user_id`) still happens via the Supabase dashboard, not the API.
+  **Never chain `.select()`/`.single()` after `.insert()` on these tables** — Postgres requires
+  `INSERT ... RETURNING` to also satisfy a `SELECT` policy, and the `INSERT` policy alone won't
+  cover it. Generate the order's `id` client-side (`crypto.randomUUID()`) instead and insert it
+  explicitly, exactly as `placeOrder` does. (Earlier note here blamed `to anon` specifically for
+  this — that was a misdiagnosis from testing while the RETURNING bug was still present; the
+  `RETURNING`/`SELECT`-policy interaction is the actual, only cause. `orders`/`order_items` insert
+  policies stayed `to public` since that's what's proven working in production; there was no need
+  to re-test `to anon` once the real cause was fixed.)
+
+## Accounts / Auth
+
+- Email+password auth via Supabase Auth, using `@supabase/ssr` for Next.js App Router cookie
+  handling: `lib/supabase/client.ts` (browser client, `NEXT_PUBLIC_SUPABASE_URL` /
+  `NEXT_PUBLIC_SUPABASE_ANON_KEY`), `lib/supabase/server.ts` (server client reading/writing
+  cookies via `next/headers` — use this, not a bare `createClient`, anywhere you need
+  `auth.getUser()` on the server), `lib/supabase/session.ts` + root `proxy.ts` (refreshes the
+  session cookie on every request — required by `@supabase/ssr`, don't remove). Next.js renamed
+  `middleware.ts` to `proxy.ts` in this version (see `AGENTS.md`) — that's not a typo, don't
+  rename it back.
+- Pages: `app/account/sign-up`, `/sign-in`, `/forgot-password`, `/update-password` (landing page
+  for the password-reset email link), and `/account` itself — a protected dashboard
+  (`redirect("/account/sign-in")` if signed out) showing profile info and order history via
+  `orders`/`order_items` (RLS-scoped automatically, no manual `user_id` filtering needed in the
+  query). Server Actions for the auth flows live in `app/account/actions.ts`.
+- `hooks/use-user.ts` exposes the signed-in user client-side (e.g. for the Navbar's
+  account icon) via `useSyncExternalStore` fed by `onAuthStateChange` — not
+  a `useEffect`/`useState` pair, consistent with `use-scrolled.ts`'s pattern elsewhere in the
+  codebase.
+- `orders.user_id` (nullable, `references auth.users(id) on delete set null`) is set from
+  `auth.getUser()` inside `placeOrder` when the customer is signed in; guest checkouts leave it
+  `null`. Deleting a user never deletes their past orders.
 
 ## Real business info vs. demo data
 

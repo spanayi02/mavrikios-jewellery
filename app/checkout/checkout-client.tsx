@@ -14,7 +14,12 @@ import { useCartStore, useCartTotals } from "@/lib/store/cart-store";
 import { formatPrice } from "@/lib/format";
 import { placeOrder } from "./actions";
 
-export function CheckoutClient() {
+interface CheckoutClientProps {
+  defaultEmail?: string;
+  defaultFullName?: string;
+}
+
+export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClientProps) {
   const lines = useCartStore((s) => s.lines);
   const clear = useCartStore((s) => s.clear);
   const { subtotal } = useCartTotals();
@@ -88,7 +93,9 @@ export function CheckoutClient() {
       <div className="mb-10">
         <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">Checkout</p>
         <h1 className="font-serif text-4xl italic text-ink-950 sm:text-5xl">Checkout</h1>
-        <p className="mt-3 text-sm text-stone-600">No account required — check out as a guest.</p>
+        <p className="mt-3 text-sm text-stone-600">
+          {defaultEmail ? `Signed in as ${defaultEmail}.` : "No account required — check out as a guest."}
+        </p>
       </div>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-14 lg:grid-cols-12">
@@ -98,7 +105,7 @@ export function CheckoutClient() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" name="email" type="email" required autoComplete="email" />
+                <Input id="email" name="email" type="email" required autoComplete="email" defaultValue={defaultEmail} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone</Label>
@@ -112,7 +119,7 @@ export function CheckoutClient() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="space-y-2 sm:col-span-2">
                 <Label htmlFor="fullName">Full Name</Label>
-                <Input id="fullName" name="fullName" required autoComplete="name" />
+                <Input id="fullName" name="fullName" required autoComplete="name" defaultValue={defaultFullName} />
               </div>
               <div className="space-y-2 sm:col-span-2">
                 <Label htmlFor="address">Address</Label>
