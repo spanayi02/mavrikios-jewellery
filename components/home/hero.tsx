@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring, type Motion
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
+import { LivingMarble } from "@/components/site/living-marble";
 import { Marquee } from "@/components/site/marquee";
 import type { PlaceholderMotif } from "@/types/product";
 
@@ -81,7 +82,7 @@ export function Hero() {
       className="relative -mt-20 flex min-h-[100vh] w-full flex-col overflow-hidden bg-marble-50 sm:min-h-[104vh]"
     >
       <motion.div style={{ y: bgY }} className="absolute inset-0">
-        <PlaceholderArt motif="monopetra" />
+        <LivingMarble mouseX={mouseX} mouseY={mouseY} className="absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-marble-50 via-marble-50/40 to-marble-50/10" />
         <div className="absolute inset-0 bg-gradient-to-r from-marble-50/85 via-marble-50/10 to-transparent" />
       </motion.div>
