@@ -1,43 +1,74 @@
 import Link from "next/link";
-import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 
 const steps = [
-  { n: "01", label: "Conversation" },
-  { n: "02", label: "Design" },
-  { n: "03", label: "Craft" },
-  { n: "04", label: "Reveal" },
+  {
+    n: "01",
+    label: "Conversation",
+    description: "Share your story, your budget and what's inspiring you.",
+  },
+  {
+    n: "02",
+    label: "Design",
+    description: "We sketch and refine the piece with you until it's right.",
+  },
+  {
+    n: "03",
+    label: "Craft",
+    description: "Your piece is handmade in our workshop, here in Latsia.",
+  },
+  {
+    n: "04",
+    label: "Reveal",
+    description: "Collect it in the boutique, finished and ready to wear.",
+  },
 ];
 
 export function BespokeEditorial() {
   return (
-    <section className="container-mavrikios py-20 sm:py-28">
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
-        <Reveal className="lg:col-span-5">
+    <section className="marble-surface py-24 sm:py-32">
+      <div className="container-mavrikios">
+        <Reveal className="max-w-lg">
           <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">Bespoke</p>
-          <h2 className="max-w-md font-serif text-3xl italic text-ink-950 sm:text-4xl">
+          <h2 className="font-serif text-3xl italic text-ink-950 sm:text-4xl">
             A piece designed entirely around you.
           </h2>
-          <p className="mt-6 max-w-md text-[15px] leading-relaxed text-stone-600">
+          <p className="mt-6 text-[15px] leading-relaxed text-stone-600">
             From a first conversation to the finished piece in your hands, our workshop designs
             and makes bespoke jewellery to order — heirlooms redesigned, ideas sketched into
             reality.
           </p>
-          <Reveal stagger={0.08} className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4" as="ol">
-            {steps.map((step) => (
-              <RevealItem key={step.n} as="li" className="flex items-baseline gap-3">
-                <span className="font-serif text-lg italic text-stone-400">{step.n}</span>
-                <span className="text-sm text-ink-950">{step.label}</span>
-              </RevealItem>
-            ))}
-          </Reveal>
-          <Button asChild variant="outline" className="mt-8">
+        </Reveal>
+
+        <Reveal
+          stagger={0.1}
+          as="ol"
+          className="relative mt-16 grid grid-cols-1 gap-10 sm:mt-20 sm:grid-cols-4 sm:gap-6"
+        >
+          <div
+            aria-hidden
+            className="absolute left-[19px] top-0 hidden h-full w-px bg-champagne-300/60 sm:top-[19px] sm:left-0 sm:h-px sm:w-full"
+          />
+          {steps.map((step) => (
+            <RevealItem key={step.n} as="li" className="relative flex gap-4 sm:flex-col sm:gap-0">
+              <span className="relative z-10 flex size-10 shrink-0 items-center justify-center border border-champagne-400 bg-marble-50 font-serif text-base italic text-champagne-600">
+                {step.n}
+              </span>
+              <div className="sm:mt-5">
+                <p className="font-serif text-lg italic text-ink-950">{step.label}</p>
+                <p className="mt-1.5 max-w-[22ch] text-sm leading-relaxed text-stone-600">
+                  {step.description}
+                </p>
+              </div>
+            </RevealItem>
+          ))}
+        </Reveal>
+
+        <Reveal delay={0.2}>
+          <Button asChild variant="outline" className="mt-14 sm:mt-16">
             <Link href="/bespoke">Begin a Bespoke Piece</Link>
           </Button>
-        </Reveal>
-        <Reveal delay={0.15} className="relative aspect-[4/5] overflow-hidden lg:col-span-6 lg:col-start-7">
-          <PlaceholderArt motif="ring" tone="ink" label="Bespoke Workshop" />
         </Reveal>
       </div>
     </section>

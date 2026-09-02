@@ -57,7 +57,7 @@ function CategoryTile({ item, large }: { item: (typeof shopCategories)[number]; 
             {item.title}
           </p>
           {large && (
-            <p className="mt-1 hidden max-w-xs text-sm text-marble-50/80 sm:block">{item.description}</p>
+            <p className="mt-1 max-w-xs text-sm text-marble-50/80">{item.description}</p>
           )}
         </div>
         <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-marble-50/15 text-marble-50 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-champagne-400 group-hover:text-ink-950">

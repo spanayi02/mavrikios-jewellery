@@ -84,6 +84,16 @@ durable engineering rules for anyone (human or agent) working in this codebase a
   `auth.getUser()` inside `placeOrder` when the customer is signed in; guest checkouts leave it
   `null`. Deleting a user never deletes their past orders.
 
+## Newsletter
+
+- `components/site/newsletter-form.tsx` calls the Server Action `subscribeToNewsletter` in
+  `app/actions/newsletter.ts`, which inserts into `newsletter_subscribers` (id, email unique,
+  created_at) in Supabase. RLS: `INSERT` `to public` with `with_check (true)`, no `SELECT`
+  policy — same shape as `orders`, review subscribers via the Supabase dashboard. A duplicate
+  email (`23505`) is treated as success, not an error, since resubscribing shouldn't fail. This
+  used to be a client-only fake-success form; don't revert to that — an email capture that shows
+  "you're on the list" must actually persist the email somewhere.
+
 ## Real business info vs. demo data
 
 - `lib/site-config.ts` holds verified business info (address, phone, Instagram, hours). Hours
