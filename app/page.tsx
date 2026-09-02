@@ -9,7 +9,6 @@ import { CraftServices } from "@/components/home/craft-services";
 import { ReviewsSection } from "@/components/home/reviews-section";
 import { InstagramSection } from "@/components/home/instagram-section";
 import { BoutiqueLocation } from "@/components/home/boutique-location";
-import { NewsletterSection } from "@/components/home/newsletter-section";
 import { getBestSellers, getNewArrivals } from "@/data/products";
 
 export default function HomePage() {
@@ -43,7 +42,6 @@ export default function HomePage() {
       <ReviewsSection />
       <InstagramSection />
       <BoutiqueLocation />
-      <NewsletterSection />
     </>
   );
 }

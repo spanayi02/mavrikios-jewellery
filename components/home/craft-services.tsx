@@ -4,7 +4,7 @@ import { services } from "@/data/services";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 
 export function CraftServices() {
-  const featured = services.slice(0, 6);
+  const featured = services.slice(0, 4);
   return (
     <section className="bg-ink-950 py-20 text-marble-50 sm:py-28">
       <div className="container-mavrikios">
@@ -26,7 +26,7 @@ export function CraftServices() {
           </Link>
         </Reveal>
 
-        <Reveal stagger={0.06} className="grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">
+        <Reveal stagger={0.06} className="grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2">
           {featured.map((service) => (
             <RevealItem key={service.key}>
               <Link
