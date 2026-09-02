@@ -31,7 +31,11 @@ export const products: Product[] = [
     material: "18k-yellow-gold",
     stone: "diamond",
     images: [
-      { alt: "Aliki Solitaire Ring, front view on marble", placeholder: "ring" },
+      {
+        src: "/images/products/aliki-solitaire-ring-1.jpg",
+        alt: "Aliki Solitaire Ring, front view on marble",
+        placeholder: "ring",
+      },
       { alt: "Aliki Solitaire Ring, detail of the claw setting", placeholder: "ring", tone: "ink" },
     ],
     variants: [
@@ -581,7 +585,11 @@ export const products: Product[] = [
     material: "9k-yellow-gold",
     stone: "none",
     images: [
-      { alt: "Orion Curb Chain Bracelet on marble", placeholder: "bracelet" },
+      {
+        src: "/images/products/orion-curb-chain-bracelet.jpg",
+        alt: "Orion Curb Chain Bracelet on marble",
+        placeholder: "bracelet",
+      },
       { alt: "Orion Curb Chain Bracelet, link detail", placeholder: "bracelet", tone: "ink" },
     ],
     availability: "in-stock",
