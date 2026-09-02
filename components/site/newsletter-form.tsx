@@ -5,15 +5,21 @@ import { ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { subscribeToNewsletter } from "@/app/actions/newsletter";
 
 export function NewsletterForm({ dark = false }: { dark?: boolean }) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email.includes("@")) {
-      toast.error("Please enter a valid email address.");
+    setIsSubmitting(true);
+    const result = await subscribeToNewsletter(email);
+    setIsSubmitting(false);
+
+    if (!result.ok) {
+      toast.error(result.error);
       return;
     }
     setSubmitted(true);
@@ -39,7 +45,13 @@ export function NewsletterForm({ dark = false }: { dark?: boolean }) {
         aria-label="Email address"
         className={dark ? "border-marble-50/30 bg-transparent text-marble-50 placeholder:text-marble-50/50 focus-visible:border-marble-50" : ""}
       />
-      <Button type="submit" variant={dark ? "inverse" : "default"} size="icon" aria-label="Subscribe">
+      <Button
+        type="submit"
+        variant={dark ? "inverse" : "default"}
+        size="icon"
+        aria-label="Subscribe"
+        disabled={isSubmitting}
+      >
         <ArrowRight className="size-4" />
       </Button>
     </form>
