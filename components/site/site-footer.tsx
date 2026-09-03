@@ -98,6 +98,38 @@ export function SiteFooter() {
           <p>&copy; {new Date().getFullYear()} Mavrikios Jewellery Boutique. All rights reserved.</p>
           <p>Latsia, Nicosia, Cyprus</p>
         </div>
+        <div className="container-mavrikios pb-6 text-center text-[11px] text-stone-400 sm:text-left">
+          <p>
+            Some product photos are temporary placeholders:{" "}
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Polaris_-_gold_ring.jpg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              &ldquo;Polaris&rdquo;
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://commons.wikimedia.org/wiki/File:Starlight_-_white_gold_ring_with_diamonds.jpg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              &ldquo;Starlight&rdquo;
+            </a>{" "}
+            by W.carter, licensed{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              CC BY-SA 4.0
+            </a>
+            , via Wikimedia Commons.
+          </p>
+        </div>
       </div>
     </footer>
   );

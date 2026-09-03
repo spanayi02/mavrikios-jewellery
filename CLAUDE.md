@@ -29,6 +29,24 @@ durable engineering rules for anyone (human or agent) working in this codebase a
   automatically renders a real photo via `next/image` when `src` is set, falling back to
   `PlaceholderArt` otherwise. **To add real photography: just set `src` on the product's images
   — no other code changes needed.**
+- `components/commerce/product-card.tsx`'s hover crossfade (primary photo → second angle) only
+  fires when the product's second image slot also has a real `src` — a product with just one
+  real photo hovers into a plain zoom instead of the placeholder art, since swapping a photo for
+  line art on hover reads as broken, not a nice alternate angle.
+- 8 of 16 demo products currently carry real photos as **temporary indicative placeholders**,
+  not verified inventory — swap these for real Mavrikios photography before launch, same as the
+  rest of the demo catalogue:
+  - `aliki-solitaire-ring-1.jpg`, `orion-curb-chain-bracelet.jpg` — user-supplied.
+  - `sapphire-cluster-ring.jpg`, `kite-drop-earrings.jpg`, `pearl-pendant-necklace.jpg`,
+    `ruby-emerald-swirl-ring.jpg` — user-supplied; material/stone in the photo is an
+    approximation of the demo product's own listed material/stone, not an exact match (e.g. the
+    photographed stone colour may differ from the `stone` field's text).
+  - `daphne-signet-ring.jpg`, `sophia-eternity-band.jpg` — sourced from Wikimedia Commons
+    (jewellery by Ann-Sophie Qvarnström, photographed by Wikimedia user W.carter), licensed
+    **CC BY-SA 4.0** — attribution required for as long as these files are in use:
+    "Polaris — gold ring" and "Starlight — white gold ring with diamonds" by W.carter, CC BY-SA
+    4.0, via Wikimedia Commons. Remove both the attribution requirement and the files together
+    when real photography replaces them.
 
 ## Commerce architecture
 
