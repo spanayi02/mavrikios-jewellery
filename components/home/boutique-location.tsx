@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { StoreStatusBadge } from "@/components/site/store-status";
 import { Reveal } from "@/components/site/reveal";
+import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { siteConfig } from "@/lib/site-config";
 
 const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
@@ -12,12 +13,13 @@ const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${enc
 export function BoutiqueLocation() {
   return (
     <section className="relative overflow-hidden py-24 sm:py-32">
-      <div
-        aria-hidden
+      <ParallaxLayer
+        clip={false}
+        range={24}
         className="pointer-events-none absolute inset-x-0 bottom-[-6%] select-none text-center font-serif text-[16vw] leading-none tracking-tight text-champagne-400/[0.1]"
       >
-        MAVRIKIOS
-      </div>
+        <span aria-hidden>MAVRIKIOS</span>
+      </ParallaxLayer>
 
       <div className="container-mavrikios relative grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
         <Reveal className="relative order-2 aspect-[4/3] overflow-hidden lg:order-1 lg:col-span-7">

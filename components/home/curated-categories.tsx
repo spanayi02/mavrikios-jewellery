@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { Reveal, RevealItem } from "@/components/site/reveal";
+import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { shopCategories } from "@/data/categories";
 
 export function CuratedCategories() {
@@ -23,10 +24,10 @@ export function CuratedCategories() {
 
       <Reveal stagger={0.08} className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-6 lg:grid-rows-2 lg:gap-5">
         <RevealItem className="aspect-[3/4] lg:col-span-2 lg:row-span-2 lg:aspect-auto">
-          <CategoryTile item={rings} />
+          <CategoryTile item={rings} parallax />
         </RevealItem>
         <RevealItem className="aspect-[3/4] lg:col-span-4 lg:aspect-auto">
-          <CategoryTile item={engagement} large />
+          <CategoryTile item={engagement} large parallax />
         </RevealItem>
         <RevealItem className="aspect-[3/4]">
           <CategoryTile item={earrings} />
@@ -45,10 +46,28 @@ export function CuratedCategories() {
   );
 }
 
-function CategoryTile({ item, large }: { item: (typeof shopCategories)[number]; large?: boolean }) {
+function CategoryTile({
+  item,
+  large,
+  parallax,
+}: {
+  item: (typeof shopCategories)[number];
+  large?: boolean;
+  parallax?: boolean;
+}) {
+  const art = (
+    <PlaceholderArt motif={item.motif} className="transition-transform duration-700 ease-out group-hover:scale-105" />
+  );
+
   return (
     <Link href={item.href} className="group relative block h-full w-full overflow-hidden bg-stone-100">
-      <PlaceholderArt motif={item.motif} className="transition-transform duration-700 ease-out group-hover:scale-105" />
+      {parallax ? (
+        <ParallaxLayer range={26} className="absolute inset-0">
+          {art}
+        </ParallaxLayer>
+      ) : (
+        art
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-ink-950/55 via-ink-950/0 to-transparent" />
       <div className="pointer-events-none absolute inset-0 border border-champagne-300/0 transition-colors duration-500 group-hover:border-champagne-300/50" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 sm:p-6">

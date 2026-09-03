@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
+import { ParallaxLayer } from "@/components/site/parallax-layer";
 
 const choices = ["Your Stone", "Your Metal", "Your Setting"];
 
@@ -10,12 +11,15 @@ export function EngagementFeature() {
     <section className="container-mavrikios py-20 sm:py-28">
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
         <Reveal y={0} className="relative order-2 aspect-[4/5] lg:order-1 lg:col-span-6">
-          <div className="absolute inset-0 right-10 top-10 overflow-hidden">
+          <ParallaxLayer range={30} className="absolute inset-0 right-10 top-10">
             <PlaceholderArt motif="monopetra" label="Engagement" />
-          </div>
-          <div className="absolute bottom-0 left-0 aspect-square w-2/5 overflow-hidden border-4 border-marble-50">
+          </ParallaxLayer>
+          <ParallaxLayer
+            range={16}
+            className="absolute bottom-0 left-0 aspect-square w-2/5 border-4 border-marble-50"
+          >
             <PlaceholderArt motif="ring" tone="ink" />
-          </div>
+          </ParallaxLayer>
         </Reveal>
         <Reveal delay={0.1} className="order-1 lg:order-2 lg:col-span-5 lg:col-start-8">
           <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">Engagement</p>
