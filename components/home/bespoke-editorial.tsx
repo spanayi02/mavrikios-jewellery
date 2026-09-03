@@ -1,6 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealItem } from "@/components/site/reveal";
+
+const lineVariants: Variants = {
+  hidden: { scaleY: 0, scaleX: 0 },
+  visible: { scaleY: 1, scaleX: 1, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 } },
+};
 
 const steps = [
   {
@@ -46,9 +54,10 @@ export function BespokeEditorial() {
           as="ol"
           className="relative mt-16 grid grid-cols-1 gap-10 sm:mt-20 sm:grid-cols-4 sm:gap-6"
         >
-          <div
+          <motion.div
             aria-hidden
-            className="absolute left-[19px] top-0 hidden h-full w-px bg-champagne-300/60 sm:top-[19px] sm:left-0 sm:h-px sm:w-full"
+            variants={lineVariants}
+            className="absolute left-[19px] top-0 h-full w-px origin-top bg-champagne-300/60 sm:top-[19px] sm:left-0 sm:h-px sm:w-full sm:origin-left"
           />
           {steps.map((step) => (
             <RevealItem key={step.n} as="li" className="relative flex gap-4 sm:flex-col sm:gap-0">

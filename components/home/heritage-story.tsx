@@ -3,6 +3,7 @@ import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { Button } from "@/components/ui/button";
 import { CountUp } from "@/components/site/count-up";
 import { Reveal } from "@/components/site/reveal";
+import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { siteConfig } from "@/lib/site-config";
 
 export function HeritageStory() {
@@ -46,12 +47,12 @@ export function HeritageStory() {
         </Reveal>
 
         <Reveal delay={0.15} className="grid grid-cols-2 gap-4 lg:col-span-7 lg:gap-5">
-          <div className="relative aspect-[3/4] translate-y-6 overflow-hidden">
+          <ParallaxLayer range={28} className="aspect-[3/4] translate-y-6">
             <PlaceholderArt motif="ring" tone="ink" label="Archive" />
-          </div>
-          <div className="relative aspect-[3/4] -translate-y-6 overflow-hidden">
+          </ParallaxLayer>
+          <ParallaxLayer range={44} className="aspect-[3/4] -translate-y-6">
             <PlaceholderArt motif="necklace" label="Workshop" />
-          </div>
+          </ParallaxLayer>
         </Reveal>
       </div>
     </section>

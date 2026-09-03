@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { ProductMedia } from "@/components/site/product-media";
 import { Reveal, RevealItem } from "@/components/site/reveal";
+import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { formatPrice } from "@/lib/format";
 import { getAllProducts } from "@/lib/data/products";
 
@@ -16,10 +17,10 @@ export async function CampaignFeature() {
 
   return (
     <section className="relative w-full overflow-hidden bg-ink-950">
-      <div className="absolute inset-0">
+      <ParallaxLayer range={60} className="absolute inset-0">
         <PlaceholderArt motif="bracelet" tone="ink" />
-        <div className="absolute inset-0 bg-ink-950/85" />
-      </div>
+      </ParallaxLayer>
+      <div className="absolute inset-0 bg-ink-950/85" />
 
       <div className="container-mavrikios relative z-10 grid grid-cols-1 items-center gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:gap-8">
         <Reveal className="lg:col-span-5">
