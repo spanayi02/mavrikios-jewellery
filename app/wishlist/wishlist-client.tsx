@@ -5,11 +5,9 @@ import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/commerce/product-card";
 import { useWishlistStore } from "@/lib/store/wishlist-store";
-import { getAllProducts } from "@/data/products";
+import type { Product } from "@/types/product";
 
-const products = getAllProducts();
-
-export function WishlistClient() {
+export function WishlistClient({ products }: { products: Product[] }) {
   const ids = useWishlistStore((s) => s.ids);
   const saved = products.filter((p) => ids.includes(p.id));
 

@@ -10,12 +10,13 @@ import { RecentlyViewedRail } from "@/components/commerce/recently-viewed-rail";
 import { TrackRecentlyViewed } from "@/components/commerce/track-recently-viewed";
 import { StickyAddToBag } from "@/components/commerce/sticky-add-to-bag";
 import { JsonLd } from "@/components/site/json-ld";
-import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/data/products";
+import { getAllProducts, getProductBySlug, getRelatedProducts } from "@/lib/data/products";
 import { categoryLabels } from "@/lib/product-labels";
 import { breadcrumbJsonLd, productJsonLd } from "@/lib/structured-data";
 
-export function generateStaticParams() {
-  return getAllProducts().map((product) => ({ slug: product.slug }));
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({
@@ -24,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
   return {
     title: product.seo.title,
@@ -40,10 +41,10 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
-  const related = getRelatedProducts(product);
+  const [related, allProducts] = await Promise.all([getRelatedProducts(product), getAllProducts()]);
   const breadcrumb = breadcrumbJsonLd([
     { name: "Shop", path: "/shop" },
     { name: categoryLabels[product.category], path: `/shop?category=${product.category}` },
@@ -78,7 +79,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <StickyAddToBag product={product} />
       <RelatedProducts products={related} />
-      <RecentlyViewedRail excludeId={product.id} />
+      <RecentlyViewedRail allProducts={allProducts} excludeId={product.id} />
     </div>
   );
 }

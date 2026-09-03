@@ -32,21 +32,40 @@ durable engineering rules for anyone (human or agent) working in this codebase a
 
 ## Commerce architecture
 
-- Product data: `types/product.ts` (types) + `data/products.ts` (demo catalogue — clearly
-  marked as sample data, not verified Mavrikios inventory). Keep this shape when replacing with
-  the real catalogue.
+- Product data lives in the `products` table in Supabase (migrated off the old static
+  `data/products.ts`, which is deleted — don't recreate it). `types/product.ts` still defines
+  the shared `Product` shape. `lib/data/products.ts` is the only place that reads the table —
+  `getAllProducts`/`getProductBySlug`/`getProductById`/`getRelatedProducts`/`getFeaturedProducts`/
+  `getBestSellers`/`getNewArrivals`/`getEngagementProducts`, all `async`, wrapped in React
+  `cache()` for per-request dedup. It uses the **plain** `@supabase/supabase-js` client with the
+  anon key (`catalogClient()`), not the cookie-based SSR client from `lib/supabase/server.ts` —
+  catalog reads are public (RLS `to public`) and don't need the caller's session, and this keeps
+  them usable from build-time contexts like `generateStaticParams`, which run with no
+  request/cookies available (the cookie-based client throws there).
+- Because product data is now async, several client components that used to import
+  `getAllProducts()` at module scope (`SearchOverlay`, `RecentlyViewedRail`, `WishlistClient`)
+  now receive `products`/`allProducts` as a prop from an async Server Component parent instead
+  (root `app/layout.tsx` → `CartProvider` → `SearchOverlay`; `app/products/[slug]/page.tsx` →
+  `RecentlyViewedRail`; `app/wishlist/page.tsx` → `WishlistClient`). Don't reach for a module-level
+  `getAllProducts()` call in a new client component — thread the data down instead.
 - Cart/wishlist/UI state: Zustand stores in `lib/store/` (`cart-store.ts`, `wishlist-store.ts`,
   `ui-store.ts`), persisted to `localStorage`. Checkout doesn't require an account — guest
   checkout still works exactly as before — but accounts now exist (see Accounts/Auth below) and,
   when signed in, an order is linked to the user.
 - Checkout (`app/checkout/`, Server Action in `app/checkout/actions.ts`) validates the form,
   re-derives every line's price/name/variant from the real catalogue (`getProductById` in
-  `data/products.ts` — never trust client-supplied price/name, cart state is tamperable in
-  devtools), writes the order + line items to Supabase (`orders`/`order_items` tables), and shows
-  a confirmation with the generated reference number. It does **not** call a payment gateway or
+  `lib/data/products.ts` — never trust client-supplied price/name, cart state is tamperable in
+  devtools), writes the order + line items to Supabase (`orders`/`order_items` tables), calls the
+  `decrement_stock` RPC per line (best-effort — never blocks order confirmation), and shows a
+  confirmation with the generated reference number. It does **not** call a payment gateway or
   send email — Cash on Delivery and QuickPay are still just the represented payment methods, not
   live charges. Wire up a real payment provider before taking this live — never fabricate a
   "payment succeeded" state beyond what's actually implemented.
+- `stock_quantity` on `products` is decremented via `public.decrement_stock(product_id, qty)`, a
+  `security definer` SQL function granted to `anon`/`authenticated` — this lets guest checkout
+  adjust stock for the one product it just bought without granting table-level `UPDATE` on
+  `products` to customers. It also flips `availability` to `out-of-stock` when a previously
+  in-stock item hits 0. Staff get real table-level `UPDATE` via RLS instead (see Admin dashboard).
 - RLS on `orders`/`order_items` grants `INSERT` `to public` with `with_check (true)` (anyone can
   place an order, signed in or not). There's also a `SELECT` policy `to authenticated` scoped to
   `user_id = auth.uid()` (added once accounts existed) — verified directly against RLS (positive
@@ -84,6 +103,35 @@ durable engineering rules for anyone (human or agent) working in this codebase a
   `auth.getUser()` inside `placeOrder` when the customer is signed in; guest checkouts leave it
   `null`. Deleting a user never deletes their past orders.
 
+## Admin dashboard
+
+- `/admin/*` is a staff-only area gated by `app/admin/layout.tsx`: redirects to sign-in if
+  signed out, redirects to `/` if signed in but not staff. Staff membership is the `staff` table
+  (`user_id` references `auth.users`, `role` is `'owner' | 'employee'`) — being a customer with
+  an account does **not** make someone staff; a row has to be added to `staff` explicitly (via
+  the Supabase dashboard/SQL for now — there's no self-serve "invite" UI). `lib/data/staff.ts`'s
+  `getStaffRole()` is the one place that checks this; owner-only pages (`/admin/sales`) call it
+  directly and `redirect("/admin")` for non-owners rather than duplicating the role list.
+- Products: `/admin/products` (list), `/admin/products/new` and `/admin/products/[id]/edit`
+  (shared `components/admin/product-form.tsx`), backed by Server Actions in
+  `app/admin/products/actions.ts` (`createProduct`/`updateProduct`/`deleteProduct`). Every action
+  re-checks `getStaffRole()` server-side — RLS on `products` also requires staff for writes, but
+  the action check gives a clean error message instead of a raw RLS failure. Writes call
+  `revalidatePath("/", "layout")` so the storefront (home rails, shop grid, PDPs) reflects
+  changes immediately — this is what makes "add a product and it shows up in the right category
+  and in the actual store" true; there's no separate publish step.
+- Orders: `/admin/orders` lists every order (staff has a dedicated `SELECT`/`UPDATE` RLS policy
+  on `orders`/`order_items` — separate from the customer-scoped `user_id = auth.uid()` policy) with
+  an inline status changer (`app/admin/orders/actions.ts` → `updateOrderStatus`, one of the
+  existing `status` check-constraint values: `pending`/`paid`/`fulfilled`/`cancelled`).
+- Sales (`/admin/sales`, owner-only): revenue/order-count/AOV and this-month-vs-last-month,
+  aggregated in-memory from `orders`/`order_items` rather than a SQL view — the boutique's order
+  volume doesn't need anything heavier, and it keeps the RLS surface to the two `SELECT` policies
+  above instead of a bespoke reporting function.
+- Not built yet, flagged rather than faked: no self-serve way to add an employee (do it directly
+  in Supabase), no product photo upload (the form takes an image **path** under
+  `public/images/products/`, same as everywhere else in this codebase), and no undo on delete.
+
 ## Newsletter
 
 - `components/site/newsletter-form.tsx` calls the Server Action `subscribeToNewsletter` in
@@ -103,7 +151,7 @@ durable engineering rules for anyone (human or agent) working in this codebase a
   warranties, or company/family history. `data/reviews.ts` is intentionally empty with a themed
   fallback until real reviews are supplied — see the comment in that file before adding fake
   ones.
-- Sample products in `data/products.ts` use plausible names/pricing but are demo data — don't
+- Sample products in the `products` table use plausible names/pricing but are demo data — don't
   present them as real inventory in copy or marketing.
 
 ## Motion & component reuse
@@ -130,7 +178,7 @@ durable engineering rules for anyone (human or agent) working in this codebase a
 ## SEO
 
 - Add `alternates: { canonical: "/path" }` to every new top-level page's `metadata`.
-- `app/sitemap.ts` and `app/robots.ts` are generated from route lists / `data/products.ts` —
+- `app/sitemap.ts` and `app/robots.ts` are generated from route lists / the `products` table —
   add new top-level static routes to `staticRoutes` in `app/sitemap.ts`.
 - `app/opengraph-image.tsx` / `app/icon.tsx` generate branded OG/favicon images at build time
   (no static asset files needed) — edit those instead of adding files under `public/`.

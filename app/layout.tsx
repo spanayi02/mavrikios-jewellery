@@ -8,6 +8,7 @@ import { AnnouncementBar } from "@/components/site/announcement-bar";
 import { JsonLd } from "@/components/site/json-ld";
 import { organizationJsonLd } from "@/lib/structured-data";
 import { siteConfig } from "@/lib/site-config";
+import { getAllProducts } from "@/lib/data/products";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -64,7 +65,9 @@ export const viewport = {
   themeColor: "#0b0e14",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const products = await getAllProducts();
+
   return (
     <html
       lang="en"
@@ -73,7 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <JsonLd data={organizationJsonLd()} />
-        <CartProvider>
+        <CartProvider products={products}>
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-ink-950 focus:px-4 focus:py-2 focus:text-sm focus:text-marble-50"

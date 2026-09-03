@@ -4,12 +4,12 @@ import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { ProductMedia } from "@/components/site/product-media";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 import { formatPrice } from "@/lib/format";
-import { getAllProducts } from "@/data/products";
+import { getAllProducts } from "@/lib/data/products";
 
 const featuredSlugs = ["eleni-tennis-bracelet", "nicosia-fine-chain-bracelet", "melina-baguette-bracelet"];
 
-export function CampaignFeature() {
-  const products = getAllProducts();
+export async function CampaignFeature() {
+  const products = await getAllProducts();
   const featured = featuredSlugs
     .map((slug) => products.find((p) => p.slug === slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));

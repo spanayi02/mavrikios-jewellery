@@ -3,11 +3,14 @@
 import { useRecentlyViewedStore } from "@/lib/store/recently-viewed-store";
 import { ProductCard } from "@/components/commerce/product-card";
 import { Reveal, RevealItem } from "@/components/site/reveal";
-import { getAllProducts } from "@/data/products";
+import type { Product } from "@/types/product";
 
-const allProducts = getAllProducts();
+interface RecentlyViewedRailProps {
+  allProducts: Product[];
+  excludeId?: string;
+}
 
-export function RecentlyViewedRail({ excludeId }: { excludeId?: string }) {
+export function RecentlyViewedRail({ allProducts, excludeId }: RecentlyViewedRailProps) {
   const ids = useRecentlyViewedStore((s) => s.ids);
   const products = ids
     .filter((id) => id !== excludeId)

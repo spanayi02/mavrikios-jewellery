@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllProducts } from "@/data/products";
+import { getAllProducts } from "@/lib/data/products";
 import { siteConfig } from "@/lib/site-config";
 
 const staticRoutes = [
@@ -17,7 +17,7 @@ const staticRoutes = [
   "/privacy",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((path) => ({
@@ -27,7 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" ? 1 : 0.7,
   }));
 
-  const productEntries: MetadataRoute.Sitemap = getAllProducts().map((product) => ({
+  const products = await getAllProducts();
+  const productEntries: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${siteConfig.url}/products/${product.slug}`,
     lastModified: new Date(product.createdAt),
     changeFrequency: "weekly",

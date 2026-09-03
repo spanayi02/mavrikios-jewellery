@@ -6,13 +6,12 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Search, X, Clock } from "lucide-react";
 import { ProductMedia } from "@/components/site/product-media";
-import { getAllProducts } from "@/data/products";
 import { categoryLabels } from "@/lib/product-labels";
 import { formatPrice } from "@/lib/format";
 import { useUIStore } from "@/lib/store/ui-store";
+import type { Product } from "@/types/product";
 
 const RECENT_KEY = "mavrikios-recent-searches";
-const products = getAllProducts();
 
 function readRecent(): string[] {
   if (typeof window === "undefined") return [];
@@ -23,7 +22,7 @@ function readRecent(): string[] {
   }
 }
 
-export function SearchOverlay() {
+export function SearchOverlay({ products }: { products: Product[] }) {
   const isOpen = useUIStore((s) => s.isSearchOpen);
   const close = useUIStore((s) => s.closeSearch);
   const [query, setQuery] = useState("");
@@ -49,7 +48,7 @@ export function SearchOverlay() {
           p.material.toLowerCase().includes(q)
       )
       .slice(0, 6);
-  }, [query]);
+  }, [query, products]);
 
   function commitSearch(term: string) {
     if (!term.trim()) return;

@@ -71,6 +71,8 @@ export interface Product {
   variants?: ProductVariant[];
   variantLabel?: string;
   availability: "in-stock" | "made-to-order" | "out-of-stock";
+  /** Units on hand — informational for made-to-order pieces, tracked for in-stock ones. */
+  stockQuantity?: number;
   featured?: boolean;
   isNew?: boolean;
   bestSeller?: boolean;
