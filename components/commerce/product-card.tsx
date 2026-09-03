@@ -20,6 +20,10 @@ interface ProductCardProps {
 
 export function ProductCard({ product, priority, className }: ProductCardProps) {
   const [primary, secondary] = product.images;
+  // Only crossfade to a second photo on hover when one is actually photographed — swapping a
+  // real photo for the generic placeholder art (e.g. a product with just one photo so far)
+  // reads as the image breaking, not a nice alternate angle.
+  const hasSecondaryPhoto = Boolean(secondary?.src);
   const openQuickView = useQuickViewStore((s) => s.open);
 
   function handleQuickView(e: React.MouseEvent) {
@@ -31,10 +35,20 @@ export function ProductCard({ product, priority, className }: ProductCardProps) 
   return (
     <div className={cn("group relative flex flex-col", className)}>
       <Link href={`/products/${product.slug}`} className="relative block aspect-[4/5] overflow-hidden bg-stone-100">
-        <div className="absolute inset-0 transition-opacity duration-500 ease-out group-hover:opacity-0">
-          <ProductMedia image={primary} priority={priority} sizes="(min-width: 1024px) 25vw, 50vw" />
+        <div
+          className={cn(
+            "absolute inset-0 overflow-hidden",
+            hasSecondaryPhoto && "transition-opacity duration-500 ease-out group-hover:opacity-0"
+          )}
+        >
+          <ProductMedia
+            image={primary}
+            priority={priority}
+            sizes="(min-width: 1024px) 25vw, 50vw"
+            className={!hasSecondaryPhoto ? "transition-transform duration-700 ease-out group-hover:scale-105" : undefined}
+          />
         </div>
-        {secondary && (
+        {hasSecondaryPhoto && (
           <div className="absolute inset-0 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100">
             <ProductMedia image={secondary} sizes="(min-width: 1024px) 25vw, 50vw" />
           </div>
