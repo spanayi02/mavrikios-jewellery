@@ -59,7 +59,7 @@ export function CartClient() {
                       <button
                         onClick={() => updateQuantity(line.productId, -1, line.variantId)}
                         aria-label="Decrease quantity"
-                        className="flex size-9 items-center justify-center hover:bg-stone-100"
+                        className="flex size-9 items-center justify-center transition-[background-color,transform] duration-150 ease-out hover:bg-stone-100 active:scale-90"
                       >
                         <Minus className="size-3.5" />
                       </button>
@@ -67,7 +67,7 @@ export function CartClient() {
                       <button
                         onClick={() => updateQuantity(line.productId, 1, line.variantId)}
                         aria-label="Increase quantity"
-                        className="flex size-9 items-center justify-center hover:bg-stone-100"
+                        className="flex size-9 items-center justify-center transition-[background-color,transform] duration-150 ease-out hover:bg-stone-100 active:scale-90"
                       >
                         <Plus className="size-3.5" />
                       </button>

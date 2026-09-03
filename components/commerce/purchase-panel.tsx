@@ -80,7 +80,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           <button
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
-            className="flex h-12 w-11 items-center justify-center text-ink-950 hover:bg-stone-100"
+            className="flex h-12 w-11 items-center justify-center text-ink-950 transition-[background-color,transform] duration-150 ease-out hover:bg-stone-100 active:scale-90"
           >
             <Minus className="size-3.5" />
           </button>
@@ -88,7 +88,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
           <button
             onClick={() => setQuantity((q) => q + 1)}
             aria-label="Increase quantity"
-            className="flex h-12 w-11 items-center justify-center text-ink-950 hover:bg-stone-100"
+            className="flex h-12 w-11 items-center justify-center text-ink-950 transition-[background-color,transform] duration-150 ease-out hover:bg-stone-100 active:scale-90"
           >
             <Plus className="size-3.5" />
           </button>
