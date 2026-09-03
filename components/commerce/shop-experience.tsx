@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { SlidersHorizontal } from "lucide-react";
 import {
   Sheet,
@@ -129,9 +130,20 @@ export function ShopExperience({
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8">
-            {filtered.map((product, i) => (
-              <ProductCard key={product.id} product={product} priority={i < 4} />
-            ))}
+            <AnimatePresence mode="popLayout" initial={false}>
+              {filtered.map((product, i) => (
+                <motion.div
+                  key={product.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <ProductCard product={product} priority={i < 4} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         )}
       </div>

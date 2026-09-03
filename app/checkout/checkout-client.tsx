@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import NumberFlow from "@number-flow/react";
+import { motion } from "framer-motion";
 import { Banknote, CheckCircle2, CreditCard, Truck } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -60,20 +61,58 @@ export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClient
 
   if (orderRef) {
     return (
-      <div className="container-mavrikios flex flex-col items-center py-24 text-center sm:py-32">
-        <CheckCircle2 className="size-10 text-ink-950" />
-        <p className="mt-6 font-serif text-3xl italic text-ink-950 sm:text-4xl">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+        }}
+        className="container-mavrikios flex flex-col items-center py-24 text-center sm:py-32"
+      >
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, scale: 0.5 },
+            visible: {
+              opacity: 1,
+              scale: 1,
+              transition: { type: "spring", duration: 0.6, bounce: 0.35 },
+            },
+          }}
+        >
+          <CheckCircle2 className="size-10 text-ink-950" />
+        </motion.div>
+        <motion.p
+          variants={{
+            hidden: { opacity: 0, y: 16 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+          }}
+          className="mt-6 font-serif text-3xl italic text-ink-950 sm:text-4xl"
+        >
           Thank you for your order
-        </p>
-        <p className="mt-4 max-w-md text-[15px] leading-relaxed text-stone-600">
+        </motion.p>
+        <motion.p
+          variants={{
+            hidden: { opacity: 0, y: 16 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+          }}
+          className="mt-4 max-w-md text-[15px] leading-relaxed text-stone-600"
+        >
           Your reference is <span className="font-medium text-ink-950">{orderRef}</span>. Our
           team will contact you shortly to confirm delivery and{" "}
           {paymentMethod === "cod" ? "your Cash on Delivery payment" : "your QuickPay payment"}.
-        </p>
-        <Button asChild size="lg" className="mt-8">
-          <Link href="/shop">Continue Shopping</Link>
-        </Button>
-      </div>
+        </motion.p>
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 16 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+          }}
+        >
+          <Button asChild size="lg" className="mt-8">
+            <Link href="/shop">Continue Shopping</Link>
+          </Button>
+        </motion.div>
+      </motion.div>
     );
   }
 
