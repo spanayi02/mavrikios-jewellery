@@ -9,11 +9,10 @@ import { CraftServices } from "@/components/home/craft-services";
 import { ReviewsSection } from "@/components/home/reviews-section";
 import { InstagramSection } from "@/components/home/instagram-section";
 import { BoutiqueLocation } from "@/components/home/boutique-location";
-import { getBestSellers, getNewArrivals } from "@/data/products";
+import { getBestSellers, getNewArrivals } from "@/lib/data/products";
 
-export default function HomePage() {
-  const newArrivals = getNewArrivals();
-  const bestSellers = getBestSellers();
+export default async function HomePage() {
+  const [newArrivals, bestSellers] = await Promise.all([getNewArrivals(), getBestSellers()]);
 
   return (
     <>

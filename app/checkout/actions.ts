@@ -1,6 +1,6 @@
 "use server";
 
-import { getProductById } from "@/data/products";
+import { getProductById } from "@/lib/data/products";
 import { createClient } from "@/lib/supabase/server";
 
 interface PlaceOrderItem {
@@ -44,12 +44,12 @@ interface ResolvedLine {
  * trusting the client — cart state lives in localStorage and could be tampered with in
  * devtools before submitting, so nothing about what a customer owes should come from it.
  */
-function resolveLines(items: PlaceOrderItem[]): ResolvedLine[] | null {
+async function resolveLines(items: PlaceOrderItem[]): Promise<ResolvedLine[] | null> {
   const resolved: ResolvedLine[] = [];
   for (const item of items) {
     if (!Number.isInteger(item.quantity) || item.quantity < 1) return null;
 
-    const product = getProductById(item.productId);
+    const product = await getProductById(item.productId);
     if (!product) return null;
 
     let variantLabel: string | null = null;
@@ -92,7 +92,7 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
     return { ok: false, error: "Your bag is empty." };
   }
 
-  const lines = resolveLines(input.items);
+  const lines = await resolveLines(input.items);
   if (!lines) {
     return { ok: false, error: "One of the items in your bag is no longer available. Please refresh and try again." };
   }
@@ -150,6 +150,15 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
     console.error("Failed to create order items", itemsError);
     return { ok: false, error: "Something went wrong placing your order. Please try again." };
   }
+
+  // Best-effort stock decrement — never block order confirmation on this.
+  await Promise.all(
+    lines.map((line) =>
+      supabase.rpc("decrement_stock", { p_product_id: line.productId, p_qty: line.quantity }).then(({ error }) => {
+        if (error) console.error("Failed to decrement stock", line.productId, error);
+      })
+    )
+  );
 
   return { ok: true, reference };
 }

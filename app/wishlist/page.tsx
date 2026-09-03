@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getAllProducts } from "@/lib/data/products";
 import { WishlistClient } from "./wishlist-client";
 
 export const metadata: Metadata = {
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function WishlistPage() {
-  return <WishlistClient />;
+export default async function WishlistPage() {
+  const products = await getAllProducts();
+  return <WishlistClient products={products} />;
 }

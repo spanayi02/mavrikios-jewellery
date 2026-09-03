@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ShopExperience } from "@/components/commerce/shop-experience";
-import { getAllProducts } from "@/data/products";
+import { getAllProducts } from "@/lib/data/products";
 import type { SortKey } from "@/lib/shop";
 import type { ProductCategory, ProductCollection } from "@/types/product";
 
@@ -34,7 +34,7 @@ export default async function ShopPage({
         ? (params.sort as SortKey)
         : "featured";
 
-  const products = getAllProducts();
+  const products = await getAllProducts();
 
   return (
     <div>

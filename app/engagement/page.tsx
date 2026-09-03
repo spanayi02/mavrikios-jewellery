@@ -4,7 +4,7 @@ import { PageHero } from "@/components/site/page-hero";
 import { ProductCard } from "@/components/commerce/product-card";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { Button } from "@/components/ui/button";
-import { getEngagementProducts } from "@/data/products";
+import { getEngagementProducts } from "@/lib/data/products";
 
 export const metadata: Metadata = {
   title: "Engagement Rings & Monopetra",
@@ -28,8 +28,8 @@ const guideSteps = [
   },
 ];
 
-export default function EngagementPage() {
-  const products = getEngagementProducts();
+export default async function EngagementPage() {
+  const products = await getEngagementProducts();
 
   return (
     <div>
