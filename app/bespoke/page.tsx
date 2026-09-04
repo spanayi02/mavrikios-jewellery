@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/site/page-hero";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
+import { ParallaxLayer } from "@/components/site/parallax-layer";
+import { Reveal, RevealItem } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
@@ -45,24 +47,26 @@ export default function BespokePage() {
       />
 
       <section className="container-mavrikios py-20 sm:py-28">
-        <div className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2">
+        <Reveal stagger={0.1} className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2">
           {flow.map((step) => (
-            <div key={step.n} className="flex gap-6">
+            <RevealItem key={step.n} className="flex gap-6">
               <span className="font-serif text-4xl italic text-stone-300">{step.n}</span>
               <div>
                 <h2 className="font-serif text-2xl text-ink-950">{step.title}</h2>
                 <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-stone-600">{step.body}</p>
               </div>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       <section className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative aspect-square lg:aspect-auto">
-          <PlaceholderArt motif="necklace" tone="ink" label="Redesign" />
-        </div>
-        <div className="flex flex-col justify-center bg-marble-100 px-6 py-16 sm:px-14 sm:py-20">
+        <Reveal y={0} className="relative aspect-square lg:aspect-auto">
+          <ParallaxLayer range={30} className="h-full">
+            <PlaceholderArt motif="necklace" tone="ink" label="Redesign" />
+          </ParallaxLayer>
+        </Reveal>
+        <Reveal delay={0.1} className="flex flex-col justify-center bg-marble-100 px-6 py-16 sm:px-14 sm:py-20">
           <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">Redesign</p>
           <h2 className="max-w-md font-serif text-3xl italic text-ink-950 sm:text-4xl">
             An heirloom, made to be worn again.
@@ -71,10 +75,10 @@ export default function BespokePage() {
             Inherited jewellery often carries more sentiment than style. We can take stones and
             gold you already own and redesign them into a piece that fits how you live now.
           </p>
-        </div>
+        </Reveal>
       </section>
 
-      <section className="marble-surface-dark py-20 text-center sm:py-28">
+      <Reveal as="section" className="marble-surface-dark py-20 text-center sm:py-28">
         <div className="container-mavrikios flex flex-col items-center">
           <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-marble-50/50">Begin</p>
           <h2 className="max-w-lg font-serif text-3xl italic text-marble-50 sm:text-4xl">
@@ -88,7 +92,7 @@ export default function BespokePage() {
             <Link href="/contact?reason=bespoke">Start the Conversation</Link>
           </Button>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }

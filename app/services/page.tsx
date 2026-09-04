@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/site/page-hero";
+import { Reveal, RevealItem } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
 
@@ -22,9 +23,12 @@ export default function ServicesPage() {
       />
 
       <section className="container-mavrikios py-20 sm:py-28">
-        <div className="grid grid-cols-1 divide-y divide-stone-200 border-t border-stone-200 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+        <Reveal
+          stagger={0.06}
+          className="grid grid-cols-1 divide-y divide-stone-200 border-t border-stone-200 sm:grid-cols-2 sm:divide-x sm:divide-y-0"
+        >
           {services.map((service, i) => (
-            <div
+            <RevealItem
               key={service.key}
               className={`flex flex-col gap-3 px-0 py-8 sm:px-10 sm:py-12 ${
                 i % 2 === 0 ? "sm:pl-0" : ""
@@ -37,12 +41,12 @@ export default function ServicesPage() {
               <p className="max-w-sm text-[15px] leading-relaxed text-stone-600">
                 {service.description}
               </p>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </section>
 
-      <section className="marble-surface py-20 text-center sm:py-28">
+      <Reveal as="section" className="marble-surface py-20 text-center sm:py-28">
         <div className="container-mavrikios flex flex-col items-center">
           <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">Enquire</p>
           <h2 className="max-w-lg font-serif text-3xl italic text-ink-950 sm:text-4xl">
@@ -61,7 +65,7 @@ export default function ServicesPage() {
             </Button>
           </div>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }
