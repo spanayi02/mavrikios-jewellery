@@ -3,6 +3,7 @@ import { Clock, MapPin, Navigation, Phone } from "lucide-react";
 import { ContactForm } from "@/components/site/contact-form";
 import { InstagramIcon } from "@/components/site/icons";
 import { StoreStatusBadge } from "@/components/site/store-status";
+import { Reveal } from "@/components/site/reveal";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -25,21 +26,21 @@ export default async function ContactPage({
 
   return (
     <div className="container-mavrikios py-16 sm:py-24">
-      <div className="mb-14 max-w-xl">
+      <Reveal className="mb-14 max-w-xl">
         <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">Contact</p>
         <h1 className="font-serif text-4xl italic text-ink-950 sm:text-5xl">Get in Touch</h1>
         <p className="mt-5 text-[15px] leading-relaxed text-stone-600">
           Whether it&rsquo;s a question about a piece, a repair, or something bespoke —
           we&rsquo;re happy to help.
         </p>
-      </div>
+      </Reveal>
 
       <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-8">
-        <div className="lg:col-span-7">
+        <Reveal delay={0.1} className="lg:col-span-7">
           <ContactForm initialReason={reason} />
-        </div>
+        </Reveal>
 
-        <div className="space-y-8 lg:col-span-4 lg:col-start-9">
+        <Reveal delay={0.2} className="space-y-8 lg:col-span-4 lg:col-start-9">
           <div>
             <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-stone-500">Visit</p>
             <p className="flex items-start gap-3 text-sm text-ink-950">
@@ -93,7 +94,7 @@ export default async function ContactPage({
             </ul>
             <StoreStatusBadge className="mt-3 text-stone-600" />
           </div>
-        </div>
+        </Reveal>
       </div>
     </div>
   );
