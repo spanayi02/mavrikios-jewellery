@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Heart, Phone, Search, ShoppingBag, User } from "lucide-react";
 import {
   Sheet,
@@ -16,6 +17,7 @@ import { useWishlistStore } from "@/lib/store/wishlist-store";
 import { useUIStore } from "@/lib/store/ui-store";
 import { useUser } from "@/hooks/use-user";
 import { siteConfig } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
 
 interface MobileNavProps {
   open: boolean;
@@ -23,6 +25,7 @@ interface MobileNavProps {
 }
 
 export function MobileNav({ open, onOpenChange }: MobileNavProps) {
+  const pathname = usePathname();
   const { totalItems } = useCartTotals();
   const wishlistCount = useWishlistStore((s) => s.ids.length);
   const cartOpen = useCartStore((s) => s.open);
@@ -73,16 +76,23 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
           </Link>
 
           <nav className="flex flex-col">
-            {primaryNav.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={close}
-                className="border-b border-stone-100 py-4 font-serif text-2xl text-ink-950"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {primaryNav.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={close}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "border-b border-stone-100 py-4 font-serif text-2xl",
+                    isActive ? "text-champagne-600" : "text-ink-950"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="mt-8">

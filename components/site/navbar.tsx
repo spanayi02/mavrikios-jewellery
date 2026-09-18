@@ -55,16 +55,23 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex">
-          {primaryNav.map((item) => (
-            <div key={item.label} onMouseEnter={() => item.label === "Shop" && handleEnter(item.label)}>
-              <Link
-                href={item.href}
-                className="veil-underline text-[13px] font-medium uppercase tracking-[0.12em] text-ink-950 transition-colors"
-              >
-                {item.label}
-              </Link>
-            </div>
-          ))}
+          {primaryNav.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <div key={item.label} onMouseEnter={() => item.label === "Shop" && handleEnter(item.label)}>
+                <Link
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "veil-underline text-[13px] font-medium uppercase tracking-[0.12em] text-ink-950 transition-colors",
+                    isActive && "veil-underline-active"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              </div>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-1">
