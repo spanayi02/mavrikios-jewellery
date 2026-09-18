@@ -86,7 +86,7 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "border-b border-stone-100 py-4 font-serif text-2xl",
-                    isActive ? "text-champagne-600" : "text-ink-950"
+                    isActive ? "text-moss-600" : "text-ink-950"
                   )}
                 >
                   {item.label}
@@ -123,7 +123,7 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
             close();
             cartOpen();
           }}
-          className="flex items-center justify-center gap-2 border-t border-stone-200 bg-ink-950 py-4 text-[12px] font-medium uppercase tracking-[0.14em] text-marble-50"
+          className="flex items-center justify-center gap-2 border-t border-stone-200 bg-ink-950 py-4 text-[12px] font-medium uppercase tracking-[0.14em] text-bone-50"
         >
           <ShoppingBag className="size-4" /> Bag {totalItems > 0 && `(${totalItems})`}
         </button>

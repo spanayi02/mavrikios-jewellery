@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Mavrikios Jewellery Boutique in Latsia, Nicosia — visit the boutique, call us, or send an enquiry.",
+    "Get in touch with Mavrikios Jewellery Boutique in Latsia, Nicosia. Visit the boutique, call us, or send an enquiry.",
   alternates: { canonical: "/contact" },
 };
 
@@ -27,10 +27,9 @@ export default async function ContactPage({
   return (
     <div className="container-mavrikios py-16 sm:py-24">
       <Reveal className="mb-14 max-w-xl">
-        <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">Contact</p>
-        <h1 className="font-serif text-4xl italic text-ink-950 sm:text-5xl">Get in Touch</h1>
+        <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">Get in touch</h1>
         <p className="mt-5 text-[15px] leading-relaxed text-stone-600">
-          Whether it&rsquo;s a question about a piece, a repair, or something bespoke —
+          Whether it&rsquo;s a question about a piece, a repair, or something bespoke,
           we&rsquo;re happy to help.
         </p>
       </Reveal>
@@ -88,7 +87,7 @@ export default async function ContactPage({
               {siteConfig.hours.map((h) => (
                 <li key={h.day} className="flex justify-between gap-6">
                   <span>{h.day}</span>
-                  <span>{h.closed ? "Closed" : `${h.open} – ${h.close}`}</span>
+                  <span>{h.closed ? "Closed" : `${h.open} - ${h.close}`}</span>
                 </li>
               ))}
             </ul>

@@ -87,7 +87,7 @@ export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClient
             hidden: { opacity: 0, y: 16 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
           }}
-          className="mt-6 font-serif text-3xl italic text-ink-950 sm:text-4xl"
+          className="mt-6 font-serif text-3xl text-ink-950 sm:text-4xl"
         >
           Thank you for your order
         </motion.p>
@@ -119,7 +119,7 @@ export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClient
   if (lines.length === 0) {
     return (
       <div className="container-mavrikios flex flex-col items-center gap-4 py-24 text-center sm:py-32">
-        <p className="font-serif text-2xl italic text-ink-950">Your bag is empty</p>
+        <p className="font-serif text-2xl text-ink-950">Your bag is empty</p>
         <Button asChild className="mt-2">
           <Link href="/shop">Shop the Collection</Link>
         </Button>
@@ -130,10 +130,9 @@ export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClient
   return (
     <div className="container-mavrikios py-16 sm:py-24">
       <div className="mb-10">
-        <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">Checkout</p>
-        <h1 className="font-serif text-4xl italic text-ink-950 sm:text-5xl">Checkout</h1>
+        <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">Checkout</h1>
         <p className="mt-3 text-sm text-stone-600">
-          {defaultEmail ? `Signed in as ${defaultEmail}.` : "No account required — check out as a guest."}
+          {defaultEmail ? `Signed in as ${defaultEmail}.` : "No account required. Check out as a guest."}
         </p>
       </div>
 
@@ -221,7 +220,7 @@ export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClient
                 <div key={`${line.productId}-${line.variantId ?? "default"}`} className="flex gap-3">
                   <div className="relative size-16 shrink-0 overflow-hidden bg-stone-100">
                     <ProductMedia image={line.image} sizes="64px" />
-                    <span className="absolute -right-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full bg-ink-950 text-[10px] text-marble-50">
+                    <span className="absolute -right-1.5 -top-1.5 flex size-5 items-center justify-center rounded-full bg-ink-950 text-[10px] text-bone-50">
                       {line.quantity}
                     </span>
                   </div>

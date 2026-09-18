@@ -61,7 +61,7 @@ export function SearchOverlay({ products }: { products: Product[] }) {
     <DialogPrimitive.Root open={isOpen} onOpenChange={handleOpenChange}>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-[70] bg-ink-950/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
-        <DialogPrimitive.Content className="fixed inset-x-0 top-0 z-[71] flex max-h-screen w-full flex-col bg-marble-50 shadow-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top sm:inset-x-auto sm:left-1/2 sm:top-20 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:border sm:border-stone-200">
+        <DialogPrimitive.Content className="fixed inset-x-0 top-0 z-[71] flex max-h-screen w-full flex-col bg-bone-50 shadow-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top sm:inset-x-auto sm:left-1/2 sm:top-20 sm:w-full sm:max-w-2xl sm:-translate-x-1/2 sm:border sm:border-stone-200">
           <VisuallyHidden>
             <DialogPrimitive.Title>Search products</DialogPrimitive.Title>
             <DialogPrimitive.Description>

@@ -45,7 +45,7 @@ export function Navbar() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-colors duration-500",
-        isTransparent ? "bg-transparent" : "border-b border-stone-200 bg-marble-50/95 backdrop-blur-md"
+        isTransparent ? "bg-transparent" : "border-b border-stone-200 bg-bone-50/95 backdrop-blur-md"
       )}
       onMouseLeave={handleLeave}
     >
@@ -105,7 +105,7 @@ export function Navbar() {
             <Link href="/wishlist">
               <Heart className="size-[18px]" />
               {wishlistCount > 0 && (
-                <span className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-champagne-500 text-[9px] font-medium text-ink-950">
+                <span className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-moss-600 text-[9px] font-medium text-bone-50">
                   {wishlistCount}
                 </span>
               )}
@@ -114,7 +114,7 @@ export function Navbar() {
           <Button variant="ghost" size="icon" aria-label={`Bag, ${totalItems} items`} onClick={cartOpen} className="relative">
             <ShoppingBag className="size-[18px]" />
             {totalItems > 0 && (
-              <span className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-champagne-500 text-[9px] font-medium text-ink-950">
+              <span className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-moss-600 text-[9px] font-medium text-bone-50">
                 {totalItems}
               </span>
             )}

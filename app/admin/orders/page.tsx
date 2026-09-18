@@ -30,12 +30,12 @@ export default async function AdminOrdersPage() {
   return (
     <div>
       <p className="mb-1 text-[11px] uppercase tracking-[0.25em] text-stone-500">Sales</p>
-      <h1 className="mb-8 font-serif text-3xl italic text-ink-950">Orders ({orders?.length ?? 0})</h1>
+      <h1 className="mb-8 font-serif text-3xl text-ink-950">Orders ({orders?.length ?? 0})</h1>
 
       {!orders || orders.length === 0 ? (
         <p className="text-sm text-stone-500">No orders yet.</p>
       ) : (
-        <div className="overflow-x-auto border border-stone-200 bg-marble-50">
+        <div className="overflow-x-auto border border-stone-200 bg-bone-50">
           <table className="w-full min-w-[760px] text-left text-sm">
             <thead className="border-b border-stone-200 text-[11px] uppercase tracking-[0.1em] text-stone-500">
               <tr>

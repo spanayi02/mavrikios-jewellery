@@ -18,7 +18,7 @@ export function AnnouncementBar() {
   }, []);
 
   return (
-    <div className="relative z-30 flex h-9 items-center justify-center bg-ink-950 px-4 text-marble-50">
+    <div className="relative z-30 flex h-9 items-center justify-center bg-ink-950 px-4 text-bone-50">
       <div className="relative h-full w-full max-w-xs overflow-hidden text-center">
         <AnimatePresence mode="wait">
           <motion.p

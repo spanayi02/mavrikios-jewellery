@@ -18,38 +18,25 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Services"
         title="A workshop, not just a shop front."
-        description="Our team handles repairs, resizing, setting and bespoke work in-house — the same as we always have."
+        description="Our team handles repairs, resizing, setting and bespoke work in-house, the same as we always have."
         motif="gift"
+        image={{ src: "/images/products/daphne-signet-ring.jpg", alt: "Plain 18k gold band" }}
       />
 
-      <section className="container-mavrikios py-20 sm:py-28">
-        <Reveal
-          stagger={0.06}
-          className="grid grid-cols-1 divide-y divide-stone-200 border-t border-stone-200 sm:grid-cols-2 sm:divide-x sm:divide-y-0"
-        >
-          {services.map((service, i) => (
-            <RevealItem
-              key={service.key}
-              className={`flex flex-col gap-3 px-0 py-8 sm:px-10 sm:py-12 ${
-                i % 2 === 0 ? "sm:pl-0" : ""
-              } border-b border-stone-200`}
-            >
-              <span className="text-xs uppercase tracking-[0.2em] text-stone-400">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h2 className="font-serif text-2xl italic text-ink-950">{service.title}</h2>
-              <p className="max-w-sm text-[15px] leading-relaxed text-stone-600">
-                {service.description}
-              </p>
+      <section className="container-mavrikios py-24 sm:py-32">
+        <Reveal stagger={0.06} className="grid grid-cols-1 gap-x-12 sm:grid-cols-2">
+          {services.map((service) => (
+            <RevealItem key={service.key} className="flex flex-col gap-3 border-t border-stone-300 py-9">
+              <h2 className="font-serif text-3xl text-ink-950">{service.title}</h2>
+              <p className="max-w-sm text-[15px] leading-relaxed text-stone-600">{service.description}</p>
             </RevealItem>
           ))}
         </Reveal>
       </section>
 
-      <Reveal as="section" className="marble-surface py-20 text-center sm:py-28">
+      <Reveal as="section" className="marble-surface py-24 text-center sm:py-32">
         <div className="container-mavrikios flex flex-col items-center">
-          <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">Enquire</p>
-          <h2 className="max-w-lg font-serif text-3xl italic text-ink-950 sm:text-4xl">
+          <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             Bring your piece in, or send us a note first.
           </h2>
           <p className="mt-5 max-w-md text-[15px] leading-relaxed text-stone-600">

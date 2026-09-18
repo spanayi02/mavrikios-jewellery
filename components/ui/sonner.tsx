@@ -10,9 +10,9 @@ function Toaster({ ...props }: ToasterProps) {
       toastOptions={{
         classNames: {
           toast:
-            "bg-ink-950! text-marble-50! border-none! rounded-sm! font-sans! shadow-xl!",
-          description: "text-marble-50/70!",
-          actionButton: "bg-marble-50! text-ink-950!",
+            "bg-ink-950! text-bone-50! border-none! rounded-sm! font-sans! shadow-xl!",
+          description: "text-bone-50/70!",
+          actionButton: "bg-bone-50! text-ink-950!",
         },
       }}
       {...props}

@@ -13,7 +13,7 @@ export default function SignInPage() {
         <p className="mb-3 text-center text-[11px] uppercase tracking-[0.3em] text-stone-500">
           Welcome Back
         </p>
-        <h1 className="mb-8 text-center font-serif text-3xl italic text-ink-950 sm:text-4xl">
+        <h1 className="mb-8 text-center font-serif text-3xl text-ink-950 sm:text-4xl">
           Sign In
         </h1>
         <SignInForm />

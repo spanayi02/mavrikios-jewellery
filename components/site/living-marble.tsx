@@ -20,11 +20,11 @@ interface Vein {
   pulseOffset: number;
 }
 
-// Same base color and vein tone as .marble-surface in globals.css (--marble-50 /
-// --stone-500) — this canvas is that treatment brought to life, not a new palette.
-const BASE = "rgb(253, 252, 250)";
-const SHADOW = "131, 124, 109";
-const HIGHLIGHT = "227, 211, 174";
+// Same base color and vein tone as .marble-surface in globals.css (--bone-50 /
+// --stone-500). This canvas is that treatment brought to life, not a new palette.
+const BASE = "rgb(247, 247, 244)";
+const SHADOW = "107, 115, 106";
+const HIGHLIGHT = "255, 255, 255";
 
 function makeVeins(): Vein[] {
   // Same three diagonals as .marble-surface's linear-gradients (128deg / 96deg /

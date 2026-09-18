@@ -39,7 +39,7 @@ export function SignUpForm() {
     return (
       <div className="flex flex-col items-center gap-4 py-6 text-center">
         <CheckCircle2 className="size-9 text-ink-950" />
-        <p className="font-serif text-2xl italic text-ink-950">Check your inbox</p>
+        <p className="font-serif text-2xl text-ink-950">Check your inbox</p>
         <p className="max-w-sm text-sm leading-relaxed text-stone-600">
           We&rsquo;ve sent a confirmation link to <span className="font-medium text-ink-950">{submittedEmail}</span>.
           Confirm your email to finish creating your account.

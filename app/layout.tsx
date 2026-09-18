@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Cormorant_Garamond, Geist } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { CartProvider } from "@/components/commerce/cart-provider";
 import { Navbar } from "@/components/site/navbar";
@@ -11,16 +11,16 @@ import { siteConfig } from "@/lib/site-config";
 import { getAllProducts } from "@/lib/data/products";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
-  axes: ["opsz", "SOFT", "WONK"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
   display: "swap",
 });
@@ -28,7 +28,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | ${siteConfig.fullName} — Since ${siteConfig.since}`,
+    default: `${siteConfig.name} | ${siteConfig.fullName}, Since ${siteConfig.since}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -72,14 +72,14 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${fraunces.variable} ${inter.variable}`}
+      className={`${cormorant.variable} ${geist.variable}`}
     >
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <JsonLd data={organizationJsonLd()} />
         <CartProvider products={products}>
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-ink-950 focus:px-4 focus:py-2 focus:text-sm focus:text-marble-50"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:bg-ink-950 focus:px-4 focus:py-2 focus:text-sm focus:text-bone-50"
           >
             Skip to content
           </a>

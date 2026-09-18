@@ -8,23 +8,57 @@ durable engineering rules for anyone (human or agent) working in this codebase a
 
 ## Design system
 
-- Palette lives in `app/globals.css` as Tailwind v4 `@theme` tokens: `marble-*` (warm white),
-  `stone-*` (cool grey), `ink-*` (near-black/navy), `silver-*`, `champagne-*` (sparing accent
-  only — never the dominant color). Use these tokens, not raw hex values, in new components.
-- Typography: `font-serif` (Fraunces, editorial/italic for headlines and campaign copy) +
-  `font-sans` (Inter, for nav/UI/prices/buttons). Don't introduce a third family.
-- Buttons are rectangular with small radius and uppercase tracked labels (see
-  `components/ui/button.tsx` variants) — not SaaS pill buttons.
-- `.marble-surface` / `.marble-surface-dark` (globals.css) are the only "marble" treatments —
-  used sparingly as a brand signature, not behind every section.
-- Motion is restrained: short entrance reveals, opacity/scale in the 0.9–1.06 range, no bounce,
-  no motion for motion's sake. Respect `prefers-reduced-motion` (already handled globally).
+The site was redesigned (Sept 2026) after the client rejected the first look as templated. The
+previous world (Fraunces + cream/gold/espresso palette, an eyebrow label above every section)
+was the textbook AI default for a "luxury" brief; the current world is deliberately not that.
+Keep it that way.
+
+- Palette lives in `app/globals.css` as Tailwind v4 `@theme` tokens: `bone-*` (cool off-white
+  base, not cream), `stone-*` (cool grey), `ink-*` (cool graphite near-black, not navy, not
+  espresso), `silver-*`, and `moss-*` (deep green, the ONE accent). Use these tokens, not raw hex
+  values. Do not add a second accent. Do not drift warm (no beige, no brass, no gold accents:
+  gold is the product, not the UI).
+- Typography: `font-serif` is Cormorant Garamond (weights 400/500/600), `font-sans` is Geist.
+  Headlines are set roman; italic is reserved for emphasising a phrase inside a headline (see the
+  hero `<em>`), never applied to every heading. Don't introduce a third family, and don't bring
+  back Fraunces or Inter.
+- Theme lock: the whole site is one light theme. `.marble-surface` (cool white Carrara) is a tint
+  within that theme. `.marble-surface-dark` (deep moss, like the inside of a ring box) is the ONE
+  permitted dark "colour block" moment per page: the homepage uses it once (`CampaignFeature`),
+  each secondary page at most once (its closing CTA). Never two dark sections on one page.
+- Shape lock: everything is sharp (`--radius: 0`, so `rounded-sm/md/lg` all resolve to 0). The
+  only round elements are floating overlay icon actions on imagery (wishlist heart, quick view,
+  quick add, tile arrows) and count indicators. Don't add rounded cards, pill badges or pill
+  buttons.
+- Buttons are rectangular with uppercase tracked labels (see `components/ui/button.tsx`). CTA
+  labels stay short enough to sit on one line at desktop. One label per intent per page.
+- Eyebrow labels (the small `uppercase tracking-[0.3em]` line above a headline) are rationed:
+  at most 1 per 3 sections on any page, and they are `text-moss-600`, not grey. The homepage
+  carries 3 across 11 sections (Best Sellers, Bespoke, Visit the Boutique). Secondary pages get
+  exactly one, inside `PageHero`. Let the headline do the work.
+- No em-dashes or en-dashes anywhere user-visible (headlines, copy, meta, alt text, prices).
+  Use a period, comma, colon or a plain hyphen. This is checked mechanically before shipping:
+  `grep -rnE "—|–" app components lib data --include="*.tsx" --include="*.ts"` should return only
+  code comments.
+- No decorative watermarks (giant ghost wordmarks or years), no scroll cues, no marquees, no
+  locale/time strips, no numbered "01 / 02" step labels, no captions overlaid on photos. All of
+  these were removed in the redesign; don't reintroduce them.
+- Motion is restrained but real: entrance reveals via `Reveal`/`RevealItem`, scroll parallax on
+  imagery via `ParallaxLayer`, the cursor-reactive `LivingMarble` canvas behind the hero, press
+  feedback on buttons. Opacity/scale stay in the 0.9–1.06 range, no bounce outside the checkout
+  confirmation. Respect `prefers-reduced-motion` (handled globally plus `useReducedMotion` in
+  `ParallaxLayer`).
 
 ## Placeholder imagery
 
-- No real product photography is available yet. `components/site/placeholder-art.tsx` renders
-  fine-line procedural jewellery motifs on a marble surface as a deliberate, on-brand
-  placeholder — not a generic grey box.
+- `components/site/placeholder-art.tsx` renders fine-line procedural jewellery motifs on a
+  marble surface as the fallback wherever a real photo is missing. After the redesign it is only
+  still visible on: the boutique/workshop image slots (`BoutiqueLocation`, `/our-story`, marked
+  with a `TODO` comment in the JSX) and the 6 demo products without a photo. Everything else on
+  the homepage, `PageHero`, the mega menu and the category tiles uses real photography from
+  `public/images/products/` (see `data/categories.ts` and `data/navigation.ts` for the `image`
+  fields). Ask the client for a boutique exterior and a workshop photo; those two slots are the
+  last visible placeholders.
 - `types/product.ts` → `ProductImage` has an optional `src`. `components/site/product-media.tsx`
   automatically renders a real photo via `next/image` when `src` is set, falling back to
   `PlaceholderArt` otherwise. **To add real photography: just set `src` on the product's images

@@ -15,18 +15,15 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0b0e14",
-          color: "#fdfcfa",
+          backgroundColor: "#12281d",
+          color: "#f7f7f4",
         }}
       >
-        <div style={{ display: "flex", fontSize: 22, letterSpacing: 8, color: "#9a9ca3", marginBottom: 28 }}>
-          NICOSIA · CYPRUS · SINCE {siteConfig.since}
-        </div>
         <div style={{ display: "flex", fontSize: 96, letterSpacing: 10, fontWeight: 500 }}>
           MAVRIKIOS
         </div>
-        <div style={{ display: "flex", fontSize: 26, letterSpacing: 3, color: "#cdb37f", marginTop: 28 }}>
-          Jewellery Boutique
+        <div style={{ display: "flex", fontSize: 26, letterSpacing: 3, color: "#c3d5ca", marginTop: 28 }}>
+          Jewellery Boutique, Nicosia, since {siteConfig.since}
         </div>
       </div>
     ),

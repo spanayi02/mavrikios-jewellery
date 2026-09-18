@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         {
           heading: "Information We Collect",
           body: [
-            "When you place an order or contact us, we collect the details you provide — such as your name, email, phone number and delivery address — to fulfil your order or respond to your enquiry.",
+            "When you place an order or contact us, we collect the details you provide (your name, email, phone number and delivery address) to fulfil your order or respond to your enquiry.",
           ],
         },
         {

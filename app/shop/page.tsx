@@ -7,7 +7,7 @@ import type { ProductCategory, ProductCollection } from "@/types/product";
 export const metadata: Metadata = {
   title: "Shop All Jewellery",
   description:
-    "Browse rings, earrings, necklaces and bracelets from Mavrikios Jewellery Boutique — fine jewellery in Nicosia, Cyprus.",
+    "Browse rings, earrings, necklaces and bracelets from Mavrikios Jewellery Boutique. Fine jewellery in Nicosia, Cyprus.",
   alternates: { canonical: "/shop" },
 };
 
@@ -38,9 +38,10 @@ export default async function ShopPage({
 
   return (
     <div>
-      <div className="border-b border-stone-200 py-10 text-center sm:py-14">
-        <p className="mb-2 text-[11px] uppercase tracking-[0.3em] text-stone-500">Mavrikios</p>
-        <h1 className="font-serif text-3xl italic text-ink-950 sm:text-4xl">All Jewellery</h1>
+      <div className="border-b border-stone-200 py-12 sm:py-16">
+        <div className="container-mavrikios">
+          <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">All jewellery</h1>
+        </div>
       </div>
       <ShopExperience
         products={products}

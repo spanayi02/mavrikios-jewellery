@@ -43,7 +43,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
         {materialLabels[product.material]}
         {product.stone !== "none" && ` · ${stoneLabels[product.stone]}`}
       </p>
-      <h1 className="mt-2 font-serif text-3xl italic text-ink-950 sm:text-4xl">{product.name}</h1>
+      <h1 className="mt-2 font-serif text-3xl text-ink-950 sm:text-4xl">{product.name}</h1>
       <p className="mt-3 text-xl text-ink-950">{formatPrice(product.price)}</p>
       <p className="mt-4 max-w-md text-[15px] leading-relaxed text-stone-600">
         {product.shortDescription}
@@ -63,7 +63,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
                 className={cn(
                   "flex h-11 min-w-11 items-center justify-center border px-3 text-sm transition-colors",
                   variant.id === variantId
-                    ? "border-ink-950 bg-ink-950 text-marble-50"
+                    ? "border-ink-950 bg-ink-950 text-bone-50"
                     : "border-stone-300 text-ink-950 hover:border-ink-950",
                   !variant.available && "cursor-not-allowed border-stone-200 text-stone-300 line-through hover:border-stone-200"
                 )}

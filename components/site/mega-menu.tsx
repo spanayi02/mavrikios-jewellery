@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 import { megaMenu, type MegaMenuLink } from "@/data/navigation";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 
@@ -11,7 +12,12 @@ interface MegaMenuProps {
   onNavigate?: () => void;
 }
 
-const defaultPanel: MegaMenuLink = { label: "The New Arrivals", href: "/shop?sort=newest", motif: "necklace" };
+const defaultPanel: MegaMenuLink = {
+  label: "The New Arrivals",
+  href: "/shop?sort=newest",
+  motif: "necklace",
+  image: "/images/products/pearl-pendant-necklace.jpg",
+};
 
 export function MegaMenu({ onNavigate }: MegaMenuProps) {
   const [active, setActive] = useState<MegaMenuLink>(defaultPanel);
@@ -22,7 +28,7 @@ export function MegaMenu({ onNavigate }: MegaMenuProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-      className="absolute inset-x-0 top-full border-t border-stone-200 bg-marble-50 shadow-2xl"
+      className="absolute inset-x-0 top-full border-t border-stone-200 bg-bone-50 shadow-2xl"
       onMouseLeave={() => setActive(defaultPanel)}
     >
       <div className="container-mavrikios grid grid-cols-12 gap-10 py-12">
@@ -37,18 +43,22 @@ export function MegaMenu({ onNavigate }: MegaMenuProps) {
         >
           <AnimatePresence mode="wait">
             <motion.div
-              key={active.motif}
+              key={active.image ?? active.motif}
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0"
+              className="absolute inset-0 bg-stone-100"
             >
-              <PlaceholderArt motif={active.motif} />
+              {active.image ? (
+                <Image src={active.image} alt="" fill sizes="50vw" className="object-cover" />
+              ) : (
+                <PlaceholderArt motif={active.motif} />
+              )}
             </motion.div>
           </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-t from-ink-950/60 via-transparent to-transparent" />
-          <div className="absolute bottom-5 left-5 flex items-center gap-2 text-marble-50">
+          <div className="absolute bottom-5 left-5 flex items-center gap-2 text-bone-50">
             <AnimatePresence mode="wait">
               <motion.span
                 key={active.label}
@@ -56,7 +66,7 @@ export function MegaMenu({ onNavigate }: MegaMenuProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.25 }}
-                className="font-serif text-lg italic"
+                className="font-serif text-xl"
               >
                 {active.label}
               </motion.span>

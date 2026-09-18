@@ -31,7 +31,7 @@ export function StoreStatusBadge({ className }: { className?: string }) {
   return (
     <span className={cn("inline-flex items-center gap-2 text-sm", className)}>
       <span
-        className={cn("size-1.5 rounded-full", status.isOpen ? "bg-emerald-600" : "bg-stone-400")}
+        className={cn("size-1.5 rounded-full", status.isOpen ? "bg-moss-500" : "bg-stone-400")}
         aria-hidden
       />
       <span>{status.label}</span>

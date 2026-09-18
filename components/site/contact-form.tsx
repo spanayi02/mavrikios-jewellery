@@ -52,8 +52,8 @@ export function ContactForm({ initialReason }: { initialReason?: string }) {
 
   if (submitted) {
     return (
-      <div className="border border-stone-200 bg-marble-100 p-8 text-center">
-        <p className="font-serif text-xl italic text-ink-950">Thank you</p>
+      <div className="border border-stone-200 bg-bone-100 p-8 text-center">
+        <p className="font-serif text-xl text-ink-950">Thank you</p>
         <p className="mt-2 text-sm text-stone-600">
           We&rsquo;ve received your message and will be in touch shortly.
         </p>

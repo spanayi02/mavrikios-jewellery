@@ -37,7 +37,7 @@ export function StickyAddToBag({ product }: { product: Product }) {
     <>
       <div ref={sentinelRef} aria-hidden className="h-px" />
       <div
-        className={`fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-stone-200 bg-marble-50/95 px-5 py-3 backdrop-blur-sm transition-transform duration-300 lg:hidden ${
+        className={`fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 border-t border-stone-200 bg-bone-50/95 px-5 py-3 backdrop-blur-sm transition-transform duration-300 lg:hidden ${
           visible ? "translate-y-0" : "translate-y-full"
         }`}
       >

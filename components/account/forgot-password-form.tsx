@@ -34,7 +34,7 @@ export function ForgotPasswordForm() {
     return (
       <div className="flex flex-col items-center gap-4 py-6 text-center">
         <CheckCircle2 className="size-9 text-ink-950" />
-        <p className="font-serif text-2xl italic text-ink-950">Check your inbox</p>
+        <p className="font-serif text-2xl text-ink-950">Check your inbox</p>
         <p className="max-w-sm text-sm leading-relaxed text-stone-600">
           If an account exists for that email, we&rsquo;ve sent a link to reset your password.
         </p>

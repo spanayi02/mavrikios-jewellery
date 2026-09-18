@@ -7,17 +7,17 @@ interface LogoProps {
 }
 
 export function Logo({ className, tone = "ink", showTagline = true }: LogoProps) {
-  const color = tone === "ink" ? "text-ink-950" : "text-marble-50";
+  const color = tone === "ink" ? "text-ink-950" : "text-bone-50";
   return (
     <span className={cn("inline-flex flex-col leading-none select-none", color, className)}>
-      <span className="font-serif text-[1.35rem] font-medium tracking-[0.14em] sm:text-2xl">
+      <span className="font-serif text-[1.45rem] font-semibold tracking-[0.16em] sm:text-[1.65rem]">
         MAVRIKIOS
       </span>
       {showTagline && (
         <span
           className={cn(
             "mt-0.5 text-[9px] uppercase tracking-[0.32em]",
-            tone === "ink" ? "text-stone-500" : "text-marble-50/60"
+            tone === "ink" ? "text-stone-500" : "text-bone-50/60"
           )}
         >
           Jewellery Boutique &middot; Since 1967

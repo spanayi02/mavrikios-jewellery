@@ -12,22 +12,17 @@ const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${enc
 
 export function BoutiqueLocation() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32">
-      <ParallaxLayer
-        clip={false}
-        range={24}
-        className="pointer-events-none absolute inset-x-0 bottom-[-6%] select-none text-center font-serif text-[16vw] leading-none tracking-tight text-champagne-400/[0.1]"
-      >
-        <span aria-hidden>MAVRIKIOS</span>
-      </ParallaxLayer>
-
-      <div className="container-mavrikios relative grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
-        <Reveal className="relative order-2 aspect-[4/3] overflow-hidden lg:order-1 lg:col-span-7">
-          <PlaceholderArt motif="gift" label="Ayiou Georgiou 17C, Latsia" />
+    <section className="relative overflow-hidden bg-bone-100 py-24 sm:py-32">
+      <div className="container-mavrikios grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+        {/* TODO: boutique exterior / interior photo, 1600x1200. Placeholder art until supplied. */}
+        <Reveal className="order-2 aspect-[4/3] lg:order-1 lg:col-span-7">
+          <ParallaxLayer range={30} className="h-full">
+            <PlaceholderArt motif="gift" />
+          </ParallaxLayer>
         </Reveal>
         <Reveal delay={0.1} className="order-1 lg:order-2 lg:col-span-5">
-          <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">Visit the Boutique</p>
-          <h2 className="max-w-md font-serif text-4xl italic text-ink-950 sm:text-5xl">
+          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-moss-600">Visit the Boutique</p>
+          <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             Come and see the pieces in person.
           </h2>
 
@@ -58,6 +53,17 @@ export function BoutiqueLocation() {
               </a>
             </Button>
           </div>
+
+          <p className="mt-8 text-xs text-stone-500">
+            <a
+              href="https://www.google.com/search?q=Mavrikios+Jewellery+Boutique+Latsia+reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="veil-underline"
+            >
+              Read our reviews on Google
+            </a>
+          </p>
         </Reveal>
       </div>
     </section>

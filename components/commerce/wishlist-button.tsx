@@ -36,7 +36,7 @@ export function WishlistButton({ product, className, variant = "floating" }: Wis
       aria-label={isSaved ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
       className={cn(
         variant === "floating" &&
-          "flex size-9 items-center justify-center rounded-full bg-marble-50/90 text-ink-950 shadow-sm backdrop-blur-sm transition-colors hover:bg-marble-50",
+          "flex size-9 items-center justify-center rounded-full bg-bone-50/90 text-ink-950 shadow-sm backdrop-blur-sm transition-colors hover:bg-bone-50",
         variant === "inline" && "flex items-center gap-2 text-sm text-ink-950",
         className
       )}

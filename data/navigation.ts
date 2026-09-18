@@ -7,6 +7,8 @@ export interface NavLink {
 
 export interface MegaMenuLink extends NavLink {
   motif: PlaceholderMotif;
+  /** Real photo shown in the mega menu preview panel when this link is hovered. */
+  image?: string;
 }
 
 export const primaryNav: NavLink[] = [
@@ -20,19 +22,19 @@ export const primaryNav: NavLink[] = [
 
 export const megaMenu: { shop: MegaMenuLink[]; jewellery: MegaMenuLink[]; moments: MegaMenuLink[] } = {
   shop: [
-    { label: "New Arrivals", href: "/shop?sort=newest", motif: "necklace" },
-    { label: "Best Sellers", href: "/shop?filter=bestseller", motif: "ring" },
-    { label: "All Jewellery", href: "/shop", motif: "bracelet" },
+    { label: "New Arrivals", href: "/shop?sort=newest", motif: "necklace", image: "/images/products/pearl-pendant-necklace.jpg" },
+    { label: "Best Sellers", href: "/shop?filter=bestseller", motif: "ring", image: "/images/products/aliki-solitaire-ring-1.jpg" },
+    { label: "All Jewellery", href: "/shop", motif: "bracelet", image: "/images/products/sophia-eternity-band.jpg" },
   ],
   jewellery: [
-    { label: "Rings", href: "/shop?category=rings", motif: "ring" },
-    { label: "Earrings", href: "/shop?category=earrings", motif: "earring" },
-    { label: "Necklaces", href: "/shop?category=necklaces", motif: "necklace" },
-    { label: "Bracelets", href: "/shop?category=bracelets", motif: "bracelet" },
+    { label: "Rings", href: "/shop?category=rings", motif: "ring", image: "/images/products/daphne-signet-ring.jpg" },
+    { label: "Earrings", href: "/shop?category=earrings", motif: "earring", image: "/images/products/kite-drop-earrings.jpg" },
+    { label: "Necklaces", href: "/shop?category=necklaces", motif: "necklace", image: "/images/products/pearl-pendant-necklace.jpg" },
+    { label: "Bracelets", href: "/shop?category=bracelets", motif: "bracelet", image: "/images/products/orion-curb-chain-bracelet.jpg" },
   ],
   moments: [
-    { label: "Engagement", href: "/engagement", motif: "monopetra" },
-    { label: "Bespoke", href: "/bespoke", motif: "ring" },
-    { label: "Gifts", href: "/shop?collection=gifts", motif: "gift" },
+    { label: "Engagement", href: "/engagement", motif: "monopetra", image: "/images/products/aliki-solitaire-ring-1.jpg" },
+    { label: "Bespoke", href: "/bespoke", motif: "ring", image: "/images/products/ruby-emerald-swirl-ring.jpg" },
+    { label: "Gifts", href: "/shop?collection=gifts", motif: "gift", image: "/images/products/aquamarine-bezel-ring.jpg" },
   ],
 };

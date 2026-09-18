@@ -65,40 +65,40 @@ export default async function AdminSalesPage() {
   return (
     <div>
       <p className="mb-1 text-[11px] uppercase tracking-[0.25em] text-stone-500">Owner</p>
-      <h1 className="mb-8 font-serif text-3xl italic text-ink-950">Sales</h1>
+      <h1 className="mb-8 font-serif text-3xl text-ink-950">Sales</h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="border border-stone-200 bg-marble-50 p-6">
+        <div className="border border-stone-200 bg-bone-50 p-6">
           <p className="text-[11px] uppercase tracking-[0.2em] text-stone-500">Total Revenue</p>
-          <p className="mt-1 font-serif text-3xl italic text-ink-950">{formatPrice(totalRevenue)}</p>
+          <p className="mt-1 font-serif text-3xl text-ink-950">{formatPrice(totalRevenue)}</p>
         </div>
-        <div className="border border-stone-200 bg-marble-50 p-6">
+        <div className="border border-stone-200 bg-bone-50 p-6">
           <p className="text-[11px] uppercase tracking-[0.2em] text-stone-500">Orders</p>
-          <p className="mt-1 font-serif text-3xl italic text-ink-950">{orderCount}</p>
+          <p className="mt-1 font-serif text-3xl text-ink-950">{orderCount}</p>
         </div>
-        <div className="border border-stone-200 bg-marble-50 p-6">
+        <div className="border border-stone-200 bg-bone-50 p-6">
           <p className="text-[11px] uppercase tracking-[0.2em] text-stone-500">Avg. Order Value</p>
-          <p className="mt-1 font-serif text-3xl italic text-ink-950">{formatPrice(avgOrderValue)}</p>
+          <p className="mt-1 font-serif text-3xl text-ink-950">{formatPrice(avgOrderValue)}</p>
         </div>
       </div>
 
-      <div className="mt-8 border border-stone-200 bg-marble-50 p-6">
+      <div className="mt-8 border border-stone-200 bg-bone-50 p-6">
         <p className="mb-4 text-[11px] uppercase tracking-[0.2em] text-stone-500">This Month vs Last Month</p>
         <div className="grid grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-stone-500">This month</p>
-            <p className="font-serif text-2xl italic text-ink-950">{formatPrice(thisMonthRevenue)}</p>
+            <p className="font-serif text-2xl text-ink-950">{formatPrice(thisMonthRevenue)}</p>
             <p className="text-xs text-stone-500">{thisMonthOrders.length} orders</p>
           </div>
           <div>
             <p className="text-sm text-stone-500">Last month</p>
-            <p className="font-serif text-2xl italic text-ink-950">{formatPrice(lastMonthRevenue)}</p>
+            <p className="font-serif text-2xl text-ink-950">{formatPrice(lastMonthRevenue)}</p>
             <p className="text-xs text-stone-500">{lastMonthOrders.length} orders</p>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 border border-stone-200 bg-marble-50 p-6">
+      <div className="mt-8 border border-stone-200 bg-bone-50 p-6">
         <p className="mb-4 text-[11px] uppercase tracking-[0.2em] text-stone-500">Top Products by Units Sold</p>
         {topProducts.length === 0 ? (
           <p className="text-sm text-stone-500">No sales yet.</p>
