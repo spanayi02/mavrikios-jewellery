@@ -57,8 +57,8 @@ export function ProductCard({ product, priority, className }: ProductCardProps) 
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-3">
           <div className="flex flex-wrap gap-1.5">
             {product.isNew && <Badge>New</Badge>}
-            {product.limited && <Badge variant="champagne">Limited</Badge>}
-            {product.bestSeller && <Badge variant="outline" className="bg-marble-50/80">Best Seller</Badge>}
+            {product.limited && <Badge variant="moss">Limited</Badge>}
+            {product.bestSeller && <Badge variant="outline" className="bg-bone-50/80">Best Seller</Badge>}
           </div>
           <span className="pointer-events-auto">
             <WishlistButton product={product} />
@@ -70,7 +70,7 @@ export function ProductCard({ product, priority, className }: ProductCardProps) 
             type="button"
             onClick={handleQuickView}
             aria-label={`Quick view ${product.name}`}
-            className="flex size-9 items-center justify-center rounded-full bg-marble-50/90 text-ink-950 shadow-sm backdrop-blur-sm transition-transform hover:scale-105 active:scale-95"
+            className="flex size-9 items-center justify-center rounded-full bg-bone-50/90 text-ink-950 shadow-sm backdrop-blur-sm transition-transform hover:scale-105 active:scale-95"
           >
             <Eye className="size-4" />
           </button>

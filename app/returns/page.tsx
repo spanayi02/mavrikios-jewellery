@@ -29,7 +29,7 @@ export default function ReturnsPage() {
         {
           heading: "How to Start a Return",
           body: [
-            "Contact us with your order details and reason for return before sending anything back — we'll confirm the next steps with you directly.",
+            "Contact us with your order details and reason for return before sending anything back. We'll confirm the next steps with you directly.",
           ],
         },
         {

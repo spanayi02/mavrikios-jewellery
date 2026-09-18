@@ -25,7 +25,7 @@ const careLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-stone-200 bg-marble-100">
+    <footer className="border-t border-stone-200 bg-bone-100">
       <div className="container-mavrikios grid grid-cols-1 gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-20">
         <div className="lg:col-span-4">
           <Logo />

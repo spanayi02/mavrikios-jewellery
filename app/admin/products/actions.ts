@@ -75,7 +75,7 @@ function toRow(input: ProductFormInput) {
     is_new: input.isNew,
     best_seller: input.bestSeller,
     limited: input.limited,
-    seo_title: `${input.name.trim()} — Mavrikios Jewellery Boutique`,
+    seo_title: `${input.name.trim()} | Mavrikios Jewellery Boutique`,
     seo_description: input.shortDescription.trim(),
     updated_at: new Date().toISOString(),
   };

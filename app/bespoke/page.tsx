@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PageHero } from "@/components/site/page-hero";
-import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
@@ -15,22 +15,18 @@ export const metadata: Metadata = {
 
 const flow = [
   {
-    n: "01",
     title: "Conversation",
-    body: "We start by listening — the occasion, the person, the idea in your head that doesn't have a name yet. In-store or by phone.",
+    body: "We start by listening: the occasion, the person, the idea in your head that doesn't have a name yet. In-store or by phone.",
   },
   {
-    n: "02",
     title: "Design",
     body: "We sketch and refine the concept together, choosing metal, stone and form until the design feels right.",
   },
   {
-    n: "03",
     title: "Craft",
     body: "Your piece is made by hand in our workshop, with the same care we've applied to every commission since 1967.",
   },
   {
-    n: "04",
     title: "Reveal",
     body: "You collect the finished piece in-store, where we check the fit and finish together before it's truly yours.",
   },
@@ -42,19 +38,17 @@ export default function BespokePage() {
       <PageHero
         eyebrow="Bespoke"
         title="A piece designed entirely around you."
-        description="From a first conversation to a finished piece in your hands — made to order, in our workshop."
+        description="From a first conversation to a finished piece in your hands, made to order in our workshop."
         motif="ring"
+        image={{ src: "/images/products/ruby-emerald-swirl-ring.jpg", alt: "Gold rings set with a ruby and an emerald" }}
       />
 
-      <section className="container-mavrikios py-20 sm:py-28">
-        <Reveal stagger={0.1} className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2">
+      <section className="container-mavrikios py-24 sm:py-32">
+        <Reveal stagger={0.1} className="grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2">
           {flow.map((step) => (
-            <RevealItem key={step.n} className="flex gap-6">
-              <span className="font-serif text-4xl italic text-stone-300">{step.n}</span>
-              <div>
-                <h2 className="font-serif text-2xl text-ink-950">{step.title}</h2>
-                <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-stone-600">{step.body}</p>
-              </div>
+            <RevealItem key={step.title} className="border-t border-stone-300 pt-6">
+              <h2 className="font-serif text-3xl text-ink-950">{step.title}</h2>
+              <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-stone-600">{step.body}</p>
             </RevealItem>
           ))}
         </Reveal>
@@ -62,13 +56,18 @@ export default function BespokePage() {
 
       <section className="grid grid-cols-1 lg:grid-cols-2">
         <Reveal y={0} className="relative aspect-square lg:aspect-auto">
-          <ParallaxLayer range={30} className="h-full">
-            <PlaceholderArt motif="necklace" tone="ink" label="Redesign" />
+          <ParallaxLayer range={30} className="h-full bg-stone-100">
+            <Image
+              src="/images/products/aquamarine-bezel-ring.jpg"
+              alt="Gold ring with a round aquamarine cabochon"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
           </ParallaxLayer>
         </Reveal>
-        <Reveal delay={0.1} className="flex flex-col justify-center bg-marble-100 px-6 py-16 sm:px-14 sm:py-20">
-          <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-stone-500">Redesign</p>
-          <h2 className="max-w-md font-serif text-3xl italic text-ink-950 sm:text-4xl">
+        <Reveal delay={0.1} className="flex flex-col justify-center bg-bone-100 px-6 py-20 sm:px-14 sm:py-24">
+          <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             An heirloom, made to be worn again.
           </h2>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-stone-600">
@@ -78,13 +77,12 @@ export default function BespokePage() {
         </Reveal>
       </section>
 
-      <Reveal as="section" className="marble-surface-dark py-20 text-center sm:py-28">
+      <Reveal as="section" className="marble-surface-dark py-24 text-center sm:py-32">
         <div className="container-mavrikios flex flex-col items-center">
-          <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-marble-50/50">Begin</p>
-          <h2 className="max-w-lg font-serif text-3xl italic text-marble-50 sm:text-4xl">
-            Begin a Bespoke Piece
+          <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-bone-50 sm:text-5xl">
+            Begin a bespoke piece
           </h2>
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-marble-50/75">
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-moss-200">
             Tell us a little about what you have in mind and we&rsquo;ll be in touch to arrange a
             first conversation.
           </p>

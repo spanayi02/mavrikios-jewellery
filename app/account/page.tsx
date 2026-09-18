@@ -53,7 +53,7 @@ export default async function AccountPage() {
       <div className="mb-12 flex flex-col items-start justify-between gap-4 border-b border-stone-200 pb-8 sm:flex-row sm:items-end">
         <div>
           <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">My Account</p>
-          <h1 className="font-serif text-3xl italic text-ink-950 sm:text-4xl">
+          <h1 className="font-serif text-3xl text-ink-950 sm:text-4xl">
             Welcome, {fullName}
           </h1>
           <p className="mt-2 text-sm text-stone-600">{user.email}</p>

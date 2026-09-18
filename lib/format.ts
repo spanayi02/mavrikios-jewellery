@@ -20,5 +20,5 @@ export function formatPrice(amount: number): string {
 
 export function formatPriceRange(min: number, max: number): string {
   if (min === max) return formatPrice(min);
-  return `${formatPrice(min)} – ${formatPrice(max)}`;
+  return `${formatPrice(min)} - ${formatPrice(max)}`;
 }

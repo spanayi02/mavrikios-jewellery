@@ -6,7 +6,6 @@ import { CampaignFeature } from "@/components/home/campaign-feature";
 import { EngagementFeature } from "@/components/home/engagement-feature";
 import { BespokeEditorial } from "@/components/home/bespoke-editorial";
 import { CraftServices } from "@/components/home/craft-services";
-import { ReviewsSection } from "@/components/home/reviews-section";
 import { InstagramSection } from "@/components/home/instagram-section";
 import { BoutiqueLocation } from "@/components/home/boutique-location";
 import { getBestSellers, getNewArrivals } from "@/lib/data/products";
@@ -19,7 +18,6 @@ export default async function HomePage() {
       <Hero />
       <CuratedCategories />
       <ProductRail
-        eyebrow="Just In"
         title="New Arrivals"
         description="The latest pieces to join the boutique, in gold, pearl and stone."
         viewAllHref="/shop?sort=newest"
@@ -35,10 +33,10 @@ export default async function HomePage() {
         viewAllHref="/shop?filter=bestseller"
         products={bestSellers}
         tinted
+        layout="scroll"
       />
       <BespokeEditorial />
       <CraftServices />
-      <ReviewsSection />
       <InstagramSection />
       <BoutiqueLocation />
     </>

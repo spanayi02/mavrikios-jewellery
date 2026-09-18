@@ -6,38 +6,32 @@ import { Reveal, RevealItem } from "@/components/site/reveal";
 export function CraftServices() {
   const featured = services.slice(0, 4);
   return (
-    <section className="bg-ink-950 py-20 text-marble-50 sm:py-28">
+    <section className="bg-bone-100 py-24 sm:py-32">
       <div className="container-mavrikios">
-        <Reveal className="mb-12 flex flex-col gap-3 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="mb-3 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-champagne-400">
-              <span className="h-px w-8 bg-champagne-400/70" aria-hidden />
-              Craft &amp; Care
-            </p>
-            <h2 className="max-w-lg font-serif text-3xl italic sm:text-4xl">
-              A workshop, not just a shop front.
-            </h2>
-          </div>
+        <Reveal className="mb-12 flex flex-col gap-4 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
+            A workshop, not just a shop front.
+          </h2>
           <Link
             href="/services"
-            className="veil-underline text-[13px] font-medium uppercase tracking-[0.12em] text-marble-50"
+            className="veil-underline text-[13px] font-medium uppercase tracking-[0.12em] text-ink-950"
           >
             All Services
           </Link>
         </Reveal>
 
-        <Reveal stagger={0.06} className="grid grid-cols-1 gap-x-8 gap-y-0 sm:grid-cols-2">
+        <Reveal stagger={0.06} className="grid grid-cols-1 gap-x-10 gap-y-0 sm:grid-cols-2">
           {featured.map((service) => (
             <RevealItem key={service.key}>
               <Link
                 href="/services"
-                className="group flex items-start justify-between gap-4 border-t border-marble-50/15 py-6"
+                className="group flex items-start justify-between gap-4 border-t border-stone-300 py-7"
               >
                 <div>
-                  <p className="font-serif text-lg italic">{service.title}</p>
-                  <p className="mt-1.5 max-w-xs text-sm text-marble-50/60">{service.description}</p>
+                  <p className="font-serif text-2xl text-ink-950">{service.title}</p>
+                  <p className="mt-2 max-w-xs text-sm leading-relaxed text-stone-600">{service.description}</p>
                 </div>
-                <ArrowUpRight className="mt-1 size-4 shrink-0 text-marble-50/50 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-marble-50" />
+                <ArrowUpRight className="mt-1 size-4 shrink-0 text-stone-500 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-moss-600" />
               </Link>
             </RevealItem>
           ))}

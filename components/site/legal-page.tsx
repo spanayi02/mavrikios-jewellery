@@ -15,7 +15,7 @@ export function LegalPage({ eyebrow, title, intro, sections }: LegalPageProps) {
     <div className="container-mavrikios py-16 sm:py-24">
       <div className="mx-auto max-w-2xl">
         <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">{eyebrow}</p>
-        <h1 className="font-serif text-4xl italic text-ink-950 sm:text-5xl">{title}</h1>
+        <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">{title}</h1>
         <p className="mt-5 text-[15px] leading-relaxed text-stone-600">{intro}</p>
 
         <div className="mt-12 space-y-10">

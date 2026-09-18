@@ -28,8 +28,8 @@ export function NewsletterForm({ dark = false }: { dark?: boolean }) {
 
   if (submitted) {
     return (
-      <p className={dark ? "text-sm text-marble-50/80" : "text-sm text-stone-600"}>
-        Thank you — you will hear from us soon.
+      <p className={dark ? "text-sm text-bone-50/80" : "text-sm text-stone-600"}>
+        Thank you. You will hear from us soon.
       </p>
     );
   }
@@ -43,7 +43,7 @@ export function NewsletterForm({ dark = false }: { dark?: boolean }) {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         aria-label="Email address"
-        className={dark ? "border-marble-50/30 bg-transparent text-marble-50 placeholder:text-marble-50/50 focus-visible:border-marble-50" : ""}
+        className={dark ? "border-bone-50/30 bg-transparent text-bone-50 placeholder:text-bone-50/50 focus-visible:border-bone-50" : ""}
       />
       <Button
         type="submit"

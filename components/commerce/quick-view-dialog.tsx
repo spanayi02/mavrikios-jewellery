@@ -75,7 +75,7 @@ export function QuickViewDialog({ product, open, onOpenChange }: QuickViewDialog
           <p className="text-[11px] uppercase tracking-[0.2em] text-stone-500">
             {categoryLabels[product.category]}
           </p>
-          <h2 className="mt-2 font-serif text-2xl italic text-ink-950">{product.name}</h2>
+          <h2 className="mt-2 font-serif text-2xl text-ink-950">{product.name}</h2>
           <p className="mt-2 text-lg text-ink-950">{formatPrice(product.price)}</p>
           <p className="mt-3 text-sm leading-relaxed text-stone-600">{product.shortDescription}</p>
           <p className="mt-3 text-xs text-stone-500">
@@ -97,7 +97,7 @@ export function QuickViewDialog({ product, open, onOpenChange }: QuickViewDialog
                     className={cn(
                       "flex h-9 min-w-9 items-center justify-center border px-2.5 text-xs transition-colors",
                       variant.id === variantId
-                        ? "border-ink-950 bg-ink-950 text-marble-50"
+                        ? "border-ink-950 bg-ink-950 text-bone-50"
                         : "border-stone-300 text-ink-950 hover:border-ink-950",
                       !variant.available && "cursor-not-allowed border-stone-200 text-stone-300 line-through"
                     )}

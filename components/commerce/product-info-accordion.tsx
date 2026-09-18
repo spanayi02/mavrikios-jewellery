@@ -38,7 +38,7 @@ export function ProductInfoAccordion({ product }: { product: Product }) {
         <AccordionContent>
           <p>
             Free delivery across Cyprus. Cash on Delivery and QuickPay are both available at
-            checkout. Made-to-order pieces are prepared in our workshop before dispatch — we will
+            checkout. Made-to-order pieces are prepared in our workshop before dispatch. We will
             confirm a timeframe when you order.
           </p>
         </AccordionContent>

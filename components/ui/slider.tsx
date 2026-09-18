@@ -37,7 +37,7 @@ function Slider({
       {values.map((_, i) => (
         <SliderPrimitive.Thumb
           key={i}
-          className="block size-4 shrink-0 rounded-full border border-ink-950 bg-marble-50 shadow transition-colors outline-none hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-ring"
+          className="block size-4 shrink-0 rounded-full border border-ink-950 bg-bone-50 shadow transition-colors outline-none hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-ring"
         />
       ))}
     </SliderPrimitive.Root>

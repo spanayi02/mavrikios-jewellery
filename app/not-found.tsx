@@ -9,11 +9,11 @@ export default function NotFound() {
         <PlaceholderArt motif="ring" label="404" />
       </div>
       <div className="order-1 lg:order-2 lg:col-span-6 lg:col-start-7">
-        <p className="mb-4 flex items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-champagne-600">
-          <span className="h-px w-8 bg-champagne-400" aria-hidden />
+        <p className="mb-4 flex items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-moss-600">
+          <span className="h-px w-8 bg-moss-400" aria-hidden />
           Page Not Found
         </p>
-        <h1 className="max-w-md font-serif text-4xl italic leading-[1.1] text-ink-950 sm:text-5xl">
+        <h1 className="max-w-md font-serif text-4xl leading-[1.1] text-ink-950 sm:text-5xl">
           This piece isn&rsquo;t where we left it.
         </h1>
         <p className="mt-6 max-w-md text-[15px] leading-relaxed text-stone-600">

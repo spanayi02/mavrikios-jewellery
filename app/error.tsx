@@ -17,11 +17,11 @@ export default function GlobalError({
 
   return (
     <div className="container-mavrikios flex min-h-[70vh] flex-col items-center justify-center py-20 text-center">
-      <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-champagne-600">
+      <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-moss-600">
         Something Went Wrong
       </p>
-      <h1 className="max-w-md font-serif text-3xl italic text-ink-950 sm:text-4xl">
-        We&rsquo;re sorry — that didn&rsquo;t work as expected.
+      <h1 className="max-w-md font-serif text-3xl text-ink-950 sm:text-4xl">
+        We&rsquo;re sorry, that didn&rsquo;t work as expected.
       </h1>
       <p className="mt-5 max-w-md text-[15px] leading-relaxed text-stone-600">
         Please try again, or head back to the homepage. If the problem continues, feel free to

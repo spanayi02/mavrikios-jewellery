@@ -10,13 +10,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-ink-950 text-marble-50 hover:bg-ink-800",
+          "bg-ink-950 text-bone-50 hover:bg-ink-800",
         inverse:
-          "bg-marble-50 text-ink-950 hover:bg-white",
+          "bg-bone-50 text-ink-950 hover:bg-white",
         outline:
-          "border border-ink-950/70 text-ink-950 hover:border-ink-950 hover:bg-ink-950 hover:text-marble-50",
+          "border border-ink-950/70 text-ink-950 hover:border-ink-950 hover:bg-ink-950 hover:text-bone-50",
         "outline-light":
-          "border border-marble-50/60 text-marble-50 hover:border-marble-50 hover:bg-marble-50 hover:text-ink-950",
+          "border border-bone-50/60 text-bone-50 hover:border-bone-50 hover:bg-bone-50 hover:text-ink-950",
         ghost: "text-ink-950 hover:bg-stone-100",
         link: "normal-case tracking-normal text-ink-950 underline-offset-4 hover:underline",
         destructive:

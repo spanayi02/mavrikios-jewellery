@@ -50,14 +50,14 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
             <button
               onClick={() => go(-1)}
               aria-label="Previous image"
-              className="absolute left-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-marble-50/85 text-ink-950 backdrop-blur-sm transition-colors hover:bg-marble-50"
+              className="absolute left-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-bone-50/85 text-ink-950 backdrop-blur-sm transition-colors hover:bg-bone-50"
             >
               <ChevronLeft className="size-4" />
             </button>
             <button
               onClick={() => go(1)}
               aria-label="Next image"
-              className="absolute right-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-marble-50/85 text-ink-950 backdrop-blur-sm transition-colors hover:bg-marble-50"
+              className="absolute right-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-bone-50/85 text-ink-950 backdrop-blur-sm transition-colors hover:bg-bone-50"
             >
               <ChevronRight className="size-4" />
             </button>

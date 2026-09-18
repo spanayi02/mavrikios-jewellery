@@ -24,35 +24,35 @@ export default async function AdminDashboardPage() {
   return (
     <div>
       <p className="mb-1 text-[11px] uppercase tracking-[0.25em] text-stone-500">Overview</p>
-      <h1 className="mb-8 font-serif text-3xl italic text-ink-950">Welcome back</h1>
+      <h1 className="mb-8 font-serif text-3xl text-ink-950">Welcome back</h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Link
           href="/admin/products"
-          className="flex items-center justify-between border border-stone-200 bg-marble-50 p-6 transition-colors hover:border-ink-950"
+          className="flex items-center justify-between border border-stone-200 bg-bone-50 p-6 transition-colors hover:border-ink-950"
         >
           <div>
             <p className="text-[11px] uppercase tracking-[0.2em] text-stone-500">Products</p>
-            <p className="mt-1 font-serif text-3xl italic text-ink-950">{productCount ?? 0}</p>
+            <p className="mt-1 font-serif text-3xl text-ink-950">{productCount ?? 0}</p>
           </div>
           <Package className="size-6 text-stone-400" />
         </Link>
         <Link
           href="/admin/orders"
-          className="flex items-center justify-between border border-stone-200 bg-marble-50 p-6 transition-colors hover:border-ink-950"
+          className="flex items-center justify-between border border-stone-200 bg-bone-50 p-6 transition-colors hover:border-ink-950"
         >
           <div>
             <p className="text-[11px] uppercase tracking-[0.2em] text-stone-500">Pending Orders</p>
-            <p className="mt-1 font-serif text-3xl italic text-ink-950">{pendingOrderCount ?? 0}</p>
+            <p className="mt-1 font-serif text-3xl text-ink-950">{pendingOrderCount ?? 0}</p>
           </div>
           <Receipt className="size-6 text-stone-400" />
         </Link>
       </div>
 
       {lowStock && lowStock.length > 0 && (
-        <div className="mt-8 border border-champagne-300 bg-champagne-100/40 p-6">
+        <div className="mt-8 border border-moss-300 bg-moss-100/40 p-6">
           <p className="mb-3 flex items-center gap-2 text-sm font-medium text-ink-950">
-            <AlertTriangle className="size-4 text-champagne-600" /> Low Stock
+            <AlertTriangle className="size-4 text-moss-600" /> Low Stock
           </p>
           <ul className="space-y-1.5">
             {lowStock.map((p) => (

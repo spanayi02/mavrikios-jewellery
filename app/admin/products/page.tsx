@@ -16,17 +16,17 @@ export default async function AdminProductsPage() {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <p className="mb-1 text-[11px] uppercase tracking-[0.25em] text-stone-500">Catalogue</p>
-          <h1 className="font-serif text-3xl italic text-ink-950">Products ({products.length})</h1>
+          <h1 className="font-serif text-3xl text-ink-950">Products ({products.length})</h1>
         </div>
         <Link
           href="/admin/products/new"
-          className="flex items-center gap-2 bg-ink-950 px-5 py-3 text-[12px] font-medium uppercase tracking-[0.1em] text-marble-50"
+          className="flex items-center gap-2 bg-ink-950 px-5 py-3 text-[12px] font-medium uppercase tracking-[0.1em] text-bone-50"
         >
           <Plus className="size-4" /> Add Product
         </Link>
       </div>
 
-      <div className="overflow-x-auto border border-stone-200 bg-marble-50">
+      <div className="overflow-x-auto border border-stone-200 bg-bone-50">
         <table className="w-full min-w-[720px] text-left text-sm">
           <thead className="border-b border-stone-200 text-[11px] uppercase tracking-[0.1em] text-stone-500">
             <tr>

@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { ProductMedia } from "@/components/site/product-media";
 import { Reveal, RevealItem } from "@/components/site/reveal";
-import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { formatPrice } from "@/lib/format";
 import { getAllProducts } from "@/lib/data/products";
 
-const featuredSlugs = ["eleni-tennis-bracelet", "nicosia-fine-chain-bracelet", "melina-baguette-bracelet"];
+const featuredSlugs = ["sophia-eternity-band", "vasso-halo-ring", "calliope-pendant-necklace"];
 
+/** The one deliberate dark moment on the homepage: deep moss, like the inside of a ring box. */
 export async function CampaignFeature() {
   const products = await getAllProducts();
   const featured = featuredSlugs
@@ -16,27 +15,18 @@ export async function CampaignFeature() {
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   return (
-    <section className="relative w-full overflow-hidden bg-ink-950">
-      <ParallaxLayer range={60} className="absolute inset-0">
-        <PlaceholderArt motif="bracelet" tone="ink" />
-      </ParallaxLayer>
-      <div className="absolute inset-0 bg-ink-950/85" />
-
-      <div className="container-mavrikios relative z-10 grid grid-cols-1 items-center gap-12 py-20 sm:py-28 lg:grid-cols-12 lg:gap-8">
+    <section className="marble-surface-dark relative w-full overflow-hidden">
+      <div className="container-mavrikios relative grid grid-cols-1 items-center gap-14 py-24 sm:py-32 lg:grid-cols-12 lg:gap-8">
         <Reveal className="lg:col-span-5">
-          <p className="mb-5 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-champagne-400">
-            <span className="h-px w-8 bg-champagne-400/70" aria-hidden />
-            The Mavrikios Edit
-          </p>
-          <h2 className="font-serif text-4xl italic leading-[1.1] text-marble-50 sm:text-5xl">
+          <h2 className="text-balance font-serif text-4xl leading-[1.08] text-bone-50 sm:text-5xl">
             Pieces for the moments that stay.
           </h2>
-          <p className="mt-4 max-w-sm text-sm text-marble-50/60">
+          <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-moss-200">
             Three pieces from the edit, chosen for the way they wear every day.
           </p>
           <Link
             href="/shop?collection=signature"
-            className="group mt-8 inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.12em] text-marble-50"
+            className="group mt-8 inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-[0.12em] text-bone-50"
           >
             Explore the Edit
             <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
@@ -47,20 +37,18 @@ export async function CampaignFeature() {
           {featured.map((product) => (
             <RevealItem key={product.id}>
               <Link href={`/products/${product.slug}`} className="group block">
-                <div className="relative aspect-square overflow-hidden">
+                <div className="relative aspect-[4/5] overflow-hidden bg-ink-900">
                   <ProductMedia
                     image={product.images[0]}
                     sizes="(min-width: 1024px) 20vw, 33vw"
                     className="transition-transform duration-500 ease-out group-hover:scale-105"
                   />
-                  <span className="absolute bottom-2 right-2 flex size-7 items-center justify-center rounded-full bg-marble-50/90 text-ink-950 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="absolute bottom-2 right-2 flex size-8 items-center justify-center rounded-full bg-bone-50/90 text-ink-950 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
                     <ArrowUpRight className="size-3.5" />
                   </span>
                 </div>
-                <p className="mt-3 truncate text-[11px] uppercase tracking-[0.08em] text-marble-50/60">
-                  {product.name}
-                </p>
-                <p className="text-sm text-marble-50">{formatPrice(product.price)}</p>
+                <p className="mt-3 truncate text-sm text-bone-50">{product.name}</p>
+                <p className="text-sm text-moss-200">{formatPrice(product.price)}</p>
               </Link>
             </RevealItem>
           ))}

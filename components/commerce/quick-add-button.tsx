@@ -35,7 +35,7 @@ export function QuickAddButton({ product, className }: QuickAddButtonProps) {
       onClick={handleClick}
       aria-label={`Quick add ${product.name} to bag`}
       className={cn(
-        "flex size-9 items-center justify-center rounded-full bg-ink-950 text-marble-50 shadow-sm transition-transform hover:scale-105 active:scale-95",
+        "flex size-9 items-center justify-center rounded-full bg-ink-950 text-bone-50 shadow-sm transition-transform hover:scale-105 active:scale-95",
         className
       )}
     >

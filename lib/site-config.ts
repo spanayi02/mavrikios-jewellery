@@ -21,7 +21,7 @@ export const siteConfig = {
   since: 1967,
   tagline: "Jewellery made to become part of your story.",
   description:
-    "Mavrikios Jewellery Boutique in Latsia, Nicosia — fine jewellery, engagement rings and bespoke pieces, handled with care since 1967.",
+    "Mavrikios Jewellery Boutique in Latsia, Nicosia. Fine jewellery, engagement rings and bespoke pieces, handled with care since 1967.",
   url: "https://mavrikios-jewellery.example.com",
   phone: "+357 22 312564",
   phoneHref: "tel:+35722312564",
