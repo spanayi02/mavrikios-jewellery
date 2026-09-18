@@ -204,6 +204,11 @@
     background-size: 100% 1px;
   }
 
+  /* Current-page nav link: the same underline the hover state draws, left permanently on. */
+  .veil-underline-active {
+    background-size: 100% 1px;
+  }
+
   .reveal {
     animation: var(--animate-reveal-up);
   }
