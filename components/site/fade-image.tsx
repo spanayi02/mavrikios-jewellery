@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Image, { type ImageProps } from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -32,8 +32,14 @@ import { cn } from "@/lib/utils";
  * lazy-loading finishes fetching the photo, which isn't guaranteed on a slow
  * connection — verified directly, this can leave the photo `complete` in the DOM with
  * no `load` event ever reaching React, stuck invisible forever, which is worse than the
- * flash this component exists to fix. A short poll on the underlying element is the
- * fallback net; it's cheap and stops the moment either signal reports loaded.
+ * flash this component exists to fix. The mount check runs in `useLayoutEffect`, not
+ * `useEffect`, specifically for the common case that check exists to catch: an image the
+ * browser already had cached, which can be `complete` before React ever attaches the
+ * `onLoad` listener. `useLayoutEffect` fires before the browser paints, so that case
+ * resolves to `opacity-100` in the very first frame the visitor sees rather than
+ * flashing hidden for a tick first. A short poll is still the fallback net for the
+ * remaining case (genuinely still downloading, and the `load` event itself doesn't land
+ * for some reason) — cheap, and stops the moment either signal reports loaded.
  */
 export function FadeImage({ alt, className, onLoad, priority, ...props }: ImageProps) {
   // Priority images are eagerly fetched for the initial paint, so treat them as
@@ -41,13 +47,17 @@ export function FadeImage({ alt, className, onLoad, priority, ...props }: ImageP
   const [loaded, setLoaded] = useState(!!priority);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (loaded) return;
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setLoaded(true);
+      return;
+    }
     const id = window.setInterval(() => {
       if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
         setLoaded(true);
       }
-    }, 150);
+    }, 75);
     return () => window.clearInterval(id);
   }, [loaded, props.src]);
 

@@ -75,6 +75,24 @@ just not featured on the homepage strip anymore.
   feedback on buttons. Opacity/scale stay in the 0.9–1.06 range, no bounce outside the checkout
   confirmation. Respect `prefers-reduced-motion` (handled globally plus `useReducedMotion` in
   `ParallaxLayer`).
+- `app/template.tsx` only plays its whole-page fade+rise on client-side route changes (the "soft
+  cut between pages" it exists for), never on a browser session's first paint. It used to run
+  unconditionally, which meant the SSR HTML for every fresh load or hard refresh rendered `<main>`
+  at `opacity:0` (confirmed directly in the raw response) and then faded the *entire* page in on
+  top of Hero's own already-staggered entrance and every `Reveal` section's `whileInView` fade.
+  Both layers start from the same hidden markup, so on a fast desktop they resolve together and
+  go unnoticed, but on a real phone's slower hydration they visibly separated into two passes,
+  which is what was being reported as pages/components "flashing" before settling. Fixed by
+  skipping the fade entirely on first paint (a module-level flag, flipped from an effect, that
+  only becomes true after the first client-side mount) so a fresh load's markup is just visible
+  immediately; in-app navigation still gets the fade. Don't reintroduce an unconditional page-level
+  fade in `template.tsx` without checking it against the section-level entrance animations it
+  wraps.
+- `FadeImage` (`components/site/fade-image.tsx`) checks whether the underlying `<img>` is already
+  `complete` in a `useLayoutEffect`, not `useEffect` + polling alone. The polling fallback is still
+  there (a cached image's `load` event can fire before React attaches `onLoad`), but it's now a
+  backstop behind a synchronous pre-paint check, so an image the browser already had cached
+  resolves to visible in the same frame instead of sitting hidden for a tick first.
 
 ## Placeholder imagery
 
