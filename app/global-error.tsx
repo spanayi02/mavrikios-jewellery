@@ -18,7 +18,7 @@ export default function GlobalError({
     <html lang="en">
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-          <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-moss-600">
+          <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-gold-600">
             Something Went Wrong
           </p>
           <h1 className="max-w-md font-serif text-3xl text-ink-950 sm:text-4xl">

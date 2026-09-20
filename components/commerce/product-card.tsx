@@ -56,8 +56,8 @@ export function ProductCard({ product, priority, className }: ProductCardProps) 
 
         <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between p-3">
           <div className="flex flex-wrap gap-1.5">
-            {product.isNew && <Badge>New</Badge>}
-            {product.limited && <Badge variant="moss">Limited</Badge>}
+            {product.isNew && <Badge variant="silver">New</Badge>}
+            {product.limited && <Badge variant="gold">Limited</Badge>}
             {product.bestSeller && <Badge variant="outline" className="bg-bone-50/80">Best Seller</Badge>}
           </div>
           <span className="pointer-events-auto">

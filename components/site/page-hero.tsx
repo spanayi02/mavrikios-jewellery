@@ -33,7 +33,7 @@ export function PageHero({ eyebrow, title, description, motif, image }: PageHero
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease }}
-          className="mb-4 text-[11px] uppercase tracking-[0.3em] text-moss-600"
+          className="mb-4 text-[11px] uppercase tracking-[0.3em] text-gold-600"
         >
           {eyebrow}
         </motion.p>

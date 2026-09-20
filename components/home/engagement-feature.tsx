@@ -46,7 +46,7 @@ export function EngagementFeature() {
             {choices.map((choice) => (
               <li
                 key={choice}
-                className="border border-moss-600/30 px-3 py-1.5 text-[12px] uppercase tracking-[0.12em] text-moss-600"
+                className="border border-gold-600/30 px-3 py-1.5 text-[12px] uppercase tracking-[0.12em] text-gold-600"
               >
                 {choice}
               </li>

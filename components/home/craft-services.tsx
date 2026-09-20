@@ -31,7 +31,7 @@ export function CraftServices() {
                   <p className="font-serif text-2xl text-ink-950">{service.title}</p>
                   <p className="mt-2 max-w-xs text-sm leading-relaxed text-stone-600">{service.description}</p>
                 </div>
-                <ArrowUpRight className="mt-1 size-4 shrink-0 text-stone-500 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-moss-600" />
+                <ArrowUpRight className="mt-1 size-4 shrink-0 text-stone-500 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold-600" />
               </Link>
             </RevealItem>
           ))}

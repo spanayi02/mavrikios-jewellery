@@ -15,14 +15,14 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#12281d",
-          color: "#f7f7f4",
+          backgroundColor: "#221509",
+          color: "#f8f6ef",
         }}
       >
         <div style={{ display: "flex", fontSize: 96, letterSpacing: 10, fontWeight: 500 }}>
           MAVRIKIOS
         </div>
-        <div style={{ display: "flex", fontSize: 26, letterSpacing: 3, color: "#c3d5ca", marginTop: 28 }}>
+        <div style={{ display: "flex", fontSize: 26, letterSpacing: 3, color: "#e3cd94", marginTop: 28 }}>
           Jewellery Boutique, Nicosia, since {siteConfig.since}
         </div>
       </div>

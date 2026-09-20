@@ -33,8 +33,8 @@ export function Reveal({
         visible: { transition: { staggerChildren: stagger, delayChildren: delay } },
       }
     : {
-        hidden: { opacity: 0, y },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay, ease } },
+        hidden: { opacity: 0, y, scale: 0.97 },
+        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, delay, ease } },
       };
 
   const Comp = motion[as];
@@ -53,8 +53,8 @@ export function Reveal({
 }
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+  hidden: { opacity: 0, y: 24, scale: 0.97 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease } },
 };
 
 /** Child of a staggered <Reveal>; animates in as part of the parent's stagger sequence. */

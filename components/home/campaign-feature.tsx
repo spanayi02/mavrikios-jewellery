@@ -7,7 +7,7 @@ import { getAllProducts } from "@/lib/data/products";
 
 const featuredSlugs = ["sophia-eternity-band", "vasso-halo-ring", "calliope-pendant-necklace"];
 
-/** The one deliberate dark moment on the homepage: deep moss, like the inside of a ring box. */
+/** The one deliberate dark moment on the homepage: deep espresso-gold, like the inside of a ring box. */
 export async function CampaignFeature() {
   const products = await getAllProducts();
   const featured = featuredSlugs
@@ -21,7 +21,7 @@ export async function CampaignFeature() {
           <h2 className="text-balance font-serif text-4xl leading-[1.08] text-bone-50 sm:text-5xl">
             Pieces for the moments that stay.
           </h2>
-          <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-moss-200">
+          <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-gold-200">
             Three pieces from the edit, chosen for the way they wear every day.
           </p>
           <Link
@@ -48,7 +48,7 @@ export async function CampaignFeature() {
                   </span>
                 </div>
                 <p className="mt-3 truncate text-sm text-bone-50">{product.name}</p>
-                <p className="text-sm text-moss-200">{formatPrice(product.price)}</p>
+                <p className="text-sm text-gold-200">{formatPrice(product.price)}</p>
               </Link>
             </RevealItem>
           ))}

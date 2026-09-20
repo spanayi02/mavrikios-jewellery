@@ -10,7 +10,8 @@ const badgeVariants = cva(
       variant: {
         default: "bg-ink-950 text-bone-50",
         outline: "border border-ink-950/30 text-ink-950",
-        moss: "bg-moss-100 text-moss-600",
+        gold: "bg-gold-100 text-gold-600",
+        silver: "bg-silver-100 text-silver-600",
         muted: "bg-stone-100 text-stone-600",
       },
     },

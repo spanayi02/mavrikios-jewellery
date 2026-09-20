@@ -71,7 +71,7 @@ export function PlaceholderArt({ motif, tone = "marble", className, label }: Pla
         viewBox="0 0 200 200"
         className={cn(
           "h-[42%] w-[42%] shrink-0",
-          isInk ? "stroke-moss-300/70" : "stroke-ink-950/25"
+          isInk ? "stroke-gold-300/70" : "stroke-ink-950/25"
         )}
         fill="none"
         strokeWidth={1.1}

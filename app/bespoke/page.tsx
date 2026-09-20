@@ -82,7 +82,7 @@ export default function BespokePage() {
           <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-bone-50 sm:text-5xl">
             Begin a bespoke piece
           </h2>
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-moss-200">
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-gold-200">
             Tell us a little about what you have in mind and we&rsquo;ll be in touch to arrange a
             first conversation.
           </p>

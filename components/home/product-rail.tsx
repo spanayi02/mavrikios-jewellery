@@ -31,7 +31,7 @@ export function ProductRail({
         <Reveal className="mb-12 flex flex-col gap-4 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
           <div>
             {eyebrow && (
-              <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-moss-600">{eyebrow}</p>
+              <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-gold-600">{eyebrow}</p>
             )}
             <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
               {title}

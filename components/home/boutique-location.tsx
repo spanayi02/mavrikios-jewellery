@@ -21,7 +21,7 @@ export function BoutiqueLocation() {
           </ParallaxLayer>
         </Reveal>
         <Reveal delay={0.1} className="order-1 lg:order-2 lg:col-span-5">
-          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-moss-600">Visit the Boutique</p>
+          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-gold-600">Visit the Boutique</p>
           <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             Come and see the pieces in person.
           </h2>

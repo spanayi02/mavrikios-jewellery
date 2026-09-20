@@ -110,7 +110,7 @@ export default async function EngagementPage() {
           <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-bone-50 sm:text-5xl">
             Book a private consultation
           </h2>
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-moss-200">
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-gold-200">
             Visit our Latsia boutique or reach out ahead of time. We&rsquo;ll set aside time to
             talk through stones, settings and budget with no pressure.
           </p>

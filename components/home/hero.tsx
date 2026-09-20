@@ -46,7 +46,7 @@ export function Hero() {
             transition={{ duration: 0.9, delay: 0.15, ease }}
             className="max-w-xl text-balance font-serif text-4xl leading-[1.1] text-ink-950 sm:text-5xl lg:text-[2.9rem] xl:text-[3.5rem]"
           >
-            Jewellery made to <em className="italic text-moss-600">become part of your story.</em>
+            Jewellery made to <em className="italic text-gold-600">become part of your story.</em>
           </motion.h1>
 
           <motion.p

@@ -5,43 +5,52 @@
 
 /* ------------------------------------------------------------------ */
 /* MAVRIKIOS design tokens                                             */
-/* Bone / Stone / Ink / Silver / Moss                                  */
-/* Cool-luxury palette: bone off-white base, deep moss-green as the    */
-/* single accent, cool graphite text. Light theme, locked.             */
+/* Bone / Stone / Ink / Silver / Gold                                  */
+/* Warm-luxury palette: ivory/cream base, a confident antique gold as   */
+/* the primary accent, cool silver as a secondary metal note, graphite  */
+/* text. Light theme, locked. (Experimental branch: reintroduces warmth */
+/* and a literal gold/silver mixed-metal feel per client direction —    */
+/* structure, type and motion carried over unchanged from the previous  */
+/* cool-moss pass; only the palette values moved.)                      */
 /* ------------------------------------------------------------------ */
 :root {
   /* Brand palette */
-  --bone-50: #f7f7f4;
-  --bone-100: #f1f1ec;
-  --bone-200: #e7e7e0;
+  --bone-50: #f8f6ef;
+  --bone-100: #f2ece0;
+  --bone-200: #e8dfc9;
 
-  --stone-50: #f3f4f1;
-  --stone-100: #e6e8e3;
-  --stone-200: #d3d6d0;
-  --stone-300: #b4b9b2;
-  --stone-400: #8d948b;
-  --stone-500: #6b736a;
-  --stone-600: #525a51;
+  --stone-50: #f4f3ef;
+  --stone-100: #e8e5dd;
+  --stone-200: #d6d1c4;
+  --stone-300: #b8b2a1;
+  --stone-400: #948c78;
+  --stone-500: #726a58;
+  --stone-600: #554e40;
 
-  --ink-950: #0f1512;
-  --ink-900: #161d19;
-  --ink-800: #1f2823;
-  --ink-700: #2a352f;
-  --ink-600: #3b4740;
-  --ink-500: #536159;
+  --ink-950: #14110c;
+  --ink-900: #1c1811;
+  --ink-800: #262019;
+  --ink-700: #322a20;
+  --ink-600: #45392a;
+  --ink-500: #5c4c38;
 
-  --silver-100: #eef0f2;
-  --silver-200: #d9dce1;
-  --silver-300: #b9bec6;
-  --silver-400: #9199a4;
+  /* A literal silver note, kept cool against the warm base — the mixed-metal half of
+     "a bit of gold, a bit of silver". */
+  --silver-100: #f1f1f2;
+  --silver-200: #dcdde0;
+  --silver-300: #bcbec4;
+  --silver-400: #94979f;
+  --silver-500: #6b6e74;
+  /* WCAG AA-safe deep cool graphite for small text on silver backgrounds */
+  --silver-600: #43464b;
 
-  --moss-100: #e3ece6;
-  --moss-200: #c3d5ca;
-  --moss-300: #8fb09c;
-  --moss-400: #5c8a6d;
-  --moss-500: #2f6a4a;
-  /* WCAG AA-safe (7:1+) deep green for small text on bone backgrounds */
-  --moss-600: #1c4a33;
+  --gold-100: #f4ead0;
+  --gold-200: #e3cd94;
+  --gold-300: #cda85a;
+  --gold-400: #a97f2e;
+  --gold-500: #8a6420;
+  /* WCAG AA-safe (7:1+) deep antique gold for small text on bone backgrounds */
+  --gold-600: #5c4413;
 
   /* semantic surface tokens (light) */
   --background: var(--bone-50);
@@ -56,12 +65,12 @@
   --secondary-foreground: var(--ink-950);
   --muted: var(--stone-100);
   --muted-foreground: var(--stone-600);
-  --accent: var(--moss-100);
-  --accent-foreground: var(--moss-600);
+  --accent: var(--gold-100);
+  --accent-foreground: var(--gold-600);
   --destructive: #9a3a2e;
   --border: var(--stone-200);
   --input: var(--stone-200);
-  --ring: var(--moss-600);
+  --ring: var(--gold-600);
   /* Shape lock: everything is sharp. Only floating overlay icon actions are round. */
   --radius: 0rem;
 }
@@ -93,13 +102,15 @@
   --color-silver-200: var(--silver-200);
   --color-silver-300: var(--silver-300);
   --color-silver-400: var(--silver-400);
+  --color-silver-500: var(--silver-500);
+  --color-silver-600: var(--silver-600);
 
-  --color-moss-100: var(--moss-100);
-  --color-moss-200: var(--moss-200);
-  --color-moss-300: var(--moss-300);
-  --color-moss-400: var(--moss-400);
-  --color-moss-500: var(--moss-500);
-  --color-moss-600: var(--moss-600);
+  --color-gold-100: var(--gold-100);
+  --color-gold-200: var(--gold-200);
+  --color-gold-300: var(--gold-300);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -151,7 +162,7 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
   ::selection {
-    background: var(--moss-600);
+    background: var(--gold-600);
     color: var(--bone-50);
   }
 }
@@ -165,25 +176,26 @@
     text-wrap: balance;
   }
 
-  /* Cool white marble (Carrara): bone base, grey veining. Used sparingly. */
+  /* Warm ivory marble: bone base, soft brass-toned veining. Used sparingly. */
   .marble-surface {
     background-color: var(--bone-100);
     background-image:
-      radial-gradient(ellipse 70% 45% at 12% 8%, rgba(141, 148, 139, 0.16), transparent 60%),
-      radial-gradient(ellipse 55% 40% at 88% 92%, rgba(141, 148, 139, 0.14), transparent 60%),
-      linear-gradient(128deg, transparent 42%, rgba(107, 115, 106, 0.1) 43%, transparent 45%),
-      linear-gradient(96deg, transparent 60%, rgba(107, 115, 106, 0.08) 61%, transparent 63%),
-      linear-gradient(150deg, transparent 22%, rgba(107, 115, 106, 0.06) 23%, transparent 25%);
+      radial-gradient(ellipse 70% 45% at 12% 8%, rgba(170, 145, 95, 0.14), transparent 60%),
+      radial-gradient(ellipse 55% 40% at 88% 92%, rgba(170, 145, 95, 0.12), transparent 60%),
+      linear-gradient(128deg, transparent 42%, rgba(130, 108, 70, 0.09) 43%, transparent 45%),
+      linear-gradient(96deg, transparent 60%, rgba(130, 108, 70, 0.07) 61%, transparent 63%),
+      linear-gradient(150deg, transparent 22%, rgba(130, 108, 70, 0.05) 23%, transparent 25%);
   }
 
-  /* The one deliberate dark moment on a page: deep moss, like the inside of a ring box. */
+  /* The one deliberate dark moment on a page: deep espresso-black with a warm gold
+     undertone, like the inside of a ring box lined in dark velvet. */
   .marble-surface-dark {
-    background-color: #12281d;
+    background-color: #221509;
     background-image:
-      radial-gradient(ellipse 70% 45% at 15% 10%, rgba(227, 236, 230, 0.05), transparent 60%),
-      radial-gradient(ellipse 55% 40% at 85% 90%, rgba(227, 236, 230, 0.04), transparent 60%),
-      linear-gradient(128deg, transparent 42%, rgba(227, 236, 230, 0.035) 43%, transparent 45%),
-      linear-gradient(96deg, transparent 60%, rgba(227, 236, 230, 0.03) 61%, transparent 63%);
+      radial-gradient(ellipse 70% 45% at 15% 10%, rgba(228, 205, 148, 0.06), transparent 60%),
+      radial-gradient(ellipse 55% 40% at 85% 90%, rgba(228, 205, 148, 0.045), transparent 60%),
+      linear-gradient(128deg, transparent 42%, rgba(228, 205, 148, 0.04) 43%, transparent 45%),
+      linear-gradient(96deg, transparent 60%, rgba(228, 205, 148, 0.03) 61%, transparent 63%);
   }
 
   .veil-underline {
