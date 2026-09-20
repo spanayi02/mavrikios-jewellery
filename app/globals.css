@@ -15,24 +15,24 @@
 /* ------------------------------------------------------------------ */
 :root {
   /* Brand palette */
-  --bone-50: #f8f6ef;
-  --bone-100: #f2ece0;
-  --bone-200: #e8dfc9;
+  --bone-50: #f7f5f0;
+  --bone-100: #efeae3;
+  --bone-200: #e5ded1;
 
   --stone-50: #f4f3ef;
   --stone-100: #e8e5dd;
   --stone-200: #d6d1c4;
-  --stone-300: #b8b2a1;
-  --stone-400: #948c78;
-  --stone-500: #726a58;
-  --stone-600: #554e40;
+  --stone-300: #b0a99a;
+  --stone-400: #8c8474;
+  --stone-500: #65615b;
+  --stone-600: #4c4843;
 
-  --ink-950: #14110c;
-  --ink-900: #1c1811;
-  --ink-800: #262019;
-  --ink-700: #322a20;
-  --ink-600: #45392a;
-  --ink-500: #5c4c38;
+  --ink-950: #211e1a;
+  --ink-900: #26211d;
+  --ink-800: #322b24;
+  --ink-700: #423930;
+  --ink-600: #574a3c;
+  --ink-500: #6f5f4c;
 
   /* A literal silver note, kept cool against the warm base — the mixed-metal half of
      "a bit of gold, a bit of silver". */
@@ -47,9 +47,12 @@
   --gold-100: #f4ead0;
   --gold-200: #e3cd94;
   --gold-300: #cda85a;
-  --gold-400: #a97f2e;
+  /* The muted champagne accent — used sparingly, only at large/bold sizes (headline
+     emphasis, hairlines, icons) where its ~3:1 contrast on bone-50 is WCAG-sufficient. */
+  --gold-400: #a8834e;
   --gold-500: #8a6420;
-  /* WCAG AA-safe (7:1+) deep antique gold for small text on bone backgrounds */
+  /* WCAG AA-safe (7:1+) deep antique gold — the only gold step used for small text
+     (eyebrows, nav, badges) on bone backgrounds. Never use gold-400 there. */
   --gold-600: #5c4413;
 
   /* semantic surface tokens (light) */
@@ -169,7 +172,7 @@
 
 @layer utilities {
   .container-mavrikios {
-    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-16;
   }
 
   .text-balance {

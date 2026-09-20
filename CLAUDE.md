@@ -17,15 +17,33 @@ while keeping everything else from the cool-moss pass (structure, type, shape lo
 eyebrow ration, em-dash ban) exactly as it was. If this direction is kept, fold this note into
 the rest of the section instead of carrying two histories.
 
+A second round on this same branch retuned the palette to exact client-specified hex values and
+rebuilt the homepage hero and category strip against a reference image (real jewellery photo
+filling ~58% of the hero with no boxed white card around it, an eyebrow, an italic-accented
+headline, and three horizontal collection cards directly below). `CuratedCategories` now renders
+that 3-card strip (Rings/Necklaces/Bracelets) instead of the earlier 6-tile mosaic; the mosaic's
+other categories (Earrings, Engagement, Gifts) are still reachable via the mega menu and `/shop`,
+just not featured on the homepage strip anymore.
+
 - Palette lives in `app/globals.css` as Tailwind v4 `@theme` tokens: `bone-*` (warm ivory/cream
-  base), `stone-*` (warm-neutral grey), `ink-*` (warm graphite near-black), `silver-*` (a literal
-  cool silver, used sparingly as the "silver" half of the mixed-metal accent — e.g. the `New`
-  product badge), and `gold-*` (antique gold, the primary accent — e.g. hero emphasis, eyebrows,
-  CTAs on the dark block, the `Limited` badge). Use these tokens, not raw hex values. `gold-600`
-  and `silver-600` are the WCAG AA-safe (7:1+) dark values for small text on light backgrounds;
-  don't use a lighter step for body text. Two accents, not one: gold carries the primary emphasis,
-  silver is the deliberately-secondary metal note — don't let silver drift into carrying eyebrows
-  or CTAs, that's gold's job.
+  base, bone-50 #f7f5f0), `stone-*` (warm-neutral grey, stone-500 #65615b for secondary text),
+  `ink-*` (warm charcoal-espresso, ink-950 #211e1a for primary text, ink-900 #26211d for dark
+  surfaces/CTAs), `silver-*` (a literal cool silver, used sparingly as the "silver" half of the
+  mixed-metal accent — e.g. the `New` product badge), and `gold-*` (antique gold, the primary
+  accent). Use these tokens, not raw hex values.
+  **Gold has two distinct roles, don't mix them up:** `gold-600` (#5c4413, ~8.5:1 contrast on
+  bone-50) is the only gold step used for small text — eyebrows, nav, badges, the `Limited`
+  badge. `gold-400` (#a8834e, the client's exact "muted champagne" value, ~3.2:1 contrast) is
+  reserved for large/bold elements only where WCAG's large-text threshold applies — an italic
+  word inside a big serif headline (see the hero's `to stay`), hairline dividers, icons on
+  hover. Never put `gold-400` on small body or label text, it fails contrast there; that mistake
+  shipped once in the hero eyebrow and was caught by screenshot review, not lint, so double-check
+  visually.
+  Two accents, not one: gold carries the primary emphasis, silver is the deliberately-secondary
+  metal note — don't let silver drift into carrying eyebrows or CTAs, that's gold's job.
+- `container-mavrikios`'s desktop gutter is `lg:px-16` (64px, was `lg:px-12`/48px) — tightened
+  per the client's "avoid oversized empty space, ~64-84px desktop padding" direction. This is
+  global, every page using the container picked it up.
 - Typography: `font-serif` is Cormorant Garamond (weights 400/500/600), `font-sans` is Geist.
   Headlines are set roman; italic is reserved for emphasising a phrase inside a headline (see the
   hero `<em>`), never applied to every heading. Don't introduce a third family, and don't bring

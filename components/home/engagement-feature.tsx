@@ -34,27 +34,38 @@ export function EngagementFeature() {
           </ParallaxLayer>
         </Reveal>
         <Reveal delay={0.1} className="order-1 lg:order-2 lg:col-span-5 lg:col-start-8">
+          <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.28em] text-gold-600">
+            Bespoke &amp; Engagement
+          </p>
           <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
-            The monopetra, made around your stone.
+            A more personal kind of <em className="italic text-gold-400">forever.</em>
           </h2>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-stone-600">
-            A single stone, simply set. The classic Cypriot engagement style, built to order in
-            our workshop. Choose your stone, your metal and your setting, and we take care of the
-            rest.
+            From the first idea to the final detail, we create meaningful pieces that tell your
+            unique story, including the monopetra, the classic Cypriot engagement style, built to
+            order around your stone.
           </p>
           <ul className="mt-6 flex flex-wrap gap-2">
             {choices.map((choice) => (
               <li
                 key={choice}
-                className="border border-gold-600/30 px-3 py-1.5 text-[12px] uppercase tracking-[0.12em] text-gold-600"
+                className="border border-gold-400/40 px-3 py-1.5 text-[12px] uppercase tracking-[0.12em] text-gold-600"
               >
                 {choice}
               </li>
             ))}
           </ul>
-          <Button asChild size="lg" className="mt-8">
-            <Link href="/engagement">Discover Engagement</Link>
-          </Button>
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Button asChild size="lg">
+              <Link href="/bespoke">Explore Bespoke</Link>
+            </Button>
+            <Link
+              href="/engagement"
+              className="veil-underline pb-0.5 text-[13px] font-medium uppercase tracking-[0.12em] text-ink-950"
+            >
+              Engagement Rings
+            </Link>
+          </div>
         </Reveal>
       </div>
     </section>
