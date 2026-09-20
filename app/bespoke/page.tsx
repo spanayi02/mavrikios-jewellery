@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { PageHero } from "@/components/site/page-hero";
 import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { Reveal, RevealItem } from "@/components/site/reveal";
@@ -57,7 +57,7 @@ export default function BespokePage() {
       <section className="grid grid-cols-1 lg:grid-cols-2">
         <Reveal y={0} className="relative aspect-square lg:aspect-auto">
           <ParallaxLayer range={30} className="h-full bg-stone-100">
-            <Image
+            <FadeImage
               src="/images/products/aquamarine-bezel-ring.jpg"
               alt="Gold ring with a round aquamarine cabochon"
               fill

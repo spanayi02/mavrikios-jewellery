@@ -41,7 +41,7 @@ export async function CampaignFeature() {
                   <ProductMedia
                     image={product.images[0]}
                     sizes="(min-width: 1024px) 20vw, 33vw"
-                    className="transition-transform duration-500 ease-out group-hover:scale-105"
+                    className="group-hover:scale-105"
                   />
                   <span className="absolute bottom-2 right-2 flex size-8 items-center justify-center rounded-full bg-bone-50/90 text-ink-950 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
                     <ArrowUpRight className="size-3.5" />

@@ -45,7 +45,7 @@ export function ProductCard({ product, priority, className }: ProductCardProps) 
             image={primary}
             priority={priority}
             sizes="(min-width: 1024px) 25vw, 50vw"
-            className={!hasSecondaryPhoto ? "transition-transform duration-700 ease-out group-hover:scale-105" : undefined}
+            className={!hasSecondaryPhoto ? "group-hover:scale-105" : undefined}
           />
         </div>
         {hasSecondaryPhoto && (

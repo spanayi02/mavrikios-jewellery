@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { PageHero } from "@/components/site/page-hero";
 import { ProductCard } from "@/components/commerce/product-card";
 import { ParallaxLayer } from "@/components/site/parallax-layer";
@@ -82,7 +82,7 @@ export default async function EngagementPage() {
       <section className="container-mavrikios grid grid-cols-1 items-center gap-12 py-24 sm:py-32 lg:grid-cols-12 lg:gap-8">
         <Reveal y={0} className="order-2 aspect-[4/5] lg:order-1 lg:col-span-6">
           <ParallaxLayer range={30} className="h-full bg-stone-100">
-            <Image
+            <FadeImage
               src="/images/products/ruby-emerald-swirl-ring.jpg"
               alt="Gold rings set with a ruby and an emerald"
               fill

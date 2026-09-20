@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { motion } from "framer-motion";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { ParallaxLayer } from "@/components/site/parallax-layer";
@@ -22,7 +22,7 @@ export function PageHero({ eyebrow, title, description, motif, image }: PageHero
     <section className="relative -mt-20 flex min-h-[60dvh] w-full items-end overflow-hidden bg-bone-50 sm:min-h-[68dvh]">
       <ParallaxLayer range={30} className="absolute inset-0">
         {image ? (
-          <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
+          <FadeImage src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
         ) : (
           <PlaceholderArt motif={motif} />
         )}

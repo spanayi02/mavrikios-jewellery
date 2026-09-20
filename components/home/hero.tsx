@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -86,7 +86,7 @@ export function Hero() {
             transition={{ duration: 1.1, delay: 0.3, ease }}
             className="relative ml-auto aspect-[4/5] w-full max-w-[540px] overflow-hidden bg-stone-100"
           >
-            <Image
+            <FadeImage
               src="/images/products/aliki-solitaire-ring-1.jpg"
               alt="Aliki solitaire ring in 18k yellow gold"
               fill
@@ -102,7 +102,7 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.7, ease }}
             className="absolute -bottom-10 left-0 hidden aspect-square w-[40%] max-w-[240px] overflow-hidden border-[10px] border-bone-50 bg-stone-100 sm:block lg:-left-4"
           >
-            <Image
+            <FadeImage
               src="/images/products/sophia-eternity-band.jpg"
               alt="Sophia eternity band in 18k white gold"
               fill
