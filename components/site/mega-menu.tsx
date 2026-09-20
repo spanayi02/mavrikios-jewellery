@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { megaMenu, type MegaMenuLink } from "@/data/navigation";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 
@@ -51,7 +51,7 @@ export function MegaMenu({ onNavigate }: MegaMenuProps) {
               className="absolute inset-0 bg-stone-100"
             >
               {active.image ? (
-                <Image src={active.image} alt="" fill sizes="50vw" className="object-cover" />
+                <FadeImage src={active.image} alt="" fill sizes="50vw" className="object-cover" />
               ) : (
                 <PlaceholderArt motif={active.motif} />
               )}

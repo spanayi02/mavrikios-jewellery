@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { ParallaxLayer } from "@/components/site/parallax-layer";
@@ -12,7 +12,7 @@ export function EngagementFeature() {
       <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-8">
         <Reveal y={0} className="relative order-2 aspect-[4/5] lg:order-1 lg:col-span-6">
           <ParallaxLayer range={30} className="absolute inset-0 right-10 top-10 bg-stone-100">
-            <Image
+            <FadeImage
               src="/images/products/sapphire-cluster-ring.jpg"
               alt="White gold ring set with a cluster of blue sapphires"
               fill
@@ -24,7 +24,7 @@ export function EngagementFeature() {
             range={16}
             className="absolute bottom-0 left-0 aspect-square w-2/5 border-[6px] border-bone-50 bg-stone-100"
           >
-            <Image
+            <FadeImage
               src="/images/products/aliki-solitaire-ring-1.jpg"
               alt="Yellow gold solitaire engagement ring"
               fill

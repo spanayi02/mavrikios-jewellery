@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { ArrowUpRight } from "lucide-react";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { Reveal, RevealItem } from "@/components/site/reveal";
@@ -51,12 +51,12 @@ function CategoryTile({
   parallax?: boolean;
 }) {
   const art = item.image ? (
-    <Image
+    <FadeImage
       src={item.image.src}
       alt={item.image.alt}
       fill
       sizes={large ? "(min-width: 1024px) 60vw, 50vw" : "(min-width: 1024px) 20vw, 50vw"}
-      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      className="object-cover group-hover:scale-105"
     />
   ) : (
     <PlaceholderArt motif={item.motif} className="transition-transform duration-700 ease-out group-hover:scale-105" />

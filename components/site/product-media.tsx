@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { FadeImage } from "@/components/site/fade-image";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import type { ProductImage } from "@/types/product";
 
@@ -14,7 +14,7 @@ interface ProductMediaProps {
 export function ProductMedia({ image, className, sizes, priority }: ProductMediaProps) {
   if (image.src) {
     return (
-      <Image
+      <FadeImage
         src={image.src}
         alt={image.alt}
         fill

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { InstagramIcon } from "@/components/site/icons";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 import { siteConfig } from "@/lib/site-config";
@@ -39,12 +39,12 @@ export function InstagramSection() {
                 rel="noopener noreferrer"
                 className="group relative block aspect-square overflow-hidden bg-stone-100"
               >
-                <Image
+                <FadeImage
                   src={tile.src}
                   alt={tile.alt}
                   fill
                   sizes="(min-width: 1024px) 16vw, 33vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="object-cover group-hover:scale-105"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-ink-950/0 transition-colors duration-300 group-hover:bg-ink-950/25">
                   <InstagramIcon className="size-5 text-bone-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { FadeImage } from "@/components/site/fade-image";
 import { Button } from "@/components/ui/button";
 import { CountUp } from "@/components/site/count-up";
 import { Reveal } from "@/components/site/reveal";
@@ -41,7 +41,7 @@ export function HeritageStory() {
 
         <Reveal delay={0.15} className="grid grid-cols-2 gap-4 lg:col-span-7 lg:gap-5">
           <ParallaxLayer range={28} className="aspect-[3/4] translate-y-8 bg-stone-100">
-            <Image
+            <FadeImage
               src="/images/products/sophia-eternity-band.jpg"
               alt="White gold band set with diamonds"
               fill
@@ -50,7 +50,7 @@ export function HeritageStory() {
             />
           </ParallaxLayer>
           <ParallaxLayer range={44} className="aspect-[3/4] -translate-y-8 bg-stone-100">
-            <Image
+            <FadeImage
               src="/images/products/daphne-signet-ring.jpg"
               alt="Plain 18k gold band"
               fill
