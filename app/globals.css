@@ -221,6 +221,91 @@
   .reveal {
     animation: var(--animate-reveal-up);
   }
+
+  /* Mount entrance for above-the-fold copy (hero headlines, page-hero eyebrows). Deliberately
+     CSS, not JS: the stylesheet is render-blocking, so this runs on the browser's very first
+     paint instead of waiting for React + Framer Motion to hydrate. Driving these from JS meant
+     the SSR markup shipped at opacity:0 and stayed blank until the bundle landed, which is
+     what read as the page "flashing" before it settled on a slower phone. `both` (not
+     `forwards`) so the element stays hidden through its delay rather than showing, hiding,
+     then animating. */
+  .enter-up {
+    animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--enter-delay, 0s);
+  }
+
+  /* Horizontal product rails. The scrollbar is the only affordance that the row continues past
+     the edge, so it stays — but as a hairline in the palette instead of the OS default slab.
+     Sharp, per the shape lock. */
+  .rail-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--stone-300) transparent;
+  }
+  .rail-scroll::-webkit-scrollbar {
+    height: 3px;
+  }
+  .rail-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .rail-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--stone-300);
+  }
+
+  /* Scroll reveals (see components/site/reveal.tsx). The hidden state is a class the client
+     only adds to content that is still below the fold at first paint, so nothing the visitor
+     can already see is ever hidden waiting on JS. */
+  .rv-armed {
+    opacity: 0;
+    transform: translateY(var(--rv-y, 1.75rem)) scale(0.97);
+  }
+  .rv-armed.rv-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--rv-delay, 0s);
+  }
+
+  /* Staggered groups: the wrapper itself never fades, its children do, one after another.
+     Children translate by a smaller amount than a standalone reveal because a group is often
+     also a horizontal scroller, where a larger offset would push into the scrollable overflow
+     area and flicker a vertical scrollbar mid-animation. */
+  .rv-group-armed > * {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.97);
+  }
+  .rv-group-armed.rv-in > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rv-group-armed.rv-in > *:nth-child(2) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 1);
+  }
+  .rv-group-armed.rv-in > *:nth-child(3) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 2);
+  }
+  .rv-group-armed.rv-in > *:nth-child(4) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 3);
+  }
+  .rv-group-armed.rv-in > *:nth-child(5) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 4);
+  }
+  .rv-group-armed.rv-in > *:nth-child(6) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 5);
+  }
+  .rv-group-armed.rv-in > *:nth-child(7) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 6);
+  }
+  .rv-group-armed.rv-in > *:nth-child(8) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 7);
+  }
+  .rv-group-armed.rv-in > *:nth-child(n + 9) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 8);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -229,7 +314,12 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    /* Delays have to go too, not just durations: a staggered or delayed entrance whose
+       duration collapses to nothing still leaves the element hidden for the length of its
+       delay, which is the same blank-then-appear this mode exists to avoid. */
+    animation-delay: 0s !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
   }
 }

@@ -93,6 +93,38 @@ just not featured on the homepage strip anymore.
   there (a cached image's `load` event can fire before React attaches `onLoad`), but it's now a
   backstop behind a synchronous pre-paint check, so an image the browser already had cached
   resolves to visible in the same frame instead of sitting hidden for a tick first.
+- **Never ship markup that starts hidden and needs JS to become visible.** This is the rule the
+  two bullets above are specific cases of, and it's the one that fixed the "everything flashes on
+  mobile then shows correctly" report for good. Framer's `initial`/`whileInView` bake their hidden
+  state into the SSR HTML, so every section using them shipped at `opacity:0` and stayed blank
+  until the bundle parsed and hydrated. Desktop hides that gap; a real phone does not. Verify with
+  `curl -s localhost:PORT/ | grep -c 'opacity:0'` against a production build — the homepage should
+  return **0**. Two mechanisms keep it there:
+  - Above-the-fold entrances (`Hero`, `PageHero`) use the `.enter-up` CSS utility with a
+    `--enter-delay` custom property for stagger. CSS is render-blocking, so these run on the
+    browser's first paint with no JS at all. `.enter-up` uses `animation-fill-mode: both` so a
+    delayed element stays hidden *through* its delay instead of showing, hiding, then animating.
+  - `Reveal`/`RevealItem` (`components/site/reveal.tsx`) are CSS + IntersectionObserver, not
+    Framer. Server and first client render are always the finished visible state; a layout effect
+    then arms (`.rv-armed`/`.rv-group-armed`) only elements whose `top` is still below the fold,
+    i.e. content the visitor cannot see yet, and those transition in on scroll via `.rv-in`.
+    Anything already on screen is never hidden, so it has no window in which to flash. Reduced
+    motion skips arming entirely. Stagger is `nth-child` `transition-delay` off a `--rv-stagger`
+    custom property (supports up to 8 distinct steps, then flattens), which is why `RevealItem` is
+    a plain element with no animation state of its own.
+  - The observer uses `threshold: 0` with a `-15%` bottom `rootMargin`, deliberately: a percentage
+    threshold never fires for a section taller than the viewport, since that share of it can't be
+    on screen at once.
+- The `prefers-reduced-motion` block in globals.css zeroes `animation-delay`/`transition-delay` as
+  well as durations. Collapsing only the duration still leaves a delayed or staggered element
+  invisible for the length of its delay, which is the same blank-then-appear the mode exists to
+  prevent.
+- Horizontal product rails (`ProductRail`) carry **no scroll-snap**. Snap points plus an entrance
+  animation plus photos completing at different moments kept giving the browser reasons to
+  re-snap mid-gesture, which is what made a scrolled rail jump back to the same card on its own
+  (reported twice). They use the `.rail-scroll` utility instead: free scrolling with a 3px
+  hairline scrollbar in `stone-300`, which stays visible on purpose since it's the only affordance
+  that the row continues past the edge. Don't reintroduce `snap-x`/`snap-start` here.
 
 ## Placeholder imagery
 

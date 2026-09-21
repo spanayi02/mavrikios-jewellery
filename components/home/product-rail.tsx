@@ -46,13 +46,17 @@ export function ProductRail({
           </Link>
         </Reveal>
 
+        {/* No scroll-snap on these rows. Snap points plus a reveal animation plus photos
+            finishing load at different moments kept handing the browser a reason to re-snap
+            mid-gesture, which is what made a scrolled rail jump back to the same card on its
+            own. Free scrolling with a hairline scrollbar is both calmer and predictable. */}
         {layout === "scroll" ? (
           <Reveal
             stagger={0.08}
-            className="-mx-5 flex snap-x snap-proximity gap-5 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:gap-8 lg:px-12"
+            className="rail-scroll -mx-5 flex gap-5 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:-mx-16 lg:gap-8 lg:px-16"
           >
             {products.map((product, i) => (
-              <RevealItem key={product.id} className="w-[68vw] shrink-0 snap-start sm:w-[340px]">
+              <RevealItem key={product.id} className="w-[68vw] shrink-0 sm:w-[340px]">
                 <ProductCard product={product} priority={i < 2} />
               </RevealItem>
             ))}
@@ -60,10 +64,10 @@ export function ProductRail({
         ) : (
           <Reveal
             stagger={0.1}
-            className="-mx-5 flex snap-x snap-proximity gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:overflow-visible sm:px-0 lg:grid-cols-4"
+            className="rail-scroll -mx-5 flex gap-5 overflow-x-auto px-5 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4"
           >
             {products.map((product, i) => (
-              <RevealItem key={product.id} className="w-[65vw] shrink-0 snap-start sm:w-auto">
+              <RevealItem key={product.id} className="w-[65vw] shrink-0 sm:w-auto">
                 <ProductCard product={product} priority={i < 2} />
               </RevealItem>
             ))}

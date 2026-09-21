@@ -1,12 +1,9 @@
 "use client";
 
 import { FadeImage } from "@/components/site/fade-image";
-import { motion } from "framer-motion";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { ParallaxLayer } from "@/components/site/parallax-layer";
 import type { PlaceholderMotif } from "@/types/product";
-
-const ease = [0.16, 1, 0.3, 1] as const;
 
 interface PageHeroProps {
   eyebrow: string;
@@ -28,32 +25,25 @@ export function PageHero({ eyebrow, title, description, motif, image }: PageHero
         )}
       </ParallaxLayer>
       <div className="absolute inset-0 bg-gradient-to-t from-bone-50 via-bone-50/70 to-bone-50/25" />
+      {/* CSS entrances, not Framer: this is above the fold on every secondary page, so a
+          JS-driven one ships the copy hidden and leaves it blank until hydration. */}
       <div className="container-mavrikios relative z-10 pb-16 pt-40 sm:pb-20">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease }}
-          className="mb-4 text-[11px] uppercase tracking-[0.3em] text-gold-600"
-        >
+        <p className="enter-up mb-4 text-[11px] uppercase tracking-[0.3em] text-gold-600">
           {eyebrow}
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease }}
-          className="max-w-2xl text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl lg:text-6xl"
+        </p>
+        <h1
+          style={{ "--enter-delay": "0.1s" } as React.CSSProperties}
+          className="enter-up max-w-2xl text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl lg:text-6xl"
         >
           {title}
-        </motion.h1>
+        </h1>
         {description && (
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.45, ease }}
-            className="mt-5 max-w-md text-[15px] leading-relaxed text-stone-600"
+          <p
+            style={{ "--enter-delay": "0.24s" } as React.CSSProperties}
+            className="enter-up mt-5 max-w-md text-[15px] leading-relaxed text-stone-600"
           >
             {description}
-          </motion.p>
+          </p>
         )}
       </div>
     </section>
