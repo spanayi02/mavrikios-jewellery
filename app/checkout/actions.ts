@@ -1,6 +1,7 @@
 "use server";
 
-import { getProductById } from "@/lib/data/products";
+import { updateTag } from "next/cache";
+import { CATALOG_TAG, getProductById } from "@/lib/data/products";
 import { createClient } from "@/lib/supabase/server";
 
 interface PlaceOrderItem {
@@ -159,6 +160,10 @@ export async function placeOrder(input: PlaceOrderInput): Promise<PlaceOrderResu
       })
     )
   );
+
+  // Stock and availability just changed, so the cached catalog is out of date. Without this a
+  // sold-out piece keeps showing as in stock until the tag ages out on its own.
+  updateTag(CATALOG_TAG);
 
   return { ok: true, reference };
 }

@@ -68,12 +68,31 @@ function toProduct(row: ProductRow): Product {
   };
 }
 
+/** Cache tag for every catalog read. Admin writes revalidate this, see app/admin/products/actions.ts. */
+export const CATALOG_TAG = "catalog";
+
 // Reads are public (RLS `to public`) and don't need the caller's session, so this
 // uses the plain anon client rather than the cookie-based SSR one — that keeps
 // catalog reads usable from build-time contexts like generateStaticParams, which
 // run with no request/cookies available.
+//
+// The explicit fetch matters. supabase-js goes through global `fetch`, which Next persists in
+// its build cache and will happily reuse on a *later* build: a product edited in the database
+// kept rendering its old name, metal and photo on prerendered pages even after a fresh
+// `next build`, because the underlying request was served from that cache. Tagging the read and
+// giving it a lifetime means a stale entry can never outlive a minute on its own, and an admin
+// write can drop it immediately via `revalidateTag`.
 function catalogClient() {
-  return createSupabaseClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+  return createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      global: {
+        fetch: (input, init) =>
+          fetch(input, { ...init, next: { revalidate: 60, tags: [CATALOG_TAG] } }),
+      },
+    }
+  );
 }
 
 export const getAllProducts = cache(async (): Promise<Product[]> => {

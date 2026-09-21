@@ -5,7 +5,7 @@ import { Reveal, RevealItem } from "@/components/site/reveal";
 import { formatPrice } from "@/lib/format";
 import { getAllProducts } from "@/lib/data/products";
 
-const featuredSlugs = ["sophia-eternity-band", "vasso-halo-ring", "calliope-pendant-necklace"];
+const featuredSlugs = ["sophia-eternity-band", "vasso-halo-ring", "calliope-pearl-drop-necklace"];
 
 /** The one deliberate dark moment on the homepage: deep espresso-gold, like the inside of a ring box. */
 export async function CampaignFeature() {

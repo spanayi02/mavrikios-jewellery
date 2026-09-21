@@ -22,14 +22,14 @@ export const primaryNav: NavLink[] = [
 
 export const megaMenu: { shop: MegaMenuLink[]; jewellery: MegaMenuLink[]; moments: MegaMenuLink[] } = {
   shop: [
-    { label: "New Arrivals", href: "/shop?sort=newest", motif: "necklace", image: "/images/products/pearl-pendant-necklace.jpg" },
+    { label: "New Arrivals", href: "/shop?sort=newest", motif: "necklace", image: "/images/products/calliope-fog-veil-necklace.jpg" },
     { label: "Best Sellers", href: "/shop?filter=bestseller", motif: "ring", image: "/images/products/aliki-solitaire-ring-1.jpg" },
     { label: "All Jewellery", href: "/shop", motif: "bracelet", image: "/images/products/sophia-eternity-band.jpg" },
   ],
   jewellery: [
     { label: "Rings", href: "/shop?category=rings", motif: "ring", image: "/images/products/daphne-signet-ring.jpg" },
     { label: "Earrings", href: "/shop?category=earrings", motif: "earring", image: "/images/products/kite-drop-earrings.jpg" },
-    { label: "Necklaces", href: "/shop?category=necklaces", motif: "necklace", image: "/images/products/pearl-pendant-necklace.jpg" },
+    { label: "Necklaces", href: "/shop?category=necklaces", motif: "necklace", image: "/images/products/irini-layered-necklace.jpg" },
     { label: "Bracelets", href: "/shop?category=bracelets", motif: "bracelet", image: "/images/products/orion-curb-chain-bracelet.jpg" },
   ],
   moments: [

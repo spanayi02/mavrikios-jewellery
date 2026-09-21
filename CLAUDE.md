@@ -119,6 +119,14 @@ just not featured on the homepage strip anymore.
   well as durations. Collapsing only the duration still leaves a delayed or staggered element
   invisible for the length of its delay, which is the same blank-then-appear the mode exists to
   prevent.
+- `CountBadge` (`components/site/count-badge.tsx`) drives the bag and wishlist counts in the
+  navbar. It is the only lasting confirmation that an add worked, and it used to both appear and
+  change value with no transition at all. It now enters on `opacity` + `scale` 0.9 to 1 over
+  180ms and pulses to 1.18 on a change, deliberately skipping the pulse on the first appearance
+  (the entry already covers it) and on the drop back to zero. Framer is fine here despite the
+  no-JS-hidden-markup rule: both counts come from a `localStorage` store, so the server always
+  renders zero and there is no server-rendered content being hidden, only a client-only element
+  arriving.
 - Horizontal product rails (`ProductRail`) carry **no scroll-snap**. Snap points plus an entrance
   animation plus photos completing at different moments kept giving the browser reasons to
   re-snap mid-gesture, which is what made a scrolled rail jump back to the same card on its own
@@ -144,20 +152,41 @@ just not featured on the homepage strip anymore.
   fires when the product's second image slot also has a real `src` — a product with just one
   real photo hovers into a plain zoom instead of the placeholder art, since swapping a photo for
   line art on hover reads as broken, not a nice alternate angle.
-- 8 of 16 demo products currently carry real photos as **temporary indicative placeholders**,
+- 12 of 16 demo products currently carry real photos as **temporary indicative placeholders**,
   not verified inventory — swap these for real Mavrikios photography before launch, same as the
-  rest of the demo catalogue:
+  rest of the demo catalogue. The remaining 4 (Monopetra, Thalia, Eleni, Nicosia) deliberately
+  still render `PlaceholderArt`; see the note on wrong photos below.
   - `aliki-solitaire-ring-1.jpg`, `orion-curb-chain-bracelet.jpg` — user-supplied.
   - `sapphire-cluster-ring.jpg`, `kite-drop-earrings.jpg`, `pearl-pendant-necklace.jpg`,
-    `ruby-emerald-swirl-ring.jpg` — user-supplied; material/stone in the photo is an
-    approximation of the demo product's own listed material/stone, not an exact match (e.g. the
-    photographed stone colour may differ from the `stone` field's text).
-  - `daphne-signet-ring.jpg`, `sophia-eternity-band.jpg` — sourced from Wikimedia Commons
-    (jewellery by Ann-Sophie Qvarnström, photographed by Wikimedia user W.carter), licensed
-    **CC BY-SA 4.0** — attribution required for as long as these files are in use:
-    "Polaris — gold ring" and "Starlight — white gold ring with diamonds" by W.carter, CC BY-SA
-    4.0, via Wikimedia Commons. Remove both the attribution requirement and the files together
-    when real photography replaces them.
+    `ruby-emerald-swirl-ring.jpg`, `mama-charm-necklace.jpg`, `aquamarine-bezel-ring.jpg` —
+    user-supplied.
+  - Sourced from Wikimedia Commons, all jewellery by Ann-Sophie Qvarnström photographed by
+    Wikimedia user W.carter, so the whole set shares one studio look:
+    `daphne-signet-ring.jpg` ("Polaris, gold ring"), `sophia-eternity-band.jpg` ("Starlight,
+    white gold ring with diamonds"), `athina-kyanite-drop-earrings.jpg` ("Arabesque, gold and
+    kyanite earrings"), `melina-woven-cuff-bracelet.jpg` ("Corset, silver bracelet"),
+    `irini-layered-necklace.jpg` + `irini-layered-necklace-2.jpg` ("Magpie's Nest, silver
+    necklace" and its side view), `kyveli-nest-pendant.jpg` ("Nest, silver pendant with
+    freshwater pearl"), `calliope-fog-veil-necklace.jpg` ("Fog Veil, silver necklace with
+    freshwater pearls") — all **CC BY-SA 4.0**; and `selene-pearl-drop-earrings.jpg` ("Pearl and
+    silver earrings") — **CC BY 4.0**. Attribution is required for as long as these files are in
+    use: photographs by W.carter, jewellery by Ann-Sophie Qvarnström, via Wikimedia Commons.
+    Remove the attribution obligation and the files together when real photography replaces them.
+- **A wrong photo is worse than no photo.** The demo catalogue's copy was rewritten to match what
+  is actually pictured rather than the other way round, because a jeweller reads these instantly:
+  Athina lost "Ruby" from its name (the photo's stone is blue), Melina became a woven cuff (the
+  photo is a plain hammered cuff, not baguette-set), Kyveli became a nest pendant (no emerald in
+  frame), Calliope and Ianthe were renamed to their photographs, and several products moved to
+  sterling silver because that is the metal in the shot. Monopetra went the other way: it is the
+  single-stone Cypriot ring the whole brand story rests on, and the only photo available showed a
+  two-stone ruby-and-emerald swirl, so it went back to the brand's own `monopetra` placeholder
+  motif. Renaming a demo product to fit a stand-in photo is fine; leaving a contradiction on the
+  page is not. Slugs moved with the names, and nothing references `products` by foreign key, but
+  `campaign-feature.tsx` pins three slugs by hand — check it after any rename.
+- Each photo is used in exactly one place. The hero photo in particular must not also appear in
+  the collections strip, the Instagram grid, the mega menu or a nav panel; it did, and the repeat
+  was obvious. If you reassign a hero image, grep the old filename across `components/` and
+  `data/` before you finish.
 
 ## Commerce architecture
 
@@ -171,6 +200,19 @@ just not featured on the homepage strip anymore.
   catalog reads are public (RLS `to public`) and don't need the caller's session, and this keeps
   them usable from build-time contexts like `generateStaticParams`, which run with no
   request/cookies available (the cookie-based client throws there).
+- **Catalog reads are tagged, and writes must invalidate the tag.** `catalogClient()` passes its
+  own `fetch` that sets `next: { revalidate: 60, tags: [CATALOG_TAG] }`. This is load-bearing:
+  supabase-js goes through global `fetch`, Next persists that in its build cache, and it will
+  reuse the entry on a *later* build. A product edited in the database kept rendering its old
+  name, metal and photo on prerendered pages through a full clean `next build` until this was
+  added, which also meant the owner's admin edits were not reliably reaching the storefront.
+  Server Actions that change catalog data call `updateTag(CATALOG_TAG)` before
+  `revalidatePath("/", "layout")` — `updateTag`, not `revalidateTag`, because it expires the
+  entry immediately (read-your-own-writes) where `revalidateTag` only marks it stale. Note this
+  version's `revalidateTag` takes a mandatory second `profile` argument and the one-argument form
+  no longer type-checks; see `node_modules/next/dist/docs/01-app/03-api-reference/04-functions/`.
+  `app/checkout/actions.ts` calls it too, after `decrement_stock`, or a sold-out piece keeps
+  advertising itself as in stock. Any new write path against `products` needs the same call.
 - Because product data is now async, several client components that used to import
   `getAllProducts()` at module scope (`SearchOverlay`, `RecentlyViewedRail`, `WishlistClient`)
   now receive `products`/`allProducts` as a prop from an async Server Component parent instead
