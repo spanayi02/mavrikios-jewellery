@@ -105,20 +105,33 @@ just not featured on the homepage strip anymore.
     browser's first paint with no JS at all. `.enter-up` uses `animation-fill-mode: both` so a
     delayed element stays hidden *through* its delay instead of showing, hiding, then animating.
   - `Reveal`/`RevealItem` (`components/site/reveal.tsx`) are CSS + IntersectionObserver, not
-    Framer. Server and first client render are always the finished visible state; a layout effect
-    then arms (`.rv-armed`/`.rv-group-armed`) only elements whose `top` is still below the fold,
-    i.e. content the visitor cannot see yet, and those transition in on scroll via `.rv-in`.
-    Anything already on screen is never hidden, so it has no window in which to flash. Reduced
-    motion skips arming entirely. Stagger is `nth-child` `transition-delay` off a `--rv-stagger`
-    custom property (supports up to 8 distinct steps, then flattens), which is why `RevealItem` is
-    a plain element with no animation state of its own.
-  - The observer uses `threshold: 0` with a `-15%` bottom `rootMargin`, deliberately: a percentage
+    Framer. Server and first client render are always the finished visible state; only elements
+    the visitor cannot see yet are armed (`.rv-armed`/`.rv-group-armed`) and transition in on
+    scroll via `.rv-in`. Anything already on screen is never hidden, so it has no window in which
+    to flash. Stagger is `nth-child` `transition-delay` off a `--rv-stagger` custom property
+    (supports up to 8 distinct steps, then flattens), which is why `RevealItem` is a plain element
+    with no animation state of its own.
+  - **The on-screen decision is made inside the observer callback, not in a layout effect.** A
+    layout effect runs before images contribute their height and before a phone's address bar
+    settles `innerHeight`, so sections that end up far below the fold measured as on-screen and
+    were skipped permanently: on mobile that read as "the scroll animations don't work at all".
+    The first callback uses real `getBoundingClientRect` geometry against the viewport; later
+    ones use the observer's own report.
+  - The observer uses `threshold: 0` with a `-10%` bottom `rootMargin`, deliberately: a percentage
     threshold never fires for a section taller than the viewport, since that share of it can't be
-    on screen at once.
+    on screen at once. The margin is *not* used for the first decision, or an element sitting in
+    that bottom strip at load would be reported off-screen and hidden while visible.
 - The `prefers-reduced-motion` block in globals.css zeroes `animation-delay`/`transition-delay` as
   well as durations. Collapsing only the duration still leaves a delayed or staggered element
   invisible for the length of its delay, which is the same blank-then-appear the mode exists to
   prevent.
+- **Reduced motion softens the entrances, it does not switch them off.** The block re-declares
+  `.enter-up` as a plain `reveal-fade` and strips `transform` from `.rv-armed`/`.rv-group-armed`,
+  leaving a ~420ms opacity fade with no travel, scale or parallax. Those selectors carry a class
+  so they outrank the universal `!important` rule above them. An earlier version had `Reveal` bail
+  out of arming entirely under reduced motion, which left phones with "Reduce Motion" switched on
+  (a very common setting) looking at a completely static site. The guidance is about vestibular
+  triggers, which are movement and scale, not opacity: reduce the motion, keep the feedback.
 - `CountBadge` (`components/site/count-badge.tsx`) drives the bag and wishlist counts in the
   navbar. It is the only lasting confirmation that an add worked, and it used to both appear and
   change value with no transition at all. It now enters on `opacity` + `scale` 0.9 to 1 over
@@ -137,13 +150,19 @@ just not featured on the homepage strip anymore.
 ## Placeholder imagery
 
 - `components/site/placeholder-art.tsx` renders fine-line procedural jewellery motifs on a
-  marble surface as the fallback wherever a real photo is missing. After the redesign it is only
-  still visible on: the boutique/workshop image slots (`BoutiqueLocation`, `/our-story`, marked
-  with a `TODO` comment in the JSX) and the 6 demo products without a photo. Everything else on
-  the homepage, `PageHero`, the mega menu and the category tiles uses real photography from
-  `public/images/products/` (see `data/categories.ts` and `data/navigation.ts` for the `image`
-  fields). Ask the client for a boutique exterior and a workshop photo; those two slots are the
-  last visible placeholders.
+  marble surface as the fallback wherever a real photo is missing. It is now visible only on the
+  4 demo products still without a photo and on `/404`; every editorial slot uses real photography
+  from `public/images/products/` (see `data/categories.ts` and `data/navigation.ts` for the
+  `image` fields).
+- The boutique and workshop slots (`BoutiqueLocation`, the pair on `/our-story`) carry **pieces,
+  not places**: `boutique-gold-band.jpg`, `story-woven-necklace.jpg`, `story-paired-bands.jpg`.
+  No photograph of a real shopfront or bench was available and passing off a stranger's shop as
+  the Latsia boutique is not an option, so those slots show the work instead and the alt text
+  describes the piece rather than claiming a location. The `TODO` comments in both files still
+  ask for a real boutique interior and workshop shot at 1600x1200; swap them in when the client
+  supplies them. Candidate "workshop" photos on Commons were rejected on look: a washing-up
+  bottle beside a kitchen bowl and red-handled pliers on a plastic ruler are worse for this brand
+  than the line art they would have replaced.
 - `types/product.ts` → `ProductImage` has an optional `src`. `components/site/product-media.tsx`
   automatically renders a real photo via `next/image` when `src` is set, falling back to
   `PlaceholderArt` otherwise. **To add real photography: just set `src` on the product's images

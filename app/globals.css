@@ -308,6 +308,15 @@
   }
 }
 
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -321,5 +330,25 @@
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Reduced motion means less motion, not a dead page. The guidance is about vestibular
+     triggers, which are travel, scale and parallax, so those go and a plain opacity fade
+     stays. Killing the entrances outright was worse for everyone: "Reduce Motion" is a
+     common setting to leave switched on for a phone, and it left the whole site static.
+     These selectors carry a class, so they outrank the universal rule above even though
+     both are !important. */
+  .enter-up {
+    animation: reveal-fade 0.4s ease-out both !important;
+  }
+  .rv-armed,
+  .rv-group-armed > * {
+    transform: none !important;
+  }
+  .rv-armed.rv-in,
+  .rv-group-armed.rv-in > * {
+    transform: none !important;
+    transition-property: opacity !important;
+    transition-duration: 420ms !important;
   }
 }

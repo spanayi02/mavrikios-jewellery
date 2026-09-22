@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-  type ElementType,
-  type ReactNode,
-} from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ElementType, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -22,60 +14,64 @@ import { cn } from "@/lib/utils";
  * blank panels that snapped in afterwards, which is what kept getting reported as sections
  * "flashing" before settling.
  *
- * Here the server and the first client render are always the finished, visible state. A layout
- * effect then arms *only* the elements still below the fold — content the visitor cannot see
- * yet, so hiding it costs nothing — and those animate in on scroll exactly as before. Anything
- * already on screen at first paint simply stays put: no hidden state, nothing to wait for, so
- * there is no window in which it can flash. Same for reduced motion, which skips arming
- * entirely.
+ * Here the server and the first client render are always the finished, visible state, and only
+ * content the visitor cannot see yet is ever hidden. Two details matter:
+ *
+ * 1. The decision is made from the observer's own callback, not from a single measurement in a
+ *    layout effect. A layout effect runs before images have contributed their height and before
+ *    a phone's address bar has settled `innerHeight`, so sections that would end up far below
+ *    the fold measured as on-screen and were skipped forever. The observer fires after layout,
+ *    with real geometry.
+ * 2. Reduced motion does not disable the reveal, it softens it (see globals.css, which drops the
+ *    travel and scale and leaves a plain opacity fade). Switching it off entirely meant a phone
+ *    with "Reduce Motion" on, which is a very common setting, got a completely static page.
  */
-
-// `useLayoutEffect` warns when React renders this on the server; the effect is client-only work
-// either way, so fall back to `useEffect` there to keep the log clean.
-const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
-
 function useScrollReveal(once: boolean) {
   const ref = useRef<HTMLElement | null>(null);
-  const [armed, setArmed] = useState(false);
-  const [shown, setShown] = useState(false);
-
-  useIsomorphicLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    // Already on screen: leave it alone. Hiding it now, after the browser has painted it, is
-    // precisely the flash this component is meant to avoid.
-    if (el.getBoundingClientRect().top < window.innerHeight) return;
-    setArmed(true);
-  }, []);
+  const [state, setState] = useState<"idle" | "hidden" | "shown">("idle");
 
   useEffect(() => {
-    if (!armed) return;
     const el = ref.current;
     if (!el) return;
 
+    let decided = false;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
+          if (!decided) {
+            decided = true;
+            // First pass uses true viewport geometry rather than the margin-adjusted report:
+            // an element sitting in the bottom strip is really on screen, and hiding it now
+            // would be the exact flash this component exists to prevent.
+            const rect = el.getBoundingClientRect();
+            const onScreen = rect.top < window.innerHeight && rect.bottom > 0;
+            if (onScreen) {
+              setState("shown");
+              if (once) observer.disconnect();
+            } else {
+              setState("hidden");
+            }
+            continue;
+          }
           if (entry.isIntersecting) {
-            setShown(true);
+            setState("shown");
             if (once) observer.disconnect();
           } else if (!once) {
-            setShown(false);
+            setState("hidden");
           }
         }
       },
       // Threshold stays at 0 and the trigger line is pulled up with rootMargin instead: a
       // percentage threshold never fires for a section taller than the viewport, since that
       // share of it can't be on screen at once.
-      { threshold: 0, rootMargin: "0px 0px -15% 0px" }
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [armed, once]);
+  }, [once]);
 
-  return { ref, armed, shown };
+  return { ref, armed: state !== "idle", shown: state === "shown" };
 }
 
 interface RevealProps {
