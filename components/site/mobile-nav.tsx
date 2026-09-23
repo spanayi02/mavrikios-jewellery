@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { Logo } from "@/components/site/logo";
-import { primaryNav, megaMenu } from "@/data/navigation";
+import { primaryNav, megaMenu, activeNavIndex } from "@/data/navigation";
 import { useCartTotals, useCartStore } from "@/lib/store/cart-store";
 import { useWishlistStore } from "@/lib/store/wishlist-store";
 import { useUIStore } from "@/lib/store/ui-store";
@@ -76,8 +76,8 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
           </Link>
 
           <nav className="flex flex-col">
-            {primaryNav.map((item) => {
-              const isActive = pathname === item.href;
+            {primaryNav.map((item, index) => {
+              const isActive = index === activeNavIndex(pathname);
               return (
                 <Link
                   key={item.label}

@@ -10,7 +10,7 @@ import { Logo } from "@/components/site/logo";
 import { MegaMenu } from "@/components/site/mega-menu";
 import { MobileNav } from "@/components/site/mobile-nav";
 import { CountBadge } from "@/components/site/count-badge";
-import { primaryNav } from "@/data/navigation";
+import { primaryNav, activeNavIndex } from "@/data/navigation";
 import { useCartTotals, useCartStore } from "@/lib/store/cart-store";
 import { useWishlistStore } from "@/lib/store/wishlist-store";
 import { useUIStore } from "@/lib/store/ui-store";
@@ -32,6 +32,7 @@ export function Navbar() {
   const openSearch = useUIStore((s) => s.openSearch);
   const user = useUser();
 
+  const activeIndex = activeNavIndex(pathname);
   const isTransparent = transparentOnTop && !scrolledPast && openMenu === null;
 
   function handleEnter(label: string) {
@@ -56,8 +57,8 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex">
-          {primaryNav.map((item) => {
-            const isActive = pathname === item.href;
+          {primaryNav.map((item, index) => {
+            const isActive = index === activeIndex;
             return (
               <div key={item.label} onMouseEnter={() => item.label === "Shop" && handleEnter(item.label)}>
                 <Link

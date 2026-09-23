@@ -13,12 +13,25 @@ export interface MegaMenuLink extends NavLink {
 
 export const primaryNav: NavLink[] = [
   { label: "Shop", href: "/shop" },
-  { label: "Collections", href: "/shop" },
   { label: "Engagement", href: "/engagement" },
   { label: "Bespoke", href: "/bespoke" },
   { label: "Services", href: "/services" },
   { label: "Our Story", href: "/our-story" },
 ];
+
+/**
+ * Index of the one nav item matching the current path, or -1.
+ *
+ * Index-based, not `item.href === pathname` per item, on purpose. "Collections" used to sit
+ * beside "Shop" pointing at the same `/shop`, so on that page both lit up: two underlines and,
+ * worse, two `aria-current="page"` links, which tells a screen reader the page is in two places
+ * at once. The duplicate entry is gone (the mega menu under "Shop" already surfaces the
+ * collections), and resolving to a single index means a future duplicate href can't bring the
+ * double highlight back.
+ */
+export function activeNavIndex(pathname: string): number {
+  return primaryNav.findIndex((item) => item.href === pathname);
+}
 
 export const megaMenu: { shop: MegaMenuLink[]; jewellery: MegaMenuLink[]; moments: MegaMenuLink[] } = {
   shop: [
