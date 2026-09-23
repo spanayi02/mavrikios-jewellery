@@ -1,8 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { getStaffRole } from "@/lib/data/staff";
+import { CATALOG_TAG } from "@/lib/data/products";
 import type { ProductCategory, ProductCollection, ProductMaterial, ProductStone } from "@/types/product";
 
 export type ProductFormResult = { ok: true; id: string } | { ok: false; error: string };
@@ -109,6 +110,9 @@ export async function createProduct(input: ProductFormInput): Promise<ProductFor
     return { ok: false, error: "Something went wrong saving the product." };
   }
 
+  // updateTag, not revalidateTag: this is a Server Action and staff expect to see their
+  // own edit on the storefront straight away, not stale-while-revalidate.
+  updateTag(CATALOG_TAG);
   revalidatePath("/", "layout");
   return { ok: true, id };
 }
@@ -128,6 +132,9 @@ export async function updateProduct(input: ProductFormInput): Promise<ProductFor
     return { ok: false, error: "Something went wrong saving the product." };
   }
 
+  // updateTag, not revalidateTag: this is a Server Action and staff expect to see their
+  // own edit on the storefront straight away, not stale-while-revalidate.
+  updateTag(CATALOG_TAG);
   revalidatePath("/", "layout");
   return { ok: true, id: input.id };
 }
@@ -140,6 +147,9 @@ export async function deleteProduct(id: string): Promise<{ ok: true } | { ok: fa
     console.error("Failed to delete product", error);
     return { ok: false, error: "Something went wrong deleting the product." };
   }
+  // updateTag, not revalidateTag: this is a Server Action and staff expect to see their
+  // own edit on the storefront straight away, not stale-while-revalidate.
+  updateTag(CATALOG_TAG);
   revalidatePath("/", "layout");
   return { ok: true };
 }

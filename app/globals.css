@@ -5,43 +5,55 @@
 
 /* ------------------------------------------------------------------ */
 /* MAVRIKIOS design tokens                                             */
-/* Bone / Stone / Ink / Silver / Moss                                  */
-/* Cool-luxury palette: bone off-white base, deep moss-green as the    */
-/* single accent, cool graphite text. Light theme, locked.             */
+/* Bone / Stone / Ink / Silver / Gold                                  */
+/* Warm-luxury palette: ivory/cream base, a confident antique gold as   */
+/* the primary accent, cool silver as a secondary metal note, graphite  */
+/* text. Light theme, locked. (Experimental branch: reintroduces warmth */
+/* and a literal gold/silver mixed-metal feel per client direction —    */
+/* structure, type and motion carried over unchanged from the previous  */
+/* cool-moss pass; only the palette values moved.)                      */
 /* ------------------------------------------------------------------ */
 :root {
   /* Brand palette */
-  --bone-50: #f7f7f4;
-  --bone-100: #f1f1ec;
-  --bone-200: #e7e7e0;
+  --bone-50: #f7f5f0;
+  --bone-100: #efeae3;
+  --bone-200: #e5ded1;
 
-  --stone-50: #f3f4f1;
-  --stone-100: #e6e8e3;
-  --stone-200: #d3d6d0;
-  --stone-300: #b4b9b2;
-  --stone-400: #8d948b;
-  --stone-500: #6b736a;
-  --stone-600: #525a51;
+  --stone-50: #f4f3ef;
+  --stone-100: #e8e5dd;
+  --stone-200: #d6d1c4;
+  --stone-300: #b0a99a;
+  --stone-400: #8c8474;
+  --stone-500: #65615b;
+  --stone-600: #4c4843;
 
-  --ink-950: #0f1512;
-  --ink-900: #161d19;
-  --ink-800: #1f2823;
-  --ink-700: #2a352f;
-  --ink-600: #3b4740;
-  --ink-500: #536159;
+  --ink-950: #211e1a;
+  --ink-900: #26211d;
+  --ink-800: #322b24;
+  --ink-700: #423930;
+  --ink-600: #574a3c;
+  --ink-500: #6f5f4c;
 
-  --silver-100: #eef0f2;
-  --silver-200: #d9dce1;
-  --silver-300: #b9bec6;
-  --silver-400: #9199a4;
+  /* A literal silver note, kept cool against the warm base — the mixed-metal half of
+     "a bit of gold, a bit of silver". */
+  --silver-100: #f1f1f2;
+  --silver-200: #dcdde0;
+  --silver-300: #bcbec4;
+  --silver-400: #94979f;
+  --silver-500: #6b6e74;
+  /* WCAG AA-safe deep cool graphite for small text on silver backgrounds */
+  --silver-600: #43464b;
 
-  --moss-100: #e3ece6;
-  --moss-200: #c3d5ca;
-  --moss-300: #8fb09c;
-  --moss-400: #5c8a6d;
-  --moss-500: #2f6a4a;
-  /* WCAG AA-safe (7:1+) deep green for small text on bone backgrounds */
-  --moss-600: #1c4a33;
+  --gold-100: #f4ead0;
+  --gold-200: #e3cd94;
+  --gold-300: #cda85a;
+  /* The muted champagne accent — used sparingly, only at large/bold sizes (headline
+     emphasis, hairlines, icons) where its ~3:1 contrast on bone-50 is WCAG-sufficient. */
+  --gold-400: #a8834e;
+  --gold-500: #8a6420;
+  /* WCAG AA-safe (7:1+) deep antique gold — the only gold step used for small text
+     (eyebrows, nav, badges) on bone backgrounds. Never use gold-400 there. */
+  --gold-600: #5c4413;
 
   /* semantic surface tokens (light) */
   --background: var(--bone-50);
@@ -56,12 +68,12 @@
   --secondary-foreground: var(--ink-950);
   --muted: var(--stone-100);
   --muted-foreground: var(--stone-600);
-  --accent: var(--moss-100);
-  --accent-foreground: var(--moss-600);
+  --accent: var(--gold-100);
+  --accent-foreground: var(--gold-600);
   --destructive: #9a3a2e;
   --border: var(--stone-200);
   --input: var(--stone-200);
-  --ring: var(--moss-600);
+  --ring: var(--gold-600);
   /* Shape lock: everything is sharp. Only floating overlay icon actions are round. */
   --radius: 0rem;
 }
@@ -93,13 +105,15 @@
   --color-silver-200: var(--silver-200);
   --color-silver-300: var(--silver-300);
   --color-silver-400: var(--silver-400);
+  --color-silver-500: var(--silver-500);
+  --color-silver-600: var(--silver-600);
 
-  --color-moss-100: var(--moss-100);
-  --color-moss-200: var(--moss-200);
-  --color-moss-300: var(--moss-300);
-  --color-moss-400: var(--moss-400);
-  --color-moss-500: var(--moss-500);
-  --color-moss-600: var(--moss-600);
+  --color-gold-100: var(--gold-100);
+  --color-gold-200: var(--gold-200);
+  --color-gold-300: var(--gold-300);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -151,39 +165,40 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
   ::selection {
-    background: var(--moss-600);
+    background: var(--gold-600);
     color: var(--bone-50);
   }
 }
 
 @layer utilities {
   .container-mavrikios {
-    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
+    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-16;
   }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  /* Cool white marble (Carrara): bone base, grey veining. Used sparingly. */
+  /* Warm ivory marble: bone base, soft brass-toned veining. Used sparingly. */
   .marble-surface {
     background-color: var(--bone-100);
     background-image:
-      radial-gradient(ellipse 70% 45% at 12% 8%, rgba(141, 148, 139, 0.16), transparent 60%),
-      radial-gradient(ellipse 55% 40% at 88% 92%, rgba(141, 148, 139, 0.14), transparent 60%),
-      linear-gradient(128deg, transparent 42%, rgba(107, 115, 106, 0.1) 43%, transparent 45%),
-      linear-gradient(96deg, transparent 60%, rgba(107, 115, 106, 0.08) 61%, transparent 63%),
-      linear-gradient(150deg, transparent 22%, rgba(107, 115, 106, 0.06) 23%, transparent 25%);
+      radial-gradient(ellipse 70% 45% at 12% 8%, rgba(170, 145, 95, 0.14), transparent 60%),
+      radial-gradient(ellipse 55% 40% at 88% 92%, rgba(170, 145, 95, 0.12), transparent 60%),
+      linear-gradient(128deg, transparent 42%, rgba(130, 108, 70, 0.09) 43%, transparent 45%),
+      linear-gradient(96deg, transparent 60%, rgba(130, 108, 70, 0.07) 61%, transparent 63%),
+      linear-gradient(150deg, transparent 22%, rgba(130, 108, 70, 0.05) 23%, transparent 25%);
   }
 
-  /* The one deliberate dark moment on a page: deep moss, like the inside of a ring box. */
+  /* The one deliberate dark moment on a page: deep espresso-black with a warm gold
+     undertone, like the inside of a ring box lined in dark velvet. */
   .marble-surface-dark {
-    background-color: #12281d;
+    background-color: #221509;
     background-image:
-      radial-gradient(ellipse 70% 45% at 15% 10%, rgba(227, 236, 230, 0.05), transparent 60%),
-      radial-gradient(ellipse 55% 40% at 85% 90%, rgba(227, 236, 230, 0.04), transparent 60%),
-      linear-gradient(128deg, transparent 42%, rgba(227, 236, 230, 0.035) 43%, transparent 45%),
-      linear-gradient(96deg, transparent 60%, rgba(227, 236, 230, 0.03) 61%, transparent 63%);
+      radial-gradient(ellipse 70% 45% at 15% 10%, rgba(228, 205, 148, 0.06), transparent 60%),
+      radial-gradient(ellipse 55% 40% at 85% 90%, rgba(228, 205, 148, 0.045), transparent 60%),
+      linear-gradient(128deg, transparent 42%, rgba(228, 205, 148, 0.04) 43%, transparent 45%),
+      linear-gradient(96deg, transparent 60%, rgba(228, 205, 148, 0.03) 61%, transparent 63%);
   }
 
   .veil-underline {
@@ -206,6 +221,100 @@
   .reveal {
     animation: var(--animate-reveal-up);
   }
+
+  /* Mount entrance for above-the-fold copy (hero headlines, page-hero eyebrows). Deliberately
+     CSS, not JS: the stylesheet is render-blocking, so this runs on the browser's very first
+     paint instead of waiting for React + Framer Motion to hydrate. Driving these from JS meant
+     the SSR markup shipped at opacity:0 and stayed blank until the bundle landed, which is
+     what read as the page "flashing" before it settled on a slower phone. `both` (not
+     `forwards`) so the element stays hidden through its delay rather than showing, hiding,
+     then animating. */
+  .enter-up {
+    animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--enter-delay, 0s);
+  }
+
+  /* Horizontal product rails. The scrollbar is the only affordance that the row continues past
+     the edge, so it stays — but as a hairline in the palette instead of the OS default slab.
+     Sharp, per the shape lock. */
+  .rail-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--stone-300) transparent;
+  }
+  .rail-scroll::-webkit-scrollbar {
+    height: 3px;
+  }
+  .rail-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .rail-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--stone-300);
+  }
+
+  /* Scroll reveals (see components/site/reveal.tsx). The hidden state is a class the client
+     only adds to content that is still below the fold at first paint, so nothing the visitor
+     can already see is ever hidden waiting on JS. */
+  .rv-armed {
+    opacity: 0;
+    transform: translateY(var(--rv-y, 1.75rem)) scale(0.97);
+  }
+  .rv-armed.rv-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: var(--rv-delay, 0s);
+  }
+
+  /* Staggered groups: the wrapper itself never fades, its children do, one after another.
+     Children translate by a smaller amount than a standalone reveal because a group is often
+     also a horizontal scroller, where a larger offset would push into the scrollable overflow
+     area and flicker a vertical scrollbar mid-animation. */
+  .rv-group-armed > * {
+    opacity: 0;
+    transform: translateY(0.75rem) scale(0.97);
+  }
+  .rv-group-armed.rv-in > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rv-group-armed.rv-in > *:nth-child(2) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 1);
+  }
+  .rv-group-armed.rv-in > *:nth-child(3) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 2);
+  }
+  .rv-group-armed.rv-in > *:nth-child(4) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 3);
+  }
+  .rv-group-armed.rv-in > *:nth-child(5) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 4);
+  }
+  .rv-group-armed.rv-in > *:nth-child(6) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 5);
+  }
+  .rv-group-armed.rv-in > *:nth-child(7) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 6);
+  }
+  .rv-group-armed.rv-in > *:nth-child(8) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 7);
+  }
+  .rv-group-armed.rv-in > *:nth-child(n + 9) {
+    transition-delay: calc(var(--rv-stagger, 80ms) * 8);
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -214,7 +323,32 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    /* Delays have to go too, not just durations: a staggered or delayed entrance whose
+       duration collapses to nothing still leaves the element hidden for the length of its
+       delay, which is the same blank-then-appear this mode exists to avoid. */
+    animation-delay: 0s !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Reduced motion means less motion, not a dead page. The guidance is about vestibular
+     triggers, which are travel, scale and parallax, so those go and a plain opacity fade
+     stays. Killing the entrances outright was worse for everyone: "Reduce Motion" is a
+     common setting to leave switched on for a phone, and it left the whole site static.
+     These selectors carry a class, so they outrank the universal rule above even though
+     both are !important. */
+  .enter-up {
+    animation: reveal-fade 0.4s ease-out both !important;
+  }
+  .rv-armed,
+  .rv-group-armed > * {
+    transform: none !important;
+  }
+  .rv-armed.rv-in,
+  .rv-group-armed.rv-in > * {
+    transform: none !important;
+    transition-property: opacity !important;
+    transition-duration: 420ms !important;
   }
 }

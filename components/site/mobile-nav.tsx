@@ -86,7 +86,7 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
                     "border-b border-stone-100 py-4 font-serif text-2xl",
-                    isActive ? "text-moss-600" : "text-ink-950"
+                    isActive ? "text-gold-600" : "text-ink-950"
                   )}
                 >
                   {item.label}

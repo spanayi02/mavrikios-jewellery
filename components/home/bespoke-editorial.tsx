@@ -22,7 +22,7 @@ export function BespokeEditorial() {
     <section className="marble-surface py-24 sm:py-32">
       <div className="container-mavrikios">
         <Reveal className="max-w-xl">
-          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-moss-600">Bespoke</p>
+          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-gold-600">Bespoke</p>
           <h2 className="text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             A piece designed entirely around you.
           </h2>
@@ -41,11 +41,11 @@ export function BespokeEditorial() {
           <motion.div
             aria-hidden
             variants={lineVariants}
-            className="absolute left-[5px] top-0 h-full w-px origin-top bg-moss-600/30 sm:left-0 sm:top-[5px] sm:h-px sm:w-full sm:origin-left"
+            className="absolute left-[5px] top-0 h-full w-px origin-top bg-gold-600/30 sm:left-0 sm:top-[5px] sm:h-px sm:w-full sm:origin-left"
           />
           {steps.map((step) => (
             <RevealItem key={step.label} as="li" className="relative flex gap-5 sm:flex-col sm:gap-0">
-              <span className="relative z-10 mt-[3px] size-[11px] shrink-0 bg-moss-600 sm:mt-0" aria-hidden />
+              <span className="relative z-10 mt-[3px] size-[11px] shrink-0 bg-gold-600 sm:mt-0" aria-hidden />
               <div className="sm:mt-6">
                 <p className="font-serif text-2xl text-ink-950">{step.label}</p>
                 <p className="mt-2 max-w-[24ch] text-sm leading-relaxed text-stone-600">{step.description}</p>

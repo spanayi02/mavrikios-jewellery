@@ -50,9 +50,9 @@ export default async function AdminDashboardPage() {
       </div>
 
       {lowStock && lowStock.length > 0 && (
-        <div className="mt-8 border border-moss-300 bg-moss-100/40 p-6">
+        <div className="mt-8 border border-gold-300 bg-gold-100/40 p-6">
           <p className="mb-3 flex items-center gap-2 text-sm font-medium text-ink-950">
-            <AlertTriangle className="size-4 text-moss-600" /> Low Stock
+            <AlertTriangle className="size-4 text-gold-600" /> Low Stock
           </p>
           <ul className="space-y-1.5">
             {lowStock.map((p) => (

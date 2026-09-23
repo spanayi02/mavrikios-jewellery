@@ -3,84 +3,81 @@ import { FadeImage } from "@/components/site/fade-image";
 import { ArrowUpRight } from "lucide-react";
 import { PlaceholderArt } from "@/components/site/placeholder-art";
 import { Reveal, RevealItem } from "@/components/site/reveal";
-import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { shopCategories } from "@/data/categories";
 
+const featuredKeys: Record<string, string> = {
+  rings: "Timeless beauty",
+  necklaces: "Everyday elegance",
+  bracelets: "Modern classics",
+};
+
 export function CuratedCategories() {
-  const [rings, earrings, necklaces, bracelets, engagement, gifts] = shopCategories;
+  const featured = shopCategories.filter((c) => c.key in featuredKeys);
 
   return (
-    <section className="container-mavrikios py-24 sm:py-32">
-      <Reveal className="mb-12 sm:mb-16">
-        <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
-          Every piece, considered
-        </h2>
+    <section className="container-mavrikios py-20 sm:py-28">
+      <Reveal className="mb-10 flex flex-col gap-4 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex items-center gap-4">
+          <span className="h-px w-10 bg-gold-400" aria-hidden />
+          <h2 className="text-[11px] font-medium uppercase tracking-[0.28em] text-gold-600">
+            Our Collections
+          </h2>
+        </div>
+        <Link
+          href="/shop"
+          className="veil-underline group flex items-center gap-2 pb-0.5 text-[13px] font-medium uppercase tracking-[0.12em] text-ink-950"
+        >
+          Explore All Collections
+          <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </Link>
       </Reveal>
 
-      <Reveal stagger={0.08} className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-6 lg:grid-rows-2 lg:gap-5">
-        <RevealItem className="aspect-[3/4] lg:col-span-2 lg:row-span-2 lg:aspect-auto">
-          <CategoryTile item={rings} parallax />
-        </RevealItem>
-        <RevealItem className="aspect-[3/4] lg:col-span-4 lg:aspect-auto">
-          <CategoryTile item={engagement} large parallax />
-        </RevealItem>
-        <RevealItem className="aspect-[3/4]">
-          <CategoryTile item={earrings} />
-        </RevealItem>
-        <RevealItem className="aspect-[3/4]">
-          <CategoryTile item={necklaces} />
-        </RevealItem>
-        <RevealItem className="aspect-[3/4]">
-          <CategoryTile item={bracelets} />
-        </RevealItem>
-        <RevealItem className="aspect-[3/4]">
-          <CategoryTile item={gifts} />
-        </RevealItem>
+      <Reveal stagger={0.08} className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+        {featured.map((item) => (
+          <RevealItem key={item.key}>
+            <CollectionCard item={item} subtitle={featuredKeys[item.key]} />
+          </RevealItem>
+        ))}
       </Reveal>
     </section>
   );
 }
 
-function CategoryTile({
+function CollectionCard({
   item,
-  large,
-  parallax,
+  subtitle,
 }: {
   item: (typeof shopCategories)[number];
-  large?: boolean;
-  parallax?: boolean;
+  subtitle: string;
 }) {
-  const art = item.image ? (
-    <FadeImage
-      src={item.image.src}
-      alt={item.image.alt}
-      fill
-      sizes={large ? "(min-width: 1024px) 60vw, 50vw" : "(min-width: 1024px) 20vw, 50vw"}
-      className="object-cover group-hover:scale-105"
-    />
-  ) : (
-    <PlaceholderArt motif={item.motif} className="transition-transform duration-700 ease-out group-hover:scale-105" />
-  );
-
   return (
-    <Link href={item.href} className="group relative block h-full w-full overflow-hidden bg-stone-100">
-      {parallax ? (
-        <ParallaxLayer range={26} className="absolute inset-0">
-          {art}
-        </ParallaxLayer>
-      ) : (
-        art
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink-950/60 via-ink-950/5 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4 sm:p-6">
+    <Link
+      href={item.href}
+      className="group flex h-full items-stretch border border-ink-950/[0.08] bg-bone-100 transition-colors duration-300 hover:bg-bone-200/60"
+    >
+      <div className="relative aspect-[4/5] w-3/5 shrink-0 overflow-hidden bg-stone-100">
+        {item.image ? (
+          <FadeImage
+            src={item.image.src}
+            alt={item.image.alt}
+            fill
+            sizes="(min-width: 640px) 20vw, 45vw"
+            className="object-cover group-hover:scale-[1.04]"
+          />
+        ) : (
+          <PlaceholderArt
+            motif={item.motif}
+            className="transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          />
+        )}
+      </div>
+      <div className="flex flex-1 flex-col justify-between p-5">
         <div>
-          <p className={`font-serif text-bone-50 ${large ? "text-3xl sm:text-4xl" : "text-xl sm:text-2xl"}`}>
-            {item.title}
-          </p>
-          {large && <p className="mt-1 max-w-xs text-sm text-bone-50/80">{item.description}</p>}
+          <p className="font-serif text-xl text-ink-950 sm:text-2xl">{item.title}</p>
+          <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-stone-500">{subtitle}</p>
         </div>
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-bone-50/15 text-bone-50 backdrop-blur-sm transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-bone-50 group-hover:text-ink-950">
-          <ArrowUpRight className="size-4" />
+        <span className="mt-6 flex size-8 items-center justify-center border border-ink-950/15 text-ink-950 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-gold-400 group-hover:text-gold-600">
+          <ArrowUpRight className="size-3.5" />
         </span>
       </div>
     </Link>

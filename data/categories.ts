@@ -36,7 +36,9 @@ export const shopCategories: CategoryCard[] = [
     description: "Pendants and chains, layered or worn alone.",
     href: "/shop?category=necklaces",
     motif: "necklace",
-    image: { src: "/images/products/pearl-pendant-necklace.jpg", alt: "Gold pendant necklace with a pearl drop" },
+    // Not the pearl pendant: that shot is the homepage hero now, and this card sits directly
+    // under it in the collections strip.
+    image: { src: "/images/products/mama-charm-necklace.jpg", alt: "Gold charm necklace with a heart and a lettered pendant" },
     filter: { category: "necklaces" },
   },
   {

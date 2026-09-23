@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/site/page-hero";
-import { PlaceholderArt } from "@/components/site/placeholder-art";
+import { FadeImage } from "@/components/site/fade-image";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 
 export const metadata: Metadata = {
@@ -51,13 +51,27 @@ export default function OurStoryPage() {
         </Reveal>
       </section>
 
-      {/* TODO: boutique + workshop photos, 1600x1200 each. Placeholder art until supplied. */}
+      {/* Stand-in photography of the work itself. These are deliberately pieces, not a claimed
+          photo of the Latsia shopfront or the bench: TODO swap for a real boutique interior and
+          a real workshop shot, 1600x1200 each, once the client supplies them. */}
       <section className="grid grid-cols-1 sm:grid-cols-2">
-        <div className="relative aspect-[4/3]">
-          <PlaceholderArt motif="necklace" />
+        <div className="relative aspect-[4/3] bg-bone-100">
+          <FadeImage
+            src="/images/products/story-woven-necklace.jpg"
+            alt="Sterling silver necklace of hand-shaped links, laid flat"
+            fill
+            sizes="(min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
         </div>
-        <div className="relative aspect-[4/3]">
-          <PlaceholderArt motif="ring" tone="ink" />
+        <div className="relative aspect-[4/3] bg-bone-100">
+          <FadeImage
+            src="/images/products/story-paired-bands.jpg"
+            alt="A pair of hand-textured silver bands"
+            fill
+            sizes="(min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
         </div>
       </section>
 

@@ -16,7 +16,7 @@ const defaultPanel: MegaMenuLink = {
   label: "The New Arrivals",
   href: "/shop?sort=newest",
   motif: "necklace",
-  image: "/images/products/pearl-pendant-necklace.jpg",
+  image: "/images/products/calliope-fog-veil-necklace.jpg",
 };
 
 export function MegaMenu({ onNavigate }: MegaMenuProps) {

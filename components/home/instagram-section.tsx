@@ -6,9 +6,9 @@ import { siteConfig } from "@/lib/site-config";
 const tiles = [
   { src: "/images/products/aquamarine-bezel-ring.jpg", alt: "Gold ring with a round aquamarine cabochon" },
   { src: "/images/products/kite-drop-earrings.jpg", alt: "Gold kite-shaped drop earrings" },
-  { src: "/images/products/pearl-pendant-necklace.jpg", alt: "Gold pendant necklace with a pearl drop" },
+  { src: "/images/products/irini-layered-necklace.jpg", alt: "Sterling silver necklace of hand-shaped open links" },
   { src: "/images/products/ruby-emerald-swirl-ring.jpg", alt: "Gold rings set with a ruby and an emerald" },
-  { src: "/images/products/mama-charm-necklace.jpg", alt: "Gold charm necklace" },
+  { src: "/images/products/melina-woven-cuff-bracelet.jpg", alt: "Hand-hammered sterling silver cuff bracelet" },
   { src: "/images/products/orion-curb-chain-bracelet.jpg", alt: "Gold curb chain bracelet" },
 ];
 

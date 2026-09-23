@@ -1,6 +1,6 @@
 import { MapPin, Navigation, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PlaceholderArt } from "@/components/site/placeholder-art";
+import { FadeImage } from "@/components/site/fade-image";
 import { StoreStatusBadge } from "@/components/site/store-status";
 import { Reveal } from "@/components/site/reveal";
 import { ParallaxLayer } from "@/components/site/parallax-layer";
@@ -14,14 +14,21 @@ export function BoutiqueLocation() {
   return (
     <section className="relative overflow-hidden bg-bone-100 py-24 sm:py-32">
       <div className="container-mavrikios grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
-        {/* TODO: boutique exterior / interior photo, 1600x1200. Placeholder art until supplied. */}
-        <Reveal className="order-2 aspect-[4/3] lg:order-1 lg:col-span-7">
+        {/* Stand-in: a piece, not a claimed photo of the shopfront. TODO swap for a real
+            boutique exterior or interior, 1600x1200, once the client supplies one. */}
+        <Reveal className="order-2 aspect-[4/3] bg-bone-200 lg:order-1 lg:col-span-7">
           <ParallaxLayer range={30} className="h-full">
-            <PlaceholderArt motif="gift" />
+            <FadeImage
+              src="/images/products/boutique-gold-band.jpg"
+              alt="Gold band set with a line of small flush-set diamonds"
+              fill
+              sizes="(min-width: 1024px) 58vw, 100vw"
+              className="object-cover"
+            />
           </ParallaxLayer>
         </Reveal>
         <Reveal delay={0.1} className="order-1 lg:order-2 lg:col-span-5">
-          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-moss-600">Visit the Boutique</p>
+          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-gold-600">Visit the Boutique</p>
           <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             Come and see the pieces in person.
           </h2>

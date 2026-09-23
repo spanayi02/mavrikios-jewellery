@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/site/logo";
 import { MegaMenu } from "@/components/site/mega-menu";
 import { MobileNav } from "@/components/site/mobile-nav";
+import { CountBadge } from "@/components/site/count-badge";
 import { primaryNav } from "@/data/navigation";
 import { useCartTotals, useCartStore } from "@/lib/store/cart-store";
 import { useWishlistStore } from "@/lib/store/wishlist-store";
@@ -104,20 +105,12 @@ export function Navbar() {
           >
             <Link href="/wishlist">
               <Heart className="size-[18px]" />
-              {wishlistCount > 0 && (
-                <span className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-moss-600 text-[9px] font-medium text-bone-50">
-                  {wishlistCount}
-                </span>
-              )}
+              <CountBadge count={wishlistCount} className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-gold-600 text-[9px] font-medium text-bone-50" />
             </Link>
           </Button>
           <Button variant="ghost" size="icon" aria-label={`Bag, ${totalItems} items`} onClick={cartOpen} className="relative">
             <ShoppingBag className="size-[18px]" />
-            {totalItems > 0 && (
-              <span className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-moss-600 text-[9px] font-medium text-bone-50">
-                {totalItems}
-              </span>
-            )}
+            <CountBadge count={totalItems} className="absolute right-1 top-1 flex size-3.5 items-center justify-center rounded-full bg-gold-600 text-[9px] font-medium text-bone-50" />
           </Button>
           <Button
             variant="ghost"
