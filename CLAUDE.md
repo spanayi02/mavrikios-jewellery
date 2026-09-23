@@ -11,19 +11,19 @@ durable engineering rules for anyone (human or agent) working in this codebase a
 The site was redesigned (Sept 2026) after the client rejected the first look as templated. The
 previous world (Fraunces + cream/gold/espresso palette, an eyebrow label above every section)
 was the textbook AI default for a "luxury" brief, and the cool-moss pass that followed was
-deliberately not that. This branch (`claude/mavrikios-warm-jewellery-mix`) is a client-directed
-experiment on top of that: reintroduce a literal gold/silver mixed-metal feel and a warmer base,
-while keeping everything else from the cool-moss pass (structure, type, shape lock, motion,
-eyebrow ration, em-dash ban) exactly as it was. If this direction is kept, fold this note into
-the rest of the section instead of carrying two histories.
+deliberately not that. The warm mixed-metal direction below was a client-directed pass on top of
+the cool-moss one: a literal gold/silver feel and a warmer base, keeping structure, type, shape
+lock, motion, the eyebrow ration and the em-dash ban exactly as they were. **It was approved and
+merged into the default branch, so it is simply the design now** — there is no competing
+direction to weigh it against, and nothing here is provisional.
 
-A second round on this same branch retuned the palette to exact client-specified hex values and
-rebuilt the homepage hero and category strip against a reference image (real jewellery photo
-filling ~58% of the hero with no boxed white card around it, an eyebrow, an italic-accented
-headline, and three horizontal collection cards directly below). `CuratedCategories` now renders
-that 3-card strip (Rings/Necklaces/Bracelets) instead of the earlier 6-tile mosaic; the mosaic's
-other categories (Earrings, Engagement, Gifts) are still reachable via the mega menu and `/shop`,
-just not featured on the homepage strip anymore.
+The palette sits at exact client-specified hex values, and the homepage hero and category strip
+were built against a client reference image: a real jewellery photo filling ~58% of the hero with
+no boxed white card around it, an eyebrow, an italic-accented headline, and three horizontal
+collection cards directly below. `CuratedCategories` renders that 3-card strip
+(Rings/Necklaces/Bracelets) rather than the earlier 6-tile mosaic; the mosaic's other categories
+(Earrings, Engagement, Gifts) are still reachable via the mega menu and `/shop`, just not
+featured on the homepage strip.
 
 - Palette lives in `app/globals.css` as Tailwind v4 `@theme` tokens: `bone-*` (warm ivory/cream
   base, bone-50 #f7f5f0), `stone-*` (warm-neutral grey, stone-500 #65615b for secondary text),
