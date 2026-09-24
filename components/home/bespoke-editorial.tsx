@@ -1,14 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealItem } from "@/components/site/reveal";
-
-const lineVariants: Variants = {
-  hidden: { scaleY: 0, scaleX: 0 },
-  visible: { scaleY: 1, scaleX: 1, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 } },
-};
 
 const steps = [
   { label: "Conversation", description: "Share your story, your budget and what's inspiring you." },
@@ -33,15 +25,22 @@ export function BespokeEditorial() {
           </p>
         </Reveal>
 
+        {/* The four steps are a sequence, so they arrive as one: the rule draws itself along
+            its own length and the markers land behind it, slightly staggered. The stagger is
+            tuned against the draw rather than picked for its own sake, so a marker appears at
+            roughly the moment the line reaches it. */}
         <Reveal
-          stagger={0.1}
+          stagger={0.12}
           as="ol"
           className="relative mt-16 grid grid-cols-1 gap-10 sm:mt-20 sm:grid-cols-4 sm:gap-6"
         >
-          <motion.div
+          {/* An <li>, not a bare <div>, so the list keeps only list items as children;
+              aria-hidden leaves the step count at four. It is also deliberately the first
+              child: the group's nth-child stagger then starts the steps one beat after the
+              line, which is the order the animation reads in. */}
+          <li
             aria-hidden
-            variants={lineVariants}
-            className="absolute left-[5px] top-0 h-full w-px origin-top bg-gold-600/30 sm:left-0 sm:top-[5px] sm:h-px sm:w-full sm:origin-left"
+            className="rv-draw pointer-events-none absolute left-[5px] top-0 block h-full w-px origin-top bg-gold-600/30 sm:left-0 sm:top-[5px] sm:h-px sm:w-full sm:origin-left"
           />
           {steps.map((step) => (
             <RevealItem key={step.label} as="li" className="relative flex gap-5 sm:flex-col sm:gap-0">

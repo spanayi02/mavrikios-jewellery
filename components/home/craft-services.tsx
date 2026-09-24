@@ -25,8 +25,15 @@ export function CraftServices() {
             <RevealItem key={service.key}>
               <Link
                 href="/services"
-                className="group flex items-start justify-between gap-4 border-t border-stone-300 py-7"
+                className="group relative flex items-start justify-between gap-4 border-t border-stone-300 py-7"
               >
+                {/* The row's own top rule, redrawn in gold and extended on hover. The list is
+                    a stack of hairlines, so the hairline is the honest thing to animate: it
+                    marks the row being pointed at without moving any of the type. */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 -top-px h-px origin-left scale-x-0 bg-gold-600 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                />
                 <div>
                   <p className="font-serif text-2xl text-ink-950">{service.title}</p>
                   <p className="mt-2 max-w-xs text-sm leading-relaxed text-stone-600">{service.description}</p>

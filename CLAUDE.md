@@ -121,6 +121,16 @@ featured on the homepage strip.
     threshold never fires for a section taller than the viewport, since that share of it can't be
     on screen at once. The margin is *not* used for the first decision, or an element sitting in
     that bottom strip at load would be reported off-screen and hidden while visible.
+  - `.rv-draw` is the one opt-out from the group fade: a child carrying it starts at `scale(0)`
+    and extends to full size instead of fading and sliding in, so a hairline draws itself along
+    its own length. It is used for the Bespoke timeline's rule (`BespokeEditorial`), where the
+    line is what makes four labels read as one sequence, and the step stagger is tuned against
+    the draw so a marker lands about when the line reaches it. Both axes scale, so the same
+    class serves the vertical mobile rule and the horizontal desktop one. Under reduced motion
+    the block's `transform: none !important` wins and the rule is simply present, which is the
+    right answer for an animation whose whole content is growth. The line is an `<li aria-hidden>`
+    rather than a `<div>`: it lives inside an `<ol>`, and it is deliberately the first child so
+    the `nth-child` stagger starts the steps one beat behind it.
 - The `prefers-reduced-motion` block in globals.css zeroes `animation-delay`/`transition-delay` as
   well as durations. Collapsing only the duration still leaves a delayed or staggered element
   invisible for the length of its delay, which is the same blank-then-appear the mode exists to
