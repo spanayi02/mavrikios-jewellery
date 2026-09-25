@@ -104,7 +104,7 @@ export const businessProfiles = { mavrikios, zafiri } as const;
  * and the LocalBusiness structured data, is derived from whichever is selected here, so there is
  * nothing else to find and change.
  */
-const activeProfile: BusinessProfile = businessProfiles.zafiri;
+const activeProfile: BusinessProfile = businessProfiles.mavrikios;
 
 const fullName = `${activeProfile.name} Jewellery Boutique`;
 

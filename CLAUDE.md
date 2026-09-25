@@ -346,10 +346,18 @@ featured on the homepage strip.
 
 - `lib/site-config.ts` holds the business identity, and it holds **two** of them: `mavrikios`
   (the real boutique, verified address/phone/Instagram) and `zafiri` (an invented stand-in).
-  One line, `activeProfile`, picks which the site renders. **`zafiri` is active right now**, so
-  the build can be shown publicly while the engagement is unsigned: a demo carrying a real
-  business's name, phone, address and Instagram is a claim about them. Put the real boutique
-  back by pointing `activeProfile` at `businessProfiles.mavrikios`, and nothing else changes.
+  One line, `activeProfile`, picks which the site renders, and that line is the **only**
+  difference between two branches:
+  - the working branch runs `zafiri`, so the build can be shown publicly while the engagement is
+    unsigned. A demo carrying a real business's name, phone, address and Instagram is a claim
+    about them.
+  - `preview/mavrikios` runs `mavrikios`, so the real thing can be shown to the client. It exists
+    to give Vercel a second branch to build a preview deployment from.
+
+  Keep them in sync by merging the working branch **into** `preview/mavrikios` and keeping that
+  branch's side of this one line. Never merge `preview/mavrikios` back the other way, or the real
+  identity lands on the public build. When the engagement is signed, flip `activeProfile` on the
+  working branch and delete the preview branch rather than living with the fork.
   - Everything user-visible derives from the active profile: the wordmark, page titles, every
     meta description, the footer, the OG image, the sitemap host, the LocalBusiness structured
     data, and the suburb and founding year where they appear inside sentences ("our <suburb>
