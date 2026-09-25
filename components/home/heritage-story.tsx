@@ -17,7 +17,7 @@ export function HeritageStory() {
             Since 1967
           </h2>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-stone-600">
-            For decades, Mavrikios has served customers looking for jewellery chosen with care,
+            For decades, {siteConfig.name} has served customers looking for jewellery chosen with care,
             craftsmanship and personal attention. What began as a small family boutique in Latsia
             continues today in the same spirit: each piece considered, each customer known by
             name.

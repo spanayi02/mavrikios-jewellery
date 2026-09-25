@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn } from "@/app/account/actions";
+import { siteConfig } from "@/lib/site-config";
 
 export function SignInForm() {
   const router = useRouter();
@@ -53,7 +54,7 @@ export function SignInForm() {
         {isSubmitting ? "Signing In…" : "Sign In"}
       </Button>
       <p className="text-center text-sm text-stone-600">
-        New to Mavrikios?{" "}
+        New to {siteConfig.name}?{" "}
         <Link href="/account/sign-up" className="veil-underline font-medium text-ink-950">
           Create an account
         </Link>

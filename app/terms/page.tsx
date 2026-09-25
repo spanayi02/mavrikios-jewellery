@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "Terms of service for Mavrikios Jewellery Boutique.",
+  description: `Terms of service for ${siteConfig.fullName}.`,
   alternates: { canonical: "/terms" },
 };
 

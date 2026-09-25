@@ -3,11 +3,12 @@ import { ShopExperience } from "@/components/commerce/shop-experience";
 import { getAllProducts } from "@/lib/data/products";
 import type { SortKey } from "@/lib/shop";
 import type { ProductCategory, ProductCollection } from "@/types/product";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Shop All Jewellery",
   description:
-    "Browse rings, earrings, necklaces and bracelets from Mavrikios Jewellery Boutique. Fine jewellery in Nicosia, Cyprus.",
+    `Browse rings, earrings, necklaces and bracelets from ${siteConfig.fullName}. Fine jewellery in ${siteConfig.address.city}, ${siteConfig.address.country}.`,
   alternates: { canonical: "/shop" },
 };
 

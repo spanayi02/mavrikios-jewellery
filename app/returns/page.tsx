@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/site/legal-page";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Returns",
-  description: "How returns and exchanges work at Mavrikios Jewellery Boutique.",
+  description: `How returns and exchanges work at ${siteConfig.fullName}.`,
   alternates: { canonical: "/returns" },
 };
 

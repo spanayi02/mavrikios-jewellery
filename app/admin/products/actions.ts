@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getStaffRole } from "@/lib/data/staff";
 import { CATALOG_TAG } from "@/lib/data/products";
 import type { ProductCategory, ProductCollection, ProductMaterial, ProductStone } from "@/types/product";
+import { siteConfig } from "@/lib/site-config";
 
 export type ProductFormResult = { ok: true; id: string } | { ok: false; error: string };
 
@@ -76,7 +77,7 @@ function toRow(input: ProductFormInput) {
     is_new: input.isNew,
     best_seller: input.bestSeller,
     limited: input.limited,
-    seo_title: `${input.name.trim()} | Mavrikios Jewellery Boutique`,
+    seo_title: `${input.name.trim()} | ${siteConfig.fullName}`,
     seo_description: input.shortDescription.trim(),
     updated_at: new Date().toISOString(),
   };

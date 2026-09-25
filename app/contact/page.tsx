@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Mavrikios Jewellery Boutique in Latsia, Nicosia. Visit the boutique, call us, or send an enquiry.",
+    `Get in touch with ${siteConfig.fullName} in ${siteConfig.address.line2}, ${siteConfig.address.city}. Visit the boutique, call us, or send an enquiry.`,
   alternates: { canonical: "/contact" },
 };
 

@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Mavrikios Jewellery Boutique handles your information.",
+  description: `How ${siteConfig.fullName} handles your information.`,
   alternates: { canonical: "/privacy" },
 };
 

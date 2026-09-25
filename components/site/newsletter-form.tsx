@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { subscribeToNewsletter } from "@/app/actions/newsletter";
+import { siteConfig } from "@/lib/site-config";
 
 export function NewsletterForm({ dark = false }: { dark?: boolean }) {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ export function NewsletterForm({ dark = false }: { dark?: boolean }) {
       return;
     }
     setSubmitted(true);
-    toast.success("You're on the list. Welcome to Mavrikios.");
+    toast.success(`You're on the list. Welcome to ${siteConfig.name}.`);
   }
 
   if (submitted) {

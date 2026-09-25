@@ -71,7 +71,7 @@ export function SiteFooter() {
         </div>
 
         <div className="lg:col-span-4">
-          <p className="mb-4 text-[11px] uppercase tracking-[0.2em] text-stone-500">Notes from Mavrikios</p>
+          <p className="mb-4 text-[11px] uppercase tracking-[0.2em] text-stone-500">Notes from {siteConfig.name}</p>
           <p className="mb-4 text-sm text-stone-600">
             New pieces, private selections and stories from the boutique.
           </p>
@@ -95,7 +95,7 @@ export function SiteFooter() {
 
       <div className="border-t border-stone-200">
         <div className="container-mavrikios flex flex-col items-center justify-between gap-3 py-6 text-xs text-stone-500 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} Mavrikios Jewellery Boutique. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {siteConfig.fullName}. All rights reserved.</p>
           <p>Latsia, Nicosia, Cyprus</p>
         </div>
         <div className="container-mavrikios pb-6 text-center text-[11px] text-stone-400 sm:text-left">

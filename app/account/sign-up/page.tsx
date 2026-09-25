@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SignUpForm } from "@/components/account/sign-up-form";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Create Account",
@@ -11,7 +12,7 @@ export default function SignUpPage() {
     <div className="container-mavrikios flex min-h-[70vh] items-center justify-center py-20">
       <div className="w-full max-w-sm">
         <p className="mb-3 text-center text-[11px] uppercase tracking-[0.3em] text-stone-500">
-          Join Mavrikios
+          Join {siteConfig.name}
         </p>
         <h1 className="mb-8 text-center font-serif text-3xl text-ink-950 sm:text-4xl">
           Create Your Account

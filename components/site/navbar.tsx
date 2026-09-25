@@ -17,6 +17,7 @@ import { useUIStore } from "@/lib/store/ui-store";
 import { useScrolledPast } from "@/hooks/use-scrolled";
 import { useUser } from "@/hooks/use-user";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/site-config";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -52,7 +53,7 @@ export function Navbar() {
       onMouseLeave={handleLeave}
     >
       <div className="container-mavrikios flex h-20 items-center justify-between">
-        <Link href="/" aria-label="Mavrikios home" className="shrink-0">
+        <Link href="/" aria-label={`${siteConfig.name} home`} className="shrink-0">
           <Logo tone="ink" />
         </Link>
 

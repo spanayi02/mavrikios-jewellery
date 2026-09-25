@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/site/page-hero";
 import { FadeImage } from "@/components/site/fade-image";
 import { Reveal, RevealItem } from "@/components/site/reveal";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "The story of Mavrikios Jewellery Boutique, a family jewellery business in Latsia, Nicosia, since 1967.",
+    `The story of ${siteConfig.fullName}, a family jewellery business in ${siteConfig.address.line2}, ${siteConfig.address.city}, since ${siteConfig.since}.`,
   alternates: { canonical: "/our-story" },
 };
 
@@ -39,7 +40,7 @@ export default function OurStoryPage() {
       <section className="container-mavrikios py-24 sm:py-32">
         <Reveal className="max-w-[62ch]">
           <p className="text-lg leading-relaxed text-ink-950 sm:text-xl">
-            For decades, Mavrikios has served customers looking for jewellery chosen with care,
+            For decades, {siteConfig.name} has served customers looking for jewellery chosen with care,
             craftsmanship and personal attention. What began as a small family boutique in Latsia
             continues today in the same spirit: each piece considered, each customer known by
             name.

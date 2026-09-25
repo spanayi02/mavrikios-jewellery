@@ -7,11 +7,12 @@ import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { getEngagementProducts } from "@/lib/data/products";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Engagement Rings & Monopetra",
   description:
-    "Engagement rings and the traditional monopetra, made to order at Mavrikios Jewellery Boutique in Nicosia, Cyprus.",
+    `Engagement rings and the traditional monopetra, made to order at ${siteConfig.fullName} in ${siteConfig.address.city}, ${siteConfig.address.country}.`,
   alternates: { canonical: "/engagement" },
 };
 

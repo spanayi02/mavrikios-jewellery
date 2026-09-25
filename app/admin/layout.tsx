@@ -5,6 +5,7 @@ import { LayoutDashboard, Package, Receipt, LineChart, ExternalLink } from "luci
 import { createClient } from "@/lib/supabase/server";
 import { getStaffRole } from "@/lib/data/staff";
 import { SignOutButton } from "@/components/account/sign-out-button";
+import { siteConfig } from "@/lib/site-config";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, ownerOnly: false },
@@ -28,7 +29,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     <div className="grid min-h-screen grid-cols-1 bg-bone-100 lg:grid-cols-[240px_1fr]">
       <aside className="hidden border-r border-stone-200 bg-bone-50 lg:flex lg:flex-col">
         <div className="border-b border-stone-200 px-6 py-6">
-          <p className="font-serif text-xl text-ink-950">Mavrikios</p>
+          <p className="font-serif text-xl text-ink-950">{siteConfig.name}</p>
           <p className="mt-0.5 text-[11px] uppercase tracking-[0.2em] text-stone-500">
             {role === "owner" ? "Owner" : "Staff"} Dashboard
           </p>
@@ -63,7 +64,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
       <div className="flex flex-col">
         <header className="flex items-center justify-between border-b border-stone-200 bg-bone-50 px-5 py-4 lg:hidden">
-          <p className="font-serif text-lg text-ink-950">Mavrikios Dashboard</p>
+          <p className="font-serif text-lg text-ink-950">{siteConfig.name} Dashboard</p>
         </header>
         <nav className="flex gap-1 overflow-x-auto border-b border-stone-200 bg-bone-50 px-4 py-2 lg:hidden">
           {navItems

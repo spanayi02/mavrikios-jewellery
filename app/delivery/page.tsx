@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/site/legal-page";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Delivery",
-  description: "Delivery across Cyprus from Mavrikios Jewellery Boutique, with Cash on Delivery and QuickPay available.",
+  description: `Delivery across ${siteConfig.address.country} from ${siteConfig.fullName}, with Cash on Delivery and QuickPay available.`,
   alternates: { canonical: "/delivery" },
 };
 

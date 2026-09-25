@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     "jewellery boutique Cyprus",
-    "Mavrikios",
+    siteConfig.name,
     "Latsia jewellery",
     "Nicosia jewellery",
     "engagement rings Cyprus",

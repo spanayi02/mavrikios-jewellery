@@ -10,6 +10,7 @@ import { categoryLabels } from "@/lib/product-labels";
 import { formatPrice } from "@/lib/format";
 import { useUIStore } from "@/lib/store/ui-store";
 import type { Product } from "@/types/product";
+import { siteConfig } from "@/lib/site-config";
 
 const RECENT_KEY = "mavrikios-recent-searches";
 
@@ -65,7 +66,7 @@ export function SearchOverlay({ products }: { products: Product[] }) {
           <VisuallyHidden>
             <DialogPrimitive.Title>Search products</DialogPrimitive.Title>
             <DialogPrimitive.Description>
-              Search the Mavrikios catalogue by name, category or material.
+              Search the {siteConfig.name} catalogue by name, category or material.
             </DialogPrimitive.Description>
           </VisuallyHidden>
 

@@ -5,11 +5,12 @@ import { PageHero } from "@/components/site/page-hero";
 import { ParallaxLayer } from "@/components/site/parallax-layer";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Bespoke Jewellery",
   description:
-    "Made-to-order, custom jewellery designed and crafted by hand at Mavrikios Jewellery Boutique in Nicosia, Cyprus.",
+    `Made-to-order, custom jewellery designed and crafted by hand at ${siteConfig.fullName} in ${siteConfig.address.city}, ${siteConfig.address.country}.`,
   alternates: { canonical: "/bespoke" },
 };
 

@@ -63,7 +63,9 @@ export function BoutiqueLocation() {
 
           <p className="mt-8 text-xs text-stone-500">
             <a
-              href="https://www.google.com/search?q=Mavrikios+Jewellery+Boutique+Latsia+reviews"
+              href={`https://www.google.com/search?q=${encodeURIComponent(
+                `${siteConfig.fullName} ${siteConfig.address.line2} reviews`
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="veil-underline"

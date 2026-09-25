@@ -4,11 +4,12 @@ import { PageHero } from "@/components/site/page-hero";
 import { Reveal, RevealItem } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Jewellery Services",
   description:
-    "Jewellery repair, ring resizing, stone setting, engraving, redesign and bespoke commissions at Mavrikios Jewellery Boutique in Nicosia.",
+    `Jewellery repair, ring resizing, stone setting, engraving, redesign and bespoke commissions at ${siteConfig.fullName} in ${siteConfig.address.city}.`,
   alternates: { canonical: "/services" },
 };
 

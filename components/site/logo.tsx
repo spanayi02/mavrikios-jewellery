@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/site-config";
 
 interface LogoProps {
   className?: string;
@@ -11,7 +12,7 @@ export function Logo({ className, tone = "ink", showTagline = true }: LogoProps)
   return (
     <span className={cn("inline-flex flex-col leading-none select-none", color, className)}>
       <span className="font-serif text-[1.45rem] font-semibold tracking-[0.16em] sm:text-[1.65rem]">
-        MAVRIKIOS
+        {siteConfig.name.toUpperCase()}
       </span>
       {showTagline && (
         <span
@@ -20,7 +21,7 @@ export function Logo({ className, tone = "ink", showTagline = true }: LogoProps)
             tone === "ink" ? "text-stone-500" : "text-bone-50/60"
           )}
         >
-          Jewellery Boutique &middot; Since 1967
+          Jewellery Boutique &middot; Since {siteConfig.since}
         </span>
       )}
     </span>
