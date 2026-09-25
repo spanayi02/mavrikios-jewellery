@@ -12,7 +12,7 @@ import { useUIStore } from "@/lib/store/ui-store";
 import type { Product } from "@/types/product";
 import { siteConfig } from "@/lib/site-config";
 
-const RECENT_KEY = "mavrikios-recent-searches";
+const RECENT_KEY = "boutique-recent-searches";
 
 function readRecent(): string[] {
   if (typeof window === "undefined") return [];

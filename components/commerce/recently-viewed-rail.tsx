@@ -22,7 +22,7 @@ export function RecentlyViewedRail({ allProducts, excludeId }: RecentlyViewedRai
 
   return (
     <section className="border-t border-stone-200 bg-bone-100 py-20 sm:py-28">
-      <div className="container-mavrikios">
+      <div className="container-boutique">
         <Reveal>
           <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">Recently Viewed</p>
           <h2 className="mb-10 font-serif text-3xl text-ink-950 sm:mb-14 sm:text-4xl">

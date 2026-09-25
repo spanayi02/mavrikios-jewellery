@@ -8,7 +8,7 @@ const choices = ["Your stone", "Your metal", "Your setting"];
 
 export function EngagementFeature() {
   return (
-    <section className="container-mavrikios py-24 sm:py-32">
+    <section className="container-boutique py-24 sm:py-32">
       <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-8">
         <Reveal y={0} className="relative order-2 aspect-[4/5] lg:order-1 lg:col-span-6">
           <ParallaxLayer range={30} className="absolute inset-0 right-10 top-10 bg-stone-100">

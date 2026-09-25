@@ -85,7 +85,7 @@ export function ShopExperience({
   };
 
   return (
-    <div className="container-mavrikios grid grid-cols-1 gap-10 py-10 lg:grid-cols-[240px_1fr] lg:gap-12 lg:py-14">
+    <div className="container-boutique grid grid-cols-1 gap-10 py-10 lg:grid-cols-[240px_1fr] lg:gap-12 lg:py-14">
       <aside className="hidden lg:block">
         <div className="sticky top-28">
           <ShopFiltersPanel {...panelProps} />

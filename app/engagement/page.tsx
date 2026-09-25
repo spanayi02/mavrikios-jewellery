@@ -44,7 +44,7 @@ export default async function EngagementPage() {
         image={{ src: "/images/products/aliki-solitaire-ring-1.jpg", alt: "Yellow gold solitaire engagement ring" }}
       />
 
-      <section className="container-mavrikios py-24 sm:py-32">
+      <section className="container-boutique py-24 sm:py-32">
         <Reveal className="mb-12 flex items-end justify-between sm:mb-16">
           <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             Made to order, for you
@@ -63,7 +63,7 @@ export default async function EngagementPage() {
       </section>
 
       <section className="bg-bone-100 py-24 sm:py-32">
-        <div className="container-mavrikios grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+        <div className="container-boutique grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-5">
             <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl lg:sticky lg:top-32">
               Three conversations, one ring
@@ -80,7 +80,7 @@ export default async function EngagementPage() {
         </div>
       </section>
 
-      <section className="container-mavrikios grid grid-cols-1 items-center gap-12 py-24 sm:py-32 lg:grid-cols-12 lg:gap-8">
+      <section className="container-boutique grid grid-cols-1 items-center gap-12 py-24 sm:py-32 lg:grid-cols-12 lg:gap-8">
         <Reveal y={0} className="order-2 aspect-[4/5] lg:order-1 lg:col-span-6">
           <ParallaxLayer range={30} className="h-full bg-stone-100">
             <FadeImage
@@ -107,13 +107,13 @@ export default async function EngagementPage() {
       </section>
 
       <Reveal as="section" className="marble-surface-dark py-24 text-center sm:py-32">
-        <div className="container-mavrikios flex flex-col items-center">
+        <div className="container-boutique flex flex-col items-center">
           <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-bone-50 sm:text-5xl">
             Book a private consultation
           </h2>
           <p className="mt-5 max-w-md text-[15px] leading-relaxed text-gold-200">
-            Visit our Latsia boutique or reach out ahead of time. We&rsquo;ll set aside time to
-            talk through stones, settings and budget with no pressure.
+            Visit our {siteConfig.address.line2} boutique or reach out ahead of time. We&rsquo;ll set
+            aside time to talk through stones, settings and budget with no pressure.
           </p>
           <Button asChild variant="inverse" size="lg" className="mt-8">
             <Link href="/contact?reason=engagement">Book a Consultation</Link>

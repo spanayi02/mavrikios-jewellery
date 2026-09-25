@@ -12,7 +12,7 @@ export function WishlistClient({ products }: { products: Product[] }) {
   const saved = products.filter((p) => ids.includes(p.id));
 
   return (
-    <div className="container-mavrikios py-16 sm:py-24">
+    <div className="container-boutique py-16 sm:py-24">
       <div className="mb-10">
         <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">
           Your Wishlist {saved.length > 0 && `(${saved.length})`}

@@ -20,10 +20,10 @@ export default async function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 96, letterSpacing: 10, fontWeight: 500 }}>
-          MAVRIKIOS
+          {siteConfig.name.toUpperCase()}
         </div>
         <div style={{ display: "flex", fontSize: 26, letterSpacing: 3, color: "#e3cd94", marginTop: 28 }}>
-          Jewellery Boutique, Nicosia, since {siteConfig.since}
+          Jewellery Boutique, {siteConfig.address.city}, since {siteConfig.since}
         </div>
       </div>
     ),

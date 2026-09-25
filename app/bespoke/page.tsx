@@ -25,7 +25,7 @@ const flow = [
   },
   {
     title: "Craft",
-    body: "Your piece is made by hand in our workshop, with the same care we've applied to every commission since 1967.",
+    body: `Your piece is made by hand in our workshop, with the same care we've applied to every commission since ${siteConfig.since}.`,
   },
   {
     title: "Reveal",
@@ -44,7 +44,7 @@ export default function BespokePage() {
         image={{ src: "/images/products/ruby-emerald-swirl-ring.jpg", alt: "Gold rings set with a ruby and an emerald" }}
       />
 
-      <section className="container-mavrikios py-24 sm:py-32">
+      <section className="container-boutique py-24 sm:py-32">
         <Reveal stagger={0.1} className="grid grid-cols-1 gap-x-12 gap-y-12 sm:grid-cols-2">
           {flow.map((step) => (
             <RevealItem key={step.title} className="border-t border-stone-300 pt-6">
@@ -79,7 +79,7 @@ export default function BespokePage() {
       </section>
 
       <Reveal as="section" className="marble-surface-dark py-24 text-center sm:py-32">
-        <div className="container-mavrikios flex flex-col items-center">
+        <div className="container-boutique flex flex-col items-center">
           <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-bone-50 sm:text-5xl">
             Begin a bespoke piece
           </h2>

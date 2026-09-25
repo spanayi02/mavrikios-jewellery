@@ -26,12 +26,12 @@ const careLinks = [
 export function SiteFooter() {
   return (
     <footer className="border-t border-stone-200 bg-bone-100">
-      <div className="container-mavrikios grid grid-cols-1 gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-20">
+      <div className="container-boutique grid grid-cols-1 gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-20">
         <div className="lg:col-span-4">
           <Logo />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-stone-600">
-            A family jewellery boutique in Latsia, Nicosia, serving customers with care and
-            craftsmanship since 1967.
+            A family jewellery boutique in {siteConfig.address.line2}, {siteConfig.address.city},
+            serving customers with care and craftsmanship since {siteConfig.since}.
           </p>
           <a
             href={siteConfig.instagram}
@@ -94,11 +94,13 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-stone-200">
-        <div className="container-mavrikios flex flex-col items-center justify-between gap-3 py-6 text-xs text-stone-500 sm:flex-row">
+        <div className="container-boutique flex flex-col items-center justify-between gap-3 py-6 text-xs text-stone-500 sm:flex-row">
           <p>&copy; {new Date().getFullYear()} {siteConfig.fullName}. All rights reserved.</p>
-          <p>Latsia, Nicosia, Cyprus</p>
+          <p>
+            {siteConfig.address.line2}, {siteConfig.address.city}, {siteConfig.address.country}
+          </p>
         </div>
-        <div className="container-mavrikios pb-6 text-center text-[11px] text-stone-400 sm:text-left">
+        <div className="container-boutique pb-6 text-center text-[11px] text-stone-400 sm:text-left">
           <p>
             Some product photos are temporary placeholders:{" "}
             <a

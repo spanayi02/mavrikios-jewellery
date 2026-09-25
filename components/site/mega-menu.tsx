@@ -31,7 +31,7 @@ export function MegaMenu({ onNavigate }: MegaMenuProps) {
       className="absolute inset-x-0 top-full border-t border-stone-200 bg-bone-50 shadow-2xl"
       onMouseLeave={() => setActive(defaultPanel)}
     >
-      <div className="container-mavrikios grid grid-cols-12 gap-10 py-12">
+      <div className="container-boutique grid grid-cols-12 gap-10 py-12">
         <MenuColumn title="Shop" items={megaMenu.shop} onNavigate={onNavigate} onHoverItem={setActive} />
         <MenuColumn title="Jewellery" items={megaMenu.jewellery} onNavigate={onNavigate} onHoverItem={setActive} />
         <MenuColumn title="Moments" items={megaMenu.moments} onNavigate={onNavigate} onHoverItem={setActive} />

@@ -68,7 +68,7 @@ export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClient
           hidden: {},
           visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
         }}
-        className="container-mavrikios flex flex-col items-center py-24 text-center sm:py-32"
+        className="container-boutique flex flex-col items-center py-24 text-center sm:py-32"
       >
         <motion.div
           variants={{
@@ -118,7 +118,7 @@ export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClient
 
   if (lines.length === 0) {
     return (
-      <div className="container-mavrikios flex flex-col items-center gap-4 py-24 text-center sm:py-32">
+      <div className="container-boutique flex flex-col items-center gap-4 py-24 text-center sm:py-32">
         <p className="font-serif text-2xl text-ink-950">Your bag is empty</p>
         <Button asChild className="mt-2">
           <Link href="/shop">Shop the Collection</Link>
@@ -128,7 +128,7 @@ export function CheckoutClient({ defaultEmail, defaultFullName }: CheckoutClient
   }
 
   return (
-    <div className="container-mavrikios py-16 sm:py-24">
+    <div className="container-boutique py-16 sm:py-24">
       <div className="mb-10">
         <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">Checkout</h1>
         <p className="mt-3 text-sm text-stone-600">

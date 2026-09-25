@@ -10,6 +10,7 @@ import { formatPrice } from "@/lib/format";
 import { materialLabels, stoneLabels } from "@/lib/product-labels";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
+import { siteConfig } from "@/lib/site-config";
 
 interface PurchasePanelProps {
   product: Product;
@@ -124,7 +125,7 @@ export function PurchasePanel({ product }: PurchasePanelProps) {
         <div className="flex items-center gap-3">
           <Users className="size-4 shrink-0 text-ink-950" />
           <dt className="sr-only">Assistance</dt>
-          <dd>In-store assistance available in Latsia</dd>
+          <dd>In-store assistance available in {siteConfig.address.line2}</dd>
         </div>
       </dl>
     </div>

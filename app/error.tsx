@@ -16,7 +16,7 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <div className="container-mavrikios flex min-h-[70vh] flex-col items-center justify-center py-20 text-center">
+    <div className="container-boutique flex min-h-[70vh] flex-col items-center justify-center py-20 text-center">
       <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-gold-600">
         Something Went Wrong
       </p>

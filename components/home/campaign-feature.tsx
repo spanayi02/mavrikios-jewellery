@@ -16,7 +16,7 @@ export async function CampaignFeature() {
 
   return (
     <section className="marble-surface-dark relative w-full overflow-hidden">
-      <div className="container-mavrikios relative grid grid-cols-1 items-center gap-14 py-24 sm:py-32 lg:grid-cols-12 lg:gap-8">
+      <div className="container-boutique relative grid grid-cols-1 items-center gap-14 py-24 sm:py-32 lg:grid-cols-12 lg:gap-8">
         <Reveal className="lg:col-span-5">
           <h2 className="text-balance font-serif text-4xl leading-[1.08] text-bone-50 sm:text-5xl">
             Pieces for the moments that stay.

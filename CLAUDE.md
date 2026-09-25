@@ -41,7 +41,7 @@ featured on the homepage strip.
   visually.
   Two accents, not one: gold carries the primary emphasis, silver is the deliberately-secondary
   metal note — don't let silver drift into carrying eyebrows or CTAs, that's gold's job.
-- `container-mavrikios`'s desktop gutter is `lg:px-16` (64px, was `lg:px-12`/48px) — tightened
+- `container-boutique`'s desktop gutter is `lg:px-16` (64px, was `lg:px-12`/48px) — tightened
   per the client's "avoid oversized empty space, ~64-84px desktop padding" direction. This is
   global, every page using the container picked it up.
 - Typography: `font-serif` is Cormorant Garamond (weights 400/500/600), `font-sans` is Geist.
@@ -344,9 +344,29 @@ featured on the homepage strip.
 
 ## Real business info vs. demo data
 
-- `lib/site-config.ts` holds verified business info (address, phone, Instagram, hours). Hours
-  are a best-effort placeholder from the one data point we had — confirm with the business
-  before relying on them.
+- `lib/site-config.ts` holds the business identity, and it holds **two** of them: `mavrikios`
+  (the real boutique, verified address/phone/Instagram) and `zafiri` (an invented stand-in).
+  One line, `activeProfile`, picks which the site renders. **`zafiri` is active right now**, so
+  the build can be shown publicly while the engagement is unsigned: a demo carrying a real
+  business's name, phone, address and Instagram is a claim about them. Put the real boutique
+  back by pointing `activeProfile` at `businessProfiles.mavrikios`, and nothing else changes.
+  - Everything user-visible derives from the active profile: the wordmark, page titles, every
+    meta description, the footer, the OG image, the sitemap host, the LocalBusiness structured
+    data, and the suburb and founding year where they appear inside sentences ("our <suburb>
+    boutique", "Since <year>"). Don't hardcode the name, the suburb or the year in a component
+    again — that is what made the first rename a 25-file grep.
+  - The `zafiri` values are all invented and deliberately not contactable: the phone sits in an
+    unallocated Cyprus range, the email uses the IANA-reserved `.example` TLD, the address is a
+    made-up street in a different suburb and the coordinates are the centre of Nicosia. The
+    Instagram link points at instagram.com itself rather than a `zafiri.jewellery` profile,
+    because that handle may belong to a real person. Don't "fix" any of these into something
+    that looks real.
+  - The scrub covers what the site renders, not the repository: this file, the git history and
+    the repo name still say Mavrikios, and the deployment URL may too.
+  - Verified by building under each profile and scanning every route for the real name, suburb,
+    year, phone, street, postcode and coordinates. Re-run that check after touching site-config.
+  - Hours are a best-effort placeholder from the one data point we had, and are shared by both
+    profiles — confirm them with the business before relying on them.
 - Do not invent awards, press mentions, certifications, review counts/quotes, stone carats,
   warranties, or company/family history. `data/reviews.ts` is intentionally empty with a themed
   fallback until real reviews are supplied — see the comment in that file before adding fake

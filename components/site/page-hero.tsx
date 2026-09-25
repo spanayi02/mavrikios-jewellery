@@ -27,7 +27,7 @@ export function PageHero({ eyebrow, title, description, motif, image }: PageHero
       <div className="absolute inset-0 bg-gradient-to-t from-bone-50 via-bone-50/70 to-bone-50/25" />
       {/* CSS entrances, not Framer: this is above the fold on every secondary page, so a
           JS-driven one ships the copy hidden and leaves it blank until hydration. */}
-      <div className="container-mavrikios relative z-10 pb-16 pt-40 sm:pb-20">
+      <div className="container-boutique relative z-10 pb-16 pt-40 sm:pb-20">
         <p className="enter-up mb-4 text-[11px] uppercase tracking-[0.3em] text-gold-600">
           {eyebrow}
         </p>

@@ -4,7 +4,7 @@ import { PlaceholderArt } from "@/components/site/placeholder-art";
 
 export default function NotFound() {
   return (
-    <div className="container-mavrikios grid grid-cols-1 items-center gap-10 py-20 sm:py-28 lg:grid-cols-12 lg:gap-8">
+    <div className="container-boutique grid grid-cols-1 items-center gap-10 py-20 sm:py-28 lg:grid-cols-12 lg:gap-8">
       <div className="relative order-2 aspect-[4/5] overflow-hidden lg:order-1 lg:col-span-5">
         <PlaceholderArt motif="ring" label="404" />
       </div>

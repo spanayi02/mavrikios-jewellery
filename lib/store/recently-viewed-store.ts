@@ -20,7 +20,7 @@ export const useRecentlyViewedStore = create<RecentlyViewedState>()(
         })),
     }),
     {
-      name: "mavrikios-recently-viewed",
+      name: "boutique-recently-viewed",
       storage: createJSONStorage(() => localStorage),
     }
   )

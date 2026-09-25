@@ -35,12 +35,12 @@ export const metadata: Metadata = {
   keywords: [
     "jewellery boutique Cyprus",
     siteConfig.name,
-    "Latsia jewellery",
-    "Nicosia jewellery",
+    `${siteConfig.address.line2} jewellery`,
+    `${siteConfig.address.city} jewellery`,
     "engagement rings Cyprus",
     "monopetra",
     "bespoke jewellery Cyprus",
-    "jewellery repairs Nicosia",
+    `jewellery repairs ${siteConfig.address.city}`,
   ],
   authors: [{ name: siteConfig.fullName }],
   openGraph: {

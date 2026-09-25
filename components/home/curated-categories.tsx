@@ -15,7 +15,7 @@ export function CuratedCategories() {
   const featured = shopCategories.filter((c) => c.key in featuredKeys);
 
   return (
-    <section className="container-mavrikios py-20 sm:py-28">
+    <section className="container-boutique py-20 sm:py-28">
       <Reveal className="mb-10 flex flex-col gap-4 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex items-center gap-4">
           <span className="h-px w-10 bg-gold-400" aria-hidden />

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function SignUpPage() {
   return (
-    <div className="container-mavrikios flex min-h-[70vh] items-center justify-center py-20">
+    <div className="container-boutique flex min-h-[70vh] items-center justify-center py-20">
       <div className="w-full max-w-sm">
         <p className="mb-3 text-center text-[11px] uppercase tracking-[0.3em] text-stone-500">
           Join {siteConfig.name}

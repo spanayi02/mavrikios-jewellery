@@ -15,7 +15,7 @@ const tiles = [
 export function InstagramSection() {
   return (
     <section className="py-24 sm:py-32">
-      <div className="container-mavrikios">
+      <div className="container-boutique">
         <Reveal className="mb-10 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             From the boutique, this week

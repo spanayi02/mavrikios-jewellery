@@ -49,7 +49,7 @@ export default async function AccountPage() {
   const fullName = (user.user_metadata?.full_name as string | undefined) ?? user.email;
 
   return (
-    <div className="container-mavrikios py-16 sm:py-24">
+    <div className="container-boutique py-16 sm:py-24">
       <div className="mb-12 flex flex-col items-start justify-between gap-4 border-b border-stone-200 pb-8 sm:flex-row sm:items-end">
         <div>
           <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">My Account</p>

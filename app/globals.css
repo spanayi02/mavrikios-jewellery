@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ------------------------------------------------------------------ */
-/* MAVRIKIOS design tokens                                             */
+/* Boutique design tokens                                              */
 /* Bone / Stone / Ink / Silver / Gold                                  */
 /* Warm-luxury palette: ivory/cream base, a confident antique gold as   */
 /* the primary accent, cool silver as a secondary metal note, graphite  */
@@ -171,7 +171,7 @@
 }
 
 @layer utilities {
-  .container-mavrikios {
+  .container-boutique {
     @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-16;
   }
 

@@ -1,18 +1,22 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealItem } from "@/components/site/reveal";
+import { siteConfig } from "@/lib/site-config";
 
 const steps = [
   { label: "Conversation", description: "Share your story, your budget and what's inspiring you." },
   { label: "Design", description: "We sketch and refine the piece with you until it's right." },
-  { label: "Craft", description: "Your piece is handmade in our workshop, here in Latsia." },
+  {
+    label: "Craft",
+    description: `Your piece is handmade in our workshop, here in ${siteConfig.address.line2}.`,
+  },
   { label: "Reveal", description: "Collect it in the boutique, finished and ready to wear." },
 ];
 
 export function BespokeEditorial() {
   return (
     <section className="marble-surface py-24 sm:py-32">
-      <div className="container-mavrikios">
+      <div className="container-boutique">
         <Reveal className="max-w-xl">
           <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-gold-600">Bespoke</p>
           <h2 className="text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">

@@ -57,7 +57,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <JsonLd data={breadcrumb} />
       <TrackRecentlyViewed productId={product.id} />
 
-      <nav aria-label="Breadcrumb" className="container-mavrikios flex items-center gap-1.5 py-5 text-xs text-stone-500">
+      <nav aria-label="Breadcrumb" className="container-boutique flex items-center gap-1.5 py-5 text-xs text-stone-500">
         <Link href="/shop" className="hover:text-ink-950">
           Shop
         </Link>
@@ -69,7 +69,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <span className="text-ink-950">{product.name}</span>
       </nav>
 
-      <div className="container-mavrikios grid grid-cols-1 gap-10 pb-10 lg:grid-cols-2 lg:gap-16">
+      <div className="container-boutique grid grid-cols-1 gap-10 pb-10 lg:grid-cols-2 lg:gap-16">
         <ProductGallery images={product.images} productName={product.name} />
         <div id="purchase-panel" className="lg:sticky lg:top-28 lg:self-start">
           <PurchasePanel product={product} />

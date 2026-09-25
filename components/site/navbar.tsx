@@ -52,7 +52,7 @@ export function Navbar() {
       )}
       onMouseLeave={handleLeave}
     >
-      <div className="container-mavrikios flex h-20 items-center justify-between">
+      <div className="container-boutique flex h-20 items-center justify-between">
         <Link href="/" aria-label={`${siteConfig.name} home`} className="shrink-0">
           <Logo tone="ink" />
         </Link>

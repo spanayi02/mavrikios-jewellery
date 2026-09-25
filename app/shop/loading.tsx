@@ -5,7 +5,7 @@ export default function ShopLoading() {
         <div className="mx-auto h-3 w-20 animate-pulse rounded-sm bg-stone-200" />
         <div className="mx-auto mt-3 h-8 w-56 animate-pulse rounded-sm bg-stone-200" />
       </div>
-      <div className="container-mavrikios py-10 sm:py-14">
+      <div className="container-boutique py-10 sm:py-14">
         <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8">
           {Array.from({ length: 9 }).map((_, i) => (
             <div key={i} className="animate-pulse">

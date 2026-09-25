@@ -14,7 +14,7 @@ export function CartClient() {
   const { totalItems, subtotal } = useCartTotals();
 
   return (
-    <div className="container-mavrikios py-16 sm:py-24">
+    <div className="container-boutique py-16 sm:py-24">
       <div className="mb-10">
         <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">Your Bag</p>
         <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">

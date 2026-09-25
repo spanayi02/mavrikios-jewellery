@@ -5,7 +5,7 @@ export function RelatedProducts({ products }: { products: Product[] }) {
   if (products.length === 0) return null;
   return (
     <section className="border-t border-stone-200 py-20 sm:py-28">
-      <div className="container-mavrikios">
+      <div className="container-boutique">
         <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-stone-500">You May Also Like</p>
         <h2 className="mb-10 font-serif text-3xl text-ink-950 sm:mb-14 sm:text-4xl">
           Complete the Look

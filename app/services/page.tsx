@@ -24,7 +24,7 @@ export default function ServicesPage() {
         image={{ src: "/images/products/daphne-signet-ring.jpg", alt: "Plain 18k gold band" }}
       />
 
-      <section className="container-mavrikios py-24 sm:py-32">
+      <section className="container-boutique py-24 sm:py-32">
         <Reveal stagger={0.06} className="grid grid-cols-1 gap-x-12 sm:grid-cols-2">
           {services.map((service) => (
             <RevealItem key={service.key} className="flex flex-col gap-3 border-t border-stone-300 py-9">
@@ -36,13 +36,13 @@ export default function ServicesPage() {
       </section>
 
       <Reveal as="section" className="marble-surface py-24 text-center sm:py-32">
-        <div className="container-mavrikios flex flex-col items-center">
+        <div className="container-boutique flex flex-col items-center">
           <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             Bring your piece in, or send us a note first.
           </h2>
           <p className="mt-5 max-w-md text-[15px] leading-relaxed text-stone-600">
-            Most repairs and resizing can be assessed on the spot in our Latsia boutique. For
-            larger commissions, tell us more beforehand.
+            Most repairs and resizing can be assessed on the spot in our{" "}
+            {siteConfig.address.line2} boutique. For larger commissions, tell us more beforehand.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">

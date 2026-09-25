@@ -13,7 +13,7 @@ const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${enc
 export function BoutiqueLocation() {
   return (
     <section className="relative overflow-hidden bg-bone-100 py-24 sm:py-32">
-      <div className="container-mavrikios grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+      <div className="container-boutique grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
         {/* Stand-in: a piece, not a claimed photo of the shopfront. TODO swap for a real
             boutique exterior or interior, 1600x1200, once the client supplies one. */}
         <Reveal className="order-2 aspect-[4/3] bg-bone-200 lg:order-1 lg:col-span-7">

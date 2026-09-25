@@ -25,7 +25,7 @@ export default async function ContactPage({
   const { reason } = await searchParams;
 
   return (
-    <div className="container-mavrikios py-16 sm:py-24">
+    <div className="container-boutique py-16 sm:py-24">
       <Reveal className="mb-14 max-w-xl">
         <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">Get in touch</h1>
         <p className="mt-5 text-[15px] leading-relaxed text-stone-600">

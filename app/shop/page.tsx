@@ -40,7 +40,7 @@ export default async function ShopPage({
   return (
     <div>
       <div className="border-b border-stone-200 py-12 sm:py-16">
-        <div className="container-mavrikios">
+        <div className="container-boutique">
           <h1 className="font-serif text-4xl text-ink-950 sm:text-5xl">All jewellery</h1>
         </div>
       </div>

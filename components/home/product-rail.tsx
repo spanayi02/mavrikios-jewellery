@@ -27,7 +27,7 @@ export function ProductRail({
 }: ProductRailProps) {
   return (
     <section className={`py-24 sm:py-32 ${tinted ? "bg-bone-100" : ""}`}>
-      <div className="container-mavrikios">
+      <div className="container-boutique">
         <Reveal className="mb-12 flex flex-col gap-4 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
           <div>
             {eyebrow && (

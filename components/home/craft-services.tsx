@@ -7,7 +7,7 @@ export function CraftServices() {
   const featured = services.slice(0, 4);
   return (
     <section className="bg-bone-100 py-24 sm:py-32">
-      <div className="container-mavrikios">
+      <div className="container-boutique">
         <Reveal className="mb-12 flex flex-col gap-4 sm:mb-16 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="max-w-lg text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
             A workshop, not just a shop front.

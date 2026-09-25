@@ -11,14 +11,15 @@ export function HeritageStory() {
 
   return (
     <section className="marble-surface relative overflow-hidden py-24 sm:py-32">
-      <div className="container-mavrikios grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-8">
+      <div className="container-boutique grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-8">
         <Reveal className="lg:col-span-5">
           <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl">
-            Since 1967
+            Since {siteConfig.since}
           </h2>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-stone-600">
             For decades, {siteConfig.name} has served customers looking for jewellery chosen with care,
-            craftsmanship and personal attention. What began as a small family boutique in Latsia
+            craftsmanship and personal attention. What began as a small family boutique in{" "}
+            {siteConfig.address.line2}{" "}
             continues today in the same spirit: each piece considered, each customer known by
             name.
           </p>

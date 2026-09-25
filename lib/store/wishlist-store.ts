@@ -24,7 +24,7 @@ export const useWishlistStore = create<WishlistState>()(
       remove: (productId) => set((state) => ({ ids: state.ids.filter((id) => id !== productId) })),
     }),
     {
-      name: "mavrikios-wishlist",
+      name: "boutique-wishlist",
       storage: createJSONStorage(() => localStorage),
     }
   )

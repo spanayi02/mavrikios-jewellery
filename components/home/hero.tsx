@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LivingMarble } from "@/components/site/living-marble";
+import { siteConfig } from "@/lib/site-config";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -39,7 +40,7 @@ export function Hero() {
               bundle hydrates. Framer still owns the scroll-linked fade on the wrapper. */}
           <motion.div style={{ opacity: contentOpacity }}>
             <p className="enter-up text-[11px] font-medium uppercase tracking-[0.28em] text-gold-600">
-              Latsia, Cyprus · Since 1967
+              {siteConfig.address.line2}, {siteConfig.address.country} · Since {siteConfig.since}
             </p>
 
             <h1
@@ -54,7 +55,7 @@ export function Hero() {
               className="enter-up mt-5 max-w-sm text-[16px] leading-relaxed text-stone-600 sm:mt-6 sm:text-[17px]"
             >
               Fine jewellery, engagement rings and bespoke pieces, selected with care at our
-              family boutique in Latsia.
+              family boutique in {siteConfig.address.line2}.
             </p>
 
             <div

@@ -31,17 +31,18 @@ export default function OurStoryPage() {
     <div>
       <PageHero
         eyebrow="Our Story"
-        title="Since 1967"
-        description="A family jewellery boutique in Latsia, built on craftsmanship and personal service."
+        title={`Since ${siteConfig.since}`}
+        description={`A family jewellery boutique in ${siteConfig.address.line2}, built on craftsmanship and personal service.`}
         motif="ring"
         image={{ src: "/images/products/sophia-eternity-band.jpg", alt: "White gold band set with diamonds" }}
       />
 
-      <section className="container-mavrikios py-24 sm:py-32">
+      <section className="container-boutique py-24 sm:py-32">
         <Reveal className="max-w-[62ch]">
           <p className="text-lg leading-relaxed text-ink-950 sm:text-xl">
             For decades, {siteConfig.name} has served customers looking for jewellery chosen with care,
-            craftsmanship and personal attention. What began as a small family boutique in Latsia
+            craftsmanship and personal attention. What began as a small family boutique in{" "}
+            {siteConfig.address.line2}{" "}
             continues today in the same spirit: each piece considered, each customer known by
             name.
           </p>
@@ -77,7 +78,7 @@ export default function OurStoryPage() {
       </section>
 
       <section className="bg-bone-100 py-24 sm:py-32">
-        <div className="container-mavrikios grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+        <div className="container-boutique grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
           <Reveal className="lg:col-span-5">
             <h2 className="max-w-md text-balance font-serif text-4xl leading-[1.08] text-ink-950 sm:text-5xl lg:sticky lg:top-32">
               The values behind every piece
