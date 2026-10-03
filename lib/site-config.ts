@@ -78,7 +78,9 @@ const mavrikios: BusinessProfile = {
 const zafiri: BusinessProfile = {
   name: "Zafiri",
   since: 1984,
-  url: "https://zafiri-jewellery.example.com",
+  // The one real value: the demo is hosted on the studio's own domain. Canonical links, the
+  // sitemap and OG tags need a live host, and this one names no business but ours.
+  url: "https://zafiri.vision.cy",
   phone: "+357 22 000000",
   phoneHref: "tel:+35722000000",
   email: "hello@zafiri.example",
